@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('dashboard.index');
     }
+
+    public function tambah()
+    {
+        return view('pages.tambah_proyek');
+    }
 }

@@ -78,8 +78,8 @@
             <div class="col-12">
               <div class="row align-items-center">
                 <div class="col-lg-6 mb-4">
-                  <h1  data-aos="fade-up" data-aos-delay="100">Sistem Manajemen Proyek</h1>
-                  <p class="mb-4"  data-aos="fade-up" data-aos-delay="200" >Sistem Manajemen Proyek merupakan sebuah aplikasi web yang menyediakan akses Informasi Proyek mengenai Rencana Proyek, Proyek Berjalan, History Proyek dan Proyek Tertunda, yang berkaitan dengan Joint Maintenance Utility PT. Gajah Tunggal Tbk.</p>
+                  <h1  data-aos="fade-up" data-aos-delay="100">Sistem Manajemen Informasi Proyek</h1>
+                  <p class="mb-4"  data-aos="fade-up" data-aos-delay="200" >Sistem Manajemen Proyek merupakan sebuah aplikasi web yang menyediakan akses Informasi Proyek mengenai Pembuatan Proyek, Detail Informasi Proyek,  dan Informasi Kontaktor, yang berkaitan dengan Joint Maintenance Utility PT. Gajah Tunggal Tbk.</p>
                   <p data-aos="fade-up" data-aos-delay="300" id="login" ><a href="#login" class="btn btn-primary py-3 px-5 btn-pill">Masuk Untuk Lanjutkan -></a></p>
 
                 </div>
