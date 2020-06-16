@@ -16,7 +16,7 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('project_no')->unique();
-            $table->string('project_year');
+            $table->integer('project_year');
             $table->string('project_title');
             $table->string('user_cc');
             $table->string('plant');
@@ -27,7 +27,7 @@ class CreateProjectsTable extends Migration
             $table->integer('spk_id')->nullable();
             $table->integer('pr_id')->nullable();
             $table->integer('rating_id')->nullable();
-            $table->integer('departemen_id');
+            $table->integer('user_id');
 
             $table->timestamps();
         });

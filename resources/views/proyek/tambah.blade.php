@@ -167,7 +167,7 @@
                   </div>
                 </div>
               <div class="card-footer ">
-                 <button type="submit" class="btn btn-primary btn-round">{{__('Simpan')}}</button>
+                 <button type="button" name="submit" class="btn btn-primary btn-round">{{__('Simpan')}}</button>
               </div>
           </div>
         </div>
