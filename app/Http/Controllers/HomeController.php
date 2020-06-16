@@ -28,6 +28,6 @@ class HomeController extends Controller
 
     public function tambah()
     {
-        return view('pages.tambah_proyek');
+        
     }
 }

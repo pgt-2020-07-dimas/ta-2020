@@ -13,8 +13,9 @@ class ProyekController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   $proyek = Proyek::all();
+        //dd($proyek);
+        return view('proyek.index',['proyek'=>$proyek]);
     }
 
     /**
@@ -34,8 +35,9 @@ class ProyekController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   $request->status = "On Schedule";
+        Proyek::create($request->all());
+        return redirect('/dashboard');
     }
 
     /**

@@ -20,7 +20,7 @@ class CreateProjectsTable extends Migration
             $table->string('project_title');
             $table->string('user_cc');
             $table->string('plant');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->string('deskripsi');
             $table->string('persentase')->nullable();
             $table->integer('boq_id')->nullable();

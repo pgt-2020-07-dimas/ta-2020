@@ -8,9 +8,8 @@
 @section('content')
   
   <div class="content">
-  <form method="post" action="#" autocomplete="off" enctype="multipart/form-data">
-      @csrf
-      @method('put')
+  <form method="post" action="/proyek" autocomplete="off" enctype="multipart/form-data">  
+      @csrf     
       @include('alerts.success')
     <div class="row"></div>
     <div class="row">
@@ -20,24 +19,22 @@
             <h5 class="title">{{__(" Planning")}}</h5>
           </div>
           <div class="card-body">
+                
                 <div class="row">
-                    <div class="col-md-10 pr-3">
-                        <div class="form-group">
-                            <label>{{__(" Tahun Proyek")}}</label>
-                                <input type="number" name="project_year" class="form-control" value="">
-        
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-10 pr-3">
+                  <div class="col-md-5 pr-3">
                     <div class="form-group">
                       <label>{{__(" No Proyek")}}</label>
                       <input type="text" name="project_no" class="form-control" >
-                      
                     </div>
                   </div>
-                </div>
+                  <div class="col-md-5 pr-3">
+                    <div class="form-group">
+                      <label>{{__(" Tahun Proyek")}}</label>
+                      <input type="text" name="project_year" class="form-control" >
+                    </div>
+                  </div>
+                </div>            
+
                 <div class="row">
                   <div class="col-md-10 pr-3">
                     <div class="form-group">
@@ -47,6 +44,16 @@
                     </div>
                   </div>
                 </div>
+                
+                <div class="row">
+                  <div class="col-md-10 pr-3">
+                    <div class="form-group">
+                      <label>{{__(" Deskripsi")}}</label>
+                      <textarea class="form-control" name="deskripsi" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="row">
                   <div class="col-md-10 pr-3">
                     <div class="form-group">
@@ -136,7 +143,7 @@
                     <div class="col-md-10 pr-3">
                       <div class="form-group ">
                         <label>{{__(" No. SPK")}}</label>
-                        <input class="form-control " name="spk_no" placeholder="" type="text"  required>
+                        <input class="form-control " name="spk_no" placeholder="" type="text" >
                         
                       </div>
                     </div>
@@ -145,7 +152,7 @@
                     <div class="col-md-10 pr-3">
                       <div class="form-group ">
                         <label>{{__(" Contractor Id")}}</label>
-                        <input class="form-control " placeholder="" type="number" name="contractor_id" required>
+                        <input class="form-control " placeholder="" type="number" name="contractor_id">
                         
                       </div>
                     </div>
@@ -154,7 +161,7 @@
                   <div class="col-md-10 pr-3">
                     <div class="form-group ">
                       <label>{{__(" Start Execution Date")}}</label>
-                      <input class="form-control" placeholder="{{ __('') }}" type="date" name="start_execution_date" required>
+                      <input class="form-control" placeholder="{{ __('') }}" type="date" name="start_execution_date">
                     </div>
                   </div>
                 </div>
@@ -162,12 +169,14 @@
                   <div class="col-md-10 pr-3">
                     <div class="form-group ">
                       <label>{{__(" Estimate Finish Date")}}</label>
-                      <input class="form-control" placeholder="{{ __('Estimate Finish Date') }}" type="date" name="estimate_finish_date" required>
+                      <input class="form-control" placeholder="{{ __('Estimate Finish Date') }}" type="date" name="estimate_finish_date">
                     </div>
                   </div>
                 </div>
               <div class="card-footer ">
-                 <button type="button" name="submit" class="btn btn-primary btn-round">{{__('Simpan')}}</button>
+              <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+              <input type="hidden" value="{{Auth::user()->kode}}" name="kode">
+                 <button type="submit" name="submit" class="btn btn-primary btn-round">{{__('Simpan')}}</button>
               </div>
           </div>
         </div>

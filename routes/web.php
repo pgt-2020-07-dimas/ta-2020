@@ -26,4 +26,6 @@ Route::get('/', [
   ]);
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::get('/tambah', 'ProyekController@create');
+Route::get('/proyek', 'ProyekController@index');
+Route::get('/proyek/tambah', 'ProyekController@create');
+Route::post('/proyek', 'ProyekController@store');

@@ -19,13 +19,13 @@
         </a>
       </li>
       <li class="@if ($activePage == 'tambah_proyek') active @endif">
-        <a href="/tambah">
+        <a href="/proyek/tambah">
           <i class="now-ui-icons ui-1_simple-add"></i>
           <p> {{ __('Tambah Proyek') }} </p>
         </a>
       </li>
       <li class="@if ($activePage == 'detail_proyek') active @endif">
-        <a href="#">
+        <a href="/proyek">
           <i class="now-ui-icons education_atom"></i>
           <p> {{ __('Detail Proyek') }} </p>
         </a>
