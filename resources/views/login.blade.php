@@ -91,7 +91,7 @@
 
 
                     <div class="form-group">
-                      <select class="form-control @error('departemen') is-invalid @enderror" name="departemen" id="exampleFormControlSelect1" required>
+                      <select class="form-control custom-select @error('departemen') is-invalid @enderror" name="departemen" id="exampleFormControlSelect1" required>
                         @foreach($user as $u)
                         <option value="{{ $u->departemen }}">{{ $u->departemen }}</option>
                         @endforeach
