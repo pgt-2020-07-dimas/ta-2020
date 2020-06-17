@@ -1,14 +1,15 @@
 @extends('layouts.app', [
-    'namePage' => 'Tambah Proyek',
+    'namePage' => 'Update Proyek',
     'class' => 'login-page sidebar-mini ',
-    'activePage' => 'tambah_proyek',
+    'activePage' => 'detail_proyek',
    
 ])
 
 @section('content')
   
   <div class="content">
-  <form method="post" action="/proyek" autocomplete="off" enctype="multipart/form-data">  
+  <form method="post" action="/proyek/{{$proyek->id}}" autocomplete="off" enctype="multipart/form-data">  
+      @method('patch')
       @csrf     
       @include('alerts.success')
     <div class="row"></div>
@@ -24,14 +25,14 @@
                   <div class="col-md-6 pr-3">
                     <div class="form-group">
                       <label>{{__(" No Proyek")}}</label>
-                      <input type="text" name="project_no" class="form-control @error('project_no') is-invalid @enderror" value="{{ old('project_no') }}">
+                      <input type="text"class="form-control @error('project_no') is-invalid @enderror" value="{{ $proyek->project_no }}" readonly>
                       @error('project_no') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
                   <div class="col-md-5 pr-3">
                     <div class="form-group">
                       <label>{{__(" Tahun Proyek")}}</label>
-                      <input type="text" name="project_year" class="form-control @error('project_year') is-invalid @enderror" value="{{ old('project_year') }}">
+                      <input type="text" name="project_year" class="form-control @error('project_year') is-invalid @enderror" value="{{ $proyek->project_year }}">
                       @error('project_year') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -41,7 +42,7 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Judul Proyek")}}</label>
-                      <input type="text" name="project_title" class="form-control @error('project_title') is-invalid @enderror" value="{{ old('project_title') }}">
+                      <input type="text" name="project_title" class="form-control @error('project_title') is-invalid @enderror" value="{{ $proyek->project_title }}">
                       @error('project_title') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -51,7 +52,7 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label>{{__(" Deskripsi")}}</label>
-                      <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="3" >{{ old('deskripsi') }}</textarea>
+                      <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="3" >{{ $proyek->deskripsi }}</textarea>
                       @error('deskripsi') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -61,7 +62,7 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label  >{{__(" User/CC")}}</label>
-                      <input type="text" name="user_cc" class="form-control @error('user_cc') is-invalid @enderror" value="{{ old('user_cc') }}" >
+                      <input type="text" name="user_cc" class="form-control @error('user_cc') is-invalid @enderror" value="{{ $proyek->user_cc }}" >
                       @error('user_cc') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -69,33 +70,41 @@
                 <div class="row">
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
-                      <label  >{{__(" Plant")}}</label>                      
+                      <label  >{{__(" Plant")}}</label>
                       <select name="plant" class="form-control @error('plant') is-invalid @enderror">
-                        <option>- Pilih Plant -</option>                        
-                        <option value="All Plant">All Plant</option>                        
-                        <option value="Plant A">Plant A</option>                        
-                        <option value="Plant BHI">Plant BHI</option>                        
-                        <option value="Plant C">Plant C</option>                        
-                        <option value="Plant DK">Plant DK</option>                        
-                        <option value="Plant M">Plant M</option>                        
-                        <option value="Plant E">Plant E</option>                        
-                        <option value="Plant R">Plant R</option>                        
-                        <option value="Plant J">Plant J</option>                        
-                        <option value="Other">Other</option>                        
+                        <option value="">- Pilih Plant -</option>                        
+                        <option value="All Plant"<?=$proyek->plant == 'All Plant' ? 'selected' : ''?>>All Plant</option>                        
+                        <option value="Plant A" <?=$proyek->plant == 'Plant A' ? 'selected' : ''?>>Plant A</option>                        
+                        <option value="Plant BHI" <?=$proyek->plant == 'Plant BHI' ? 'selected' : ''?>>Plant BHI</option>                        
+                        <option value="Plant C" <?=$proyek->plant == 'Plant C' ? 'selected' : ''?>>Plant C</option>                        
+                        <option value="Plant DK" <?=$proyek->plant == 'Plant DK' ? 'selected' : ''?>>Plant DK</option>                        
+                        <option value="Plant M" <?=$proyek->plant == 'Plant M' ? 'selected' : ''?>>Plant M</option>                        
+                        <option value="Plant E" <?=$proyek->plant == 'Plant E' ? 'selected' : ''?>>Plant E</option>                        
+                        <option value="Plant R" <?=$proyek->plant == 'Plant R' ? 'selected' : ''?>>Plant R</option>                        
+                        <option value="Plant J" <?=$proyek->plant == 'Plant J' ? 'selected' : ''?>>Plant J</option>                        
+                        <option value="Other" <?=$proyek->plant == 'Other' ? 'selected' : ''?>>Other</option>                        
                       </select>
                       @error('plant') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
                 </div>
               <div class="card-footer ">
-                <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
-                <input type="hidden" value="{{Auth::user()->kode}}" name="kode">
-                <input type="hidden" value="Planning" name="status">
-                <input type="hidden" value="5%" name="persentase">
-                <div class="text-right pr-4">
-                  <button type="submit" name="submit" class="btn btn-primary btn-round">{{__('Simpan')}}</button>
-                  <a href="/dashboard" class="btn btn-info btn-round">{{__('Kembali')}}</a>
-                </div>
+              <div class="text-right pr-4">
+                 <button type="submit" name="submit" class="btn btn-primary btn-round">{{__('Simpan')}}</button></form>
+                 <form action="/proyek" class="d-inline" method="post">
+                 @method('patch')
+                 @csrf 
+                    <input type="hidden" name="status" value="Suspend">
+                    <input type="hidden" name="id" value="{{$proyek->id}}">
+                    <button type="submit" name="submit" class="btn btn-warning btn-round">{{__('Tunda')}}</button>
+                 </form>
+                 <form action="/proyek/{{ $proyek->id }}" method="post" class="d-inline">    
+                 @method('delete')
+                 @csrf            
+                    <button type="submit" name="submit" class="btn btn-danger btn-round" onclick="return confirm('Yakin menghapus?');">{{__('Hapus')}}</button>
+                 </form>  
+                 <a href="/proyek/{{$proyek->id}}" class="btn btn-info btn-round">{{__('Kembali')}}</a>
+              </div>
               </div>
           </div>   
         </div>
@@ -156,6 +165,6 @@
       </div>
     </div>
     
-    </form>
+    
   </div>
 @endsection

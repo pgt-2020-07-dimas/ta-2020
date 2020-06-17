@@ -28,7 +28,12 @@ Route::get('/', [
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/proyek', 'ProyekController@index');
 Route::get('/proyek/tambah', 'ProyekController@create');
+Route::get('/proyek/{proyek}', 'ProyekController@show');
+Route::get('/proyek/{proyek}/edit', 'ProyekController@edit');
 Route::post('/proyek', 'ProyekController@store');
+Route::delete('/proyek/{proyek}', 'ProyekController@destroy');
+Route::patch('/proyek/{proyek}', 'ProyekController@update');
+Route::patch('/proyek', 'ProyekController@tunda');
 
 Route::get('/boq', 'BillController@index');
 Route::get('/purchase', 'PurchaseRequisitionController@index');

@@ -76,7 +76,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card pl-3">
+        <div class="card pl-3 .d-sm-none .d-md-block">
           <div class="card-header">
             <h5 class="title mt-3">{{__(" Detail Proyek")}}</h5>
           </div>

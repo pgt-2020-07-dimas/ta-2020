@@ -35,9 +35,18 @@ class ProyekController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   $request->status = "On Schedule";
-        Proyek::create($request->all());
-        return redirect('/dashboard');
+    {   
+        $request->validate([
+            'project_no' => 'required|size:2',
+            'project_year' => 'required|size:4',
+            'project_title' => 'required|max:50',
+            'deskripsi' => 'required|max:100',
+            'user_cc' => 'required|max:50',
+            'plant' => 'required|max:10',
+        ]);
+        $proyek = Proyek::create($request->all());            
+        $id =$proyek->id;
+        return redirect('/proyek'.'/'.$id.'/edit');
     }
 
     /**
@@ -48,7 +57,7 @@ class ProyekController extends Controller
      */
     public function show(Proyek $proyek)
     {
-        //
+        return view('proyek.detail',['proyek'=>$proyek]);
     }
 
     /**
@@ -59,7 +68,7 @@ class ProyekController extends Controller
      */
     public function edit(Proyek $proyek)
     {
-        //
+        return view('proyek.edit',['proyek'=>$proyek]);
     }
 
     /**
@@ -71,7 +80,22 @@ class ProyekController extends Controller
      */
     public function update(Request $request, Proyek $proyek)
     {
-        //
+        $request->validate([            
+            'project_year' => 'required|size:4',
+            'project_title' => 'required|max:50',
+            'deskripsi' => 'required|max:100',
+            'user_cc' => 'required|max:50',
+            'plant' => 'required|max:10',
+        ]);
+        Proyek::where('id', $proyek->id)
+                ->update([
+                    'project_year'=>$request->project_year,
+                    'project_title'=>$request->project_title,
+                    'deskripsi'=>$request->deskripsi,
+                    'user_cc'=>$request->user_cc,
+                    'plant'=>$request->plant,
+                ]);
+        return redirect('/proyek'.'/'.$proyek->id.'/edit');
     }
 
     /**
@@ -82,6 +106,15 @@ class ProyekController extends Controller
      */
     public function destroy(Proyek $proyek)
     {
-        //
+        Proyek::destroy($proyek->id);
+        return redirect('/proyek');
+    }
+    public function tunda(Request $request, Proyek $proyek)
+    {
+        Proyek::where('id', $request->id)
+                ->update([
+                    'status'=>$request->status,                    
+                ]);
+        return redirect('/proyek');
     }
 }
