@@ -14,9 +14,9 @@
     <div class="row"></div>
     <div class="row">
       <div class="col-md-4">
-        <div class="card">
+        <div class="card pl-3">
           <div class="card-header">
-            <h5 class="title">{{__(" Planning")}}</h5>
+            <h5 class="title mt-3">{{__(" Planning")}}</h5>
           </div>
           <div class="card-body">
                 
@@ -77,23 +77,23 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card">
+        <div class="card pl-3">
           <div class="card-header">
-            <h5 class="title">{{__(" BOQ, PR, Desain")}}</h5>
+            <h5 class="title mt-3">{{__(" BOQ, PR, Desain")}}</h5>
           </div>
           <div class="card-body">
               <div class="row">
               </div>
                 <div class="row">
-                  <div class="ml-5">
-                    <a href="" class="">+Bill Of Quantity</a>
+                  <div class="ml-3">
+                    <a href="/boq" class="">+Bill Of Quantity</a>
                   </div>
                   <div class="col-md-5 pr-3">
                     <input type="text" name="status" class="form-control" placeholder="belum terisi" readonly>
                   </div>
                 </div>
                 <div class="row mt-2">
-                  <div class="ml-5 pr-5">
+                  <div class="ml-3 pr-5">
                     <a href="" class="">+Drawing</a>
                   </div>
                   <div class="col-md-5 pr-3">
@@ -133,9 +133,9 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card">
+        <div class="card pl-3">
           <div class="card-header">
-            <h5 class="title">{{__(" Surat Perintah Kerja")}}</h5>
+            <h5 class="title mt-3">{{__(" Surat Perintah Kerja")}}</h5>
           </div>
           <div class="card-body">
               
