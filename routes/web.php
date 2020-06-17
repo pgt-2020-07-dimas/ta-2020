@@ -31,3 +31,5 @@ Route::get('/proyek/tambah', 'ProyekController@create');
 Route::post('/proyek', 'ProyekController@store');
 
 Route::get('/boq', 'BillController@index');
+Route::get('/purchase', 'PurchaseRequisitionController@index');
+Route::get('/spk', 'SpkController@index');

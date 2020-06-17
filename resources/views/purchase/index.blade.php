@@ -12,7 +12,7 @@
       <div class="col-md-8">
         <div class="card pl-3">
           <div class="card-header">
-            <h5 class="title mt-3">{{__(" Isi Bill Of Quantity")}}</h5>
+            <h5 class="title mt-3">{{__(" Isi Purchase Requisition")}}</h5>
           </div>
           <div class="card-body">
             <form method="post" action="" autocomplete="off" enctype="multipart/form-data">
@@ -21,53 +21,43 @@
               <div class="row">
               </div>           
 
+              <div class="row ">
+                  <div class="col-md-10 pr-3">
+                    <div class="form-group">
+                      <label  >{{__(" PR No.")}}</label>
+                      <input type="text" name="pr_no" class="form-control" >
+                      
+                    </div>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-md-10 pr-3">
                     <div class="form-group">
-                      <label  >{{__(" Nama Item")}}</label>
-                      <input type="text" name="item_name" class="form-control" >
+                      <label  >{{__(" Aanwijzing Date")}}</label>
+                      <input type="date" name="aanwijzing_date" class="form-control" >
                       
                     </div>
                   </div>
                 </div>
-                
                 <div class="row">
                   <div class="col-md-10 pr-3">
                     <div class="form-group">
-                      <label>{{__(" Spesifikasi")}}</label>
-                      <textarea class="form-control" name="specification" rows="3" placeholder="Brand, Size, Type, Other......"></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-5 pr-3">
-                    <div class="form-group">
-                      <label  >{{__(" Quantity")}}</label>
-                      <input type="number" name="quantity" class="form-control" maxlength="3" >
-                      
-                    </div>
-                  </div>
-                  <div class="col-md-5 pr-3">
-                    <div class="form-group">
-                      <label  >{{__(" Unit")}}</label>
-                      <input type="text" name="unit" class="form-control" >
+                      <label  >{{__(" Bid Submission Date")}}</label>
+                      <input type="date" name="bid_submission_date" class="form-control" >
                       
                     </div>
                   </div>
                 </div>
-
-                <div class="row">
-                  <div class="col-md-10 pr-3">
-                    <div class="form-group">
-                      <label  >{{__(" Harga/Unit")}}</label>
-                      <input type="text" name="price_unit" class="form-control" >
-                      
-                    </div>
+                <div class="row mt-2">
+                  <div class="ml-5">
+                    <a href="" title="Surat Perintah Kerja" class="">+Upload PR File</a>
+                  </div>
+                  <div class="col-md-3 pr-5">
+                    <input type="text" name="status" class="form-control text-center" placeholder="belum terisi" readonly>
                   </div>
                 </div>
-              <div class="card-footer ">
-                <button type="submit" title="Tambah Item" class="btn btn-success btn-round">{{__('Tambah')}}</button>
+              <div class="card-footer mt-4">
+                <button type="submit" title="Simpan" class="btn btn-success btn-round">{{__('Simpan')}}</button>
                 <a href="/proyek/tambah" title="Kembali" class="btn btn-warning btn-round">{{__('kembali')}}</a>
               </div>
             </form>
@@ -138,48 +128,6 @@
         </div>
       </div>
     </div>
-
-    
-    <div class="card pl-3">
-          <div class="card-header">
-            <h5 class="title mt-3">{{__(" Data Item")}}</h5>
-          </div>
-        <div class="card-body">
-        <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>No.</th>
-                <th>Nama Item</th>
-                <th class="text-center">Spesifikasi</th>
-                <th class="text-center">Quantity</th>
-                <th class="text-center">Unit</th>
-                <th class="text-center">Price/Unit</th>
-                <th class="text-center">Total Price</th>
-                
-                <th class="text-center">Opsi</th>
-            </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td>Pipa</td>
-                    <td>Brand WAVIN; Size 4; dll</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">Buah</td>
-                    <td class="text-center">Rp5.000.000</td>
-                    <td class="text-center">Rp25.000.000</td>
-                    <td class="text-center">
-                        <a href="#" class="badge badge-primary" title="Edit Item" id="2-tasks-edit" icon="edit"><i class="fa fa-edit"></i> </a>
-                        <a href="#" class="badge badge-danger" title="Hapus Item" id="2-tasks-delete" icon="close"><i class="fa fa-close"></i> </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-       </div>
-     </div>
 </div>
   
 @endsection
