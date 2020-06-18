@@ -38,3 +38,5 @@ Route::patch('/proyek', 'ProyekController@tunda');
 Route::get('/boq', 'BillController@index');
 Route::get('/purchase', 'PurchaseRequisitionController@index');
 Route::get('/spk', 'SpkController@index');
+
+

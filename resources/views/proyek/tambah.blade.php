@@ -24,14 +24,14 @@
                   <div class="col-md-6 pr-3">
                     <div class="form-group">
                       <label>{{__(" No Proyek")}}</label>
-                      <input type="text" name="project_no" class="form-control @error('project_no') is-invalid @enderror" value="{{ old('project_no') }}">
+                      <input type="text" name="project_no" class="form-control badge-pill  @error('project_no') is-invalid @enderror" value="{{ old('project_no') }}">
                       @error('project_no') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
                   <div class="col-md-5 pr-3">
                     <div class="form-group">
                       <label>{{__(" Tahun Proyek")}}</label>
-                      <input type="text" name="project_year" class="form-control @error('project_year') is-invalid @enderror" value="{{ old('project_year') }}">
+                      <input type="text" name="project_year" class="form-control badge-pill  @error('project_year') is-invalid @enderror" value="{{ old('project_year') }}">
                       @error('project_year') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -41,7 +41,7 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Judul Proyek")}}</label>
-                      <input type="text" name="project_title" class="form-control @error('project_title') is-invalid @enderror" value="{{ old('project_title') }}">
+                      <input type="text" name="project_title" class="form-control badge-pill  @error('project_title') is-invalid @enderror" value="{{ old('project_title') }}">
                       @error('project_title') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -51,7 +51,7 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label>{{__(" Deskripsi")}}</label>
-                      <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="3" >{{ old('deskripsi') }}</textarea>
+                      <textarea class="form-control badge-pill  @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="3" >{{ old('deskripsi') }}</textarea>
                       @error('deskripsi') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -61,7 +61,7 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label  >{{__(" User/CC")}}</label>
-                      <input type="text" name="user_cc" class="form-control @error('user_cc') is-invalid @enderror" value="{{ old('user_cc') }}" >
+                      <input type="text" name="user_cc" class="form-control badge-pill  @error('user_cc') is-invalid @enderror" value="{{ old('user_cc') }}" >
                       @error('user_cc') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -70,7 +70,7 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Plant")}}</label>                      
-                      <select name="plant" class="form-control @error('plant') is-invalid @enderror">
+                      <select name="plant" class="form-control  @error('plant') is-invalid @enderror">
                         <option>- Pilih Plant -</option>                        
                         <option value="All Plant">All Plant</option>                        
                         <option value="Plant A">Plant A</option>                        
@@ -91,7 +91,7 @@
                 <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
                 <input type="hidden" value="{{Auth::user()->kode}}" name="kode">
                 <input type="hidden" value="Planning" name="status">
-                <input type="hidden" value="5%" name="persentase">
+                <input type="hidden" value="5" name="persentase">
                 <div class="text-right pr-4">
                   <button type="submit" name="submit" class="btn btn-primary btn-round">{{__('Simpan')}}</button>
                   <a href="/dashboard" class="btn btn-info btn-round">{{__('Kembali')}}</a>
@@ -116,7 +116,7 @@
                   </td>
                   <td>
                   <div class="col-md-10">                    
-                    <span class="btn btn-sm btn-round btn-danger">belum terisi</span>
+                    <span class="btn btn-sm badge-pill btn-danger">belum terisi</span>
                   </div>
                   </td>
                 </tr>
@@ -126,7 +126,7 @@
                   </td>
                   <td>
                   <div class="col-md-10">
-                  <span class="btn btn-sm btn-round btn-danger">belum terisi</span>
+                  <span class="btn btn-sm badge-pill btn-danger">belum terisi</span>
                   </div>
                   </td>
                 </tr>
@@ -136,7 +136,7 @@
                   </td>
                   <td>
                   <div class="col-md-10">
-                  <span class="btn btn-sm btn-round btn-danger">belum terisi</span>
+                  <span class="btn btn-sm badge-pill btn-danger">belum terisi</span>
                   </div>
                   </td>
                 </tr>
@@ -146,7 +146,7 @@
                   </td>
                   <td>
                   <div class="col-md-10">
-                  <span class="btn btn-sm btn-round btn-danger">belum terisi</span>
+                  <span class="btn btn-sm badge-pill btn-danger">belum terisi</span>
                   </div>
                   </td>
                 </tr>
