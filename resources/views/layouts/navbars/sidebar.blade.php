@@ -54,10 +54,12 @@
           <p>{{ __('Rating Kontaktor') }}</p>
         </a>
       </li>
-      <li class = "@if ($activePage == 'info') active @endif">
-        <a href="#">
-          <i class="now-ui-icons travel_info"></i>
-          <p>{{ __('Info') }}</p>
+      <li class = "@if ($activePage == 'info') active @endif">        
+        <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                     document.getElementById('logout-form').submit();">
+                    <i class="now-ui-icons travel_info"></i>
+                      {{ __('Logout') }}
         </a>
       </li>
     </ul>
