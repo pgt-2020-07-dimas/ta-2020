@@ -64,7 +64,7 @@
                   <div class="ml-3">
                     <a class="card-subtitle text-muted" title="Bill Of Quantity">BILL OF QUANTITY</a>
                   </div>
-                  <div class="ml-3">
+                  <div class="ml-2">
                    <a href="" class="" title="Bill Of Quantity">>Lihat Detail</a>                  
                   </div>
                 </div>
@@ -114,7 +114,7 @@
                   <div class="ml-3 ">
                   <a class="card-subtitle text-muted" title="Desain Gambar">{{__(" SPK/PO NO.")}}</a>
                   </div>
-                  <div class="ml-3">
+                  <div class="ml-4">
                   <a class="card-subtitle text-muted" title="Desain Gambar">:&nbsp;{{__(" belum diisi")}}</a>                
                   </div>
                 </div>
@@ -123,7 +123,7 @@
                   <div class="ml-3 ">
                   <a class="card-subtitle text-muted" title="Desain Gambar">{{__(" CONTRACTOR")}}&nbsp;</a>
                   </div>
-                  <div class="ml-3">
+                  <div class="ml-1">
                   <a class="card-subtitle text-muted" title="Desain Gambar">:&nbsp;{{__(" belum diisi")}}</a>                
                   </div>
                 </div>
@@ -159,8 +159,9 @@
         </div>
         </div>
         <div class="text-right pr-5">
-        <a href="{{ $proyek->id }}/edit" class="btn badge-pill btn-warning">Edit</a>
-         <a href="#" class="btn badge-pill btn-primary mr-3">Update Progress</a>
+        <a href="{{ $proyek->id }}/edit" class="btn btn-warning btn-round">Edit</a>
+         <a href="#" class="btn btn-primary btn-round">Update Progress</a>
+         <a href="/proyek" class="btn btn-info mr-3 btn-round">Kembali</a>
          </div>
          </div>
          </div>

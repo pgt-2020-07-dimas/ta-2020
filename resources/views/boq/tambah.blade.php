@@ -77,8 +77,8 @@
                   </div>
                 </div>
               <div class="card-footer text-right mr-4">
-                <button type="submit" title="Tambah Item" class="btn badge-pill btn-success ">{{__('Tambah')}}</button>
-                <a href="/proyek/tambah" title="Kembali" class="btn badge-pill btn-warning ">{{__('kembali')}}</a>
+                <button type="submit" title="Tambah Item" class="btn btn-round btn-success ">{{__('Tambah')}}</button>
+                <a href="/proyek/tambah" title="Kembali" class="btn btn-round btn-warning ">{{__('kembali')}}</a>
               </div>
             </form>
           </div>
@@ -156,7 +156,7 @@
           </div>
         <div class="card-body">
         <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
             <thead>
             <tr>
                 <th>No.</th>

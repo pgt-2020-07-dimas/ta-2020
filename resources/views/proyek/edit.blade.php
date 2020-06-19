@@ -90,20 +90,20 @@
                 </div>
               <div class="card-footer ">
               <div class="text-right pr-4">
-                 <button type="submit" name="submit" class="btn badge-pill btn-primary btn-round">{{__('Simpan')}}</button></form>
+                 <button type="submit" name="submit" class="btn badge-pill btn-primary btn-round mt-2">{{__('Simpan')}}</button></form>
                  <form action="/proyek" class="d-inline" method="post">
                  @method('patch')
                  @csrf 
                     <input type="hidden" name="status" value="Suspend">
                     <input type="hidden" name="id" value="{{$proyek->id}}">
-                    <button type="submit" name="submit" class="btn badge-pill btn-warning btn-round">{{__('Tunda')}}</button>
+                    <button type="submit" name="submit" class="btn badge-pill btn-warning btn-round mt-2">{{__('Tunda')}}</button>
                  </form>
                  <form action="/proyek/{{ $proyek->id }}" method="post" class="d-inline">    
                  @method('delete')
                  @csrf            
-                    <button type="submit" name="submit" class="btn badge-pill btn-danger btn-round" onclick="return confirm('Yakin menghapus?');">{{__('Hapus')}}</button>
+                    <button type="submit" name="submit" class="btn badge-pill btn-danger btn-round mt-2" onclick="return confirm('Yakin menghapus?');">{{__('Hapus')}}</button>
                  </form>  
-                 <a href="/proyek/{{$proyek->id}}" class="btn badge-pill btn-info btn-round">{{__('Kembali')}}</a>
+                 <a href="/proyek/{{$proyek->id}}" class="btn badge-pill btn-info btn-round mt-2">{{__('Kembali')}}</a>
               </div>
               </div>
           </div>   
@@ -121,10 +121,13 @@
               <table class="table table-borderless ml-2">
                 <tr>
                   <td>
-                  <a href="/boq/tambah/{{ $proyek->id }}" title="Bill of Quantity" class="">+Bill of Quantity</a>
+                  <form action="" method="" class="d-inline">
+                    <button type="submit" name="submit" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk menambah">Bill of Quantity</button>
+                  <!--<a href="/boq/tambah/{{ $proyek->id }}" title="Bill of Quantity" class="">+Bill of Quantity</a>-->
+                  </form>
                   </td>
                   <td>
-                  <div class="col-md-10">                    
+                  <div class="col-md-11">                    
                     <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
                   </div>
                   </td>
@@ -134,7 +137,7 @@
                     <a href="/drawing" title="Klik untuk menambah" class="">+Drawing</a>
                   </td>
                   <td>
-                  <div class="col-md-10">
+                  <div class="col-md-11">
                   <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
                   </div>
                   </td>
@@ -144,7 +147,7 @@
                     <a href="/purchase" title="Klik untuk menambah" class="">+Purchase Req</a>
                   </td>
                   <td>
-                  <div class="col-md-10">
+                  <div class="col-md-11">
                   <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
                   </div>
                   </td>
@@ -154,7 +157,7 @@
                     <a href="/spk" title="Klik untuk menambah" class="">+SPK</a>
                   </td>
                   <td>
-                  <div class="col-md-10">
+                  <div class="col-md-11">
                   <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
                   </div>
                   </td>

@@ -26,7 +26,7 @@
                                     <span class="progress-bar border-warning"></span>
                     </span>
                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                        <div class="h2 font-weight-bold">{{ $p->persentase }}<sup class="small">%</sup></div>
+                        <div class="h2 font-weight-bold mt-4">{{ $p->persentase }}<sup class="small">%</sup></div>
                     </div>
                     </div>
                         <h5 class="card-title text-center mt-3">{{ Auth::user()->departemen }}-{{substr($p->project_year,-2)}}{{ Auth::user()->kode }}-{{$p->project_no}}</h5>
@@ -36,7 +36,7 @@
                         </div>
                         <p class="card-body font-italic"><small>Status : {{ $p->status }} | {{ $p->plant }}</small></p>
                         <div class="text-right">
-                            <a href="/proyek/{{$p->id}}" class="btn badge-pill btn-outline-danger">Detail</a>
+                            <a href="/proyek/{{$p->id}}" class="btn btn-round btn-primary">Detail</a>
                         </div>
                         
                     </div>

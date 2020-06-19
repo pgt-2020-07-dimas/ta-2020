@@ -70,7 +70,7 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Plant")}}</label>
-                      <select name="plant" class="form-control badge-pill @error('plant') is-invalid @enderror">
+                      <select name="plant" class="form-control @error('plant') is-invalid @enderror">
                         <option>- Pilih Plant -</option>                        
                         <option value="All Plant">All Plant</option>                        
                         <option value="Plant A">Plant A</option>                        
@@ -93,8 +93,8 @@
                 <input type="hidden" value="Planning" name="status">
                 <input type="hidden" value="5" name="persentase">
                 <div class="text-right pr-4">
-                  <button type="submit" name="submit" class="btn badge-pill btn-primary btn-round">{{__('Simpan')}}</button>
-                  <a href="/dashboard" class="btn badge-pill btn-info">{{__('Kembali')}}</a>
+                  <button type="submit" name="submit" class="btn btn-primary btn-round">{{__('Simpan')}}</button>
+                  <a href="/dashboard" class="btn btn-round btn-info">{{__('Kembali')}}</a>
                 </div>
               </div>
           </div>   
@@ -116,7 +116,7 @@
                   </td>
                   <td>
                   <div class="col-md-10">                    
-                    <span class="btn btn-sm badge-pill btn-danger">belum terisi</span>
+                    <span class="btn btn-sm btn-round btn-danger">belum terisi</span>
                   </div>
                   </td>
                 </tr>
@@ -126,7 +126,7 @@
                   </td>
                   <td>
                   <div class="col-md-10">
-                  <span class="btn btn-sm badge-pill btn-danger">belum terisi</span>
+                  <span class="btn btn-sm btn-round btn-danger">belum terisi</span>
                   </div>
                   </td>
                 </tr>
@@ -136,7 +136,7 @@
                   </td>
                   <td>
                   <div class="col-md-10">
-                  <span class="btn btn-sm badge-pill btn-danger">belum terisi</span>
+                  <span class="btn btn-sm btn-round btn-danger">belum terisi</span>
                   </div>
                   </td>
                 </tr>
@@ -146,7 +146,7 @@
                   </td>
                   <td>
                   <div class="col-md-10">
-                  <span class="btn btn-sm badge-pill btn-danger">belum terisi</span>
+                  <span class="btn btn-sm btn-round btn-danger">belum terisi</span>
                   </div>
                   </td>
                 </tr>
