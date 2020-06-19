@@ -17,7 +17,7 @@ class CreateContractorsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('alamat');
-            $table->string('rating');
+            $table->string('rating')->nullable();
             $table->timestamps();
         });
     }

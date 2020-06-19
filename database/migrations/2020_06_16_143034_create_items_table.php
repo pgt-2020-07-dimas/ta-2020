@@ -22,9 +22,9 @@ class CreateItemsTable extends Migration
             $table->integer('quantity');
             $table->string('price_unit');
             $table->string('total_price');
-            $table->string('bobot');
-            $table->integer('persentase');
-            $table->string('status');
+            $table->string('bobot')->nullable();
+            $table->integer('persentase')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

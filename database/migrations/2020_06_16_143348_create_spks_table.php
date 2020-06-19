@@ -16,9 +16,9 @@ class CreateSpksTable extends Migration
         Schema::create('spks', function (Blueprint $table) {
             $table->id();
             $table->string('spk_no');
-            $table->date('start_execution_date');
-            $table->date('estimate_finish_date');
-            $table->string('path');
+            $table->date('start_execution_date')->nullable();
+            $table->date('estimate_finish_date')->nullable();
+            $table->string('path')->nullable();
             $table->integer('contractor_id');
             $table->timestamps();
         });

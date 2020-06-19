@@ -18,7 +18,7 @@ class CreateProgressesTable extends Migration
             $table->integer('item_id');
             $table->string('quantity');
             $table->date('date');
-            $table->string('path');
+            $table->string('path')->nullable();
             $table->timestamps();
         });
     }

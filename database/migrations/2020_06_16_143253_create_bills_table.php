@@ -15,8 +15,8 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->string('planned_budged');
-            $table->string('actual_budged');
+            $table->string('planned_budged')->nullable();
+            $table->string('actual_budged')->nullable();
             $table->timestamps();
         });
     }

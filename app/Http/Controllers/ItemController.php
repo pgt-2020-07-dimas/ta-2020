@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Bill;
-use App\Proyek;
+use App\Item;
 use Illuminate\Http\Request;
 
-class BillController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        return view('boq.index');
+        //
     }
 
     /**
@@ -23,11 +22,9 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
-    {   
-        $proyek = Proyek::where('id',$request->id)->first();       
-        //dd($proyek->project_year); 
-        return view('boq.tambah',['proyek'=>$proyek]);
+    public function create()
+    {
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class BillController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Bill  $bill
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Bill $bill)
+    public function show(Item $item)
     {
         //
     }
@@ -55,10 +52,10 @@ class BillController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Bill  $bill
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bill $bill)
+    public function edit(Item $item)
     {
         //
     }
@@ -67,10 +64,10 @@ class BillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Bill  $bill
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bill $bill)
+    public function update(Request $request, Item $item)
     {
         //
     }
@@ -78,10 +75,10 @@ class BillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Bill  $bill
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bill $bill)
+    public function destroy(Item $item)
     {
         //
     }

@@ -121,7 +121,7 @@
               <table class="table table-borderless ml-2">
                 <tr>
                   <td>
-                  <a href="/boq" title="Klik untuk menambah" class="">+Bill of Quantity</a>
+                  <a href="/boq/tambah/{{ $proyek->id }}" title="Bill of Quantity" class="">+Bill of Quantity</a>
                   </td>
                   <td>
                   <div class="col-md-10">                    

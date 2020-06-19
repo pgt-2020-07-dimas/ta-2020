@@ -35,7 +35,7 @@ Route::delete('/proyek/{proyek}', 'ProyekController@destroy');
 Route::patch('/proyek/{proyek}', 'ProyekController@update');
 Route::patch('/proyek', 'ProyekController@tunda');
 
-Route::get('/boq', 'BillController@index');
+Route::get('/boq/tambah/{id}', 'BillController@create');
 Route::get('/purchase', 'PurchaseRequisitionController@index');
 Route::get('/spk', 'SpkController@index');
 

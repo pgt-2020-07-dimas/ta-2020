@@ -112,7 +112,7 @@
               <table class="table table-borderless ml-2">
                 <tr>
                   <td>
-                  <a href="/boq" title="Klik untuk menambah" class="">+Bill of Quantity</a>
+                  <a href="#" title="Klik untuk menambah" onclick="return alert('Silahkan simpan proyek terlebih dahulu');" class="">+Bill of Quantity</a>
                   </td>
                   <td>
                   <div class="col-md-10">                    
@@ -122,7 +122,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <a href="/drawing" title="Klik untuk menambah" class="">+Drawing</a>
+                    <a href="#" title="Klik untuk menambah" onclick="return alert('Silahkan simpan proyek terlebih dahulu');">+Drawing</a>
                   </td>
                   <td>
                   <div class="col-md-10">
@@ -132,7 +132,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <a href="/purchase" title="Klik untuk menambah" class="">+Purchase Req</a>
+                    <a href="#" title="Klik untuk menambah" onclick="return alert('Silahkan simpan proyek terlebih dahulu');">+Purchase Req</a>
                   </td>
                   <td>
                   <div class="col-md-10">
@@ -142,7 +142,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <a href="/spk" title="Klik untuk menambah" class="">+SPK</a>
+                    <a href="#" title="Klik untuk menambah" onclick="return alert('Silahkan simpan proyek terlebih dahulu');">+SPK</a>
                   </td>
                   <td>
                   <div class="col-md-10">
