@@ -121,14 +121,24 @@
               <table class="table table-borderless ml-2">
                 <tr>
                   <td>
-                  <form action="" method="" class="d-inline">
-                    <button type="submit" name="submit" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk menambah">Bill of Quantity</button>
+                  @if ($proyek->boq_id <> null)
+                  <a href="/boq/{{$proyek->boq_id}}/edit" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk mengedit">+Bill of Quantity</a>
+                  @else
+                  <form action="/boq/tambah" method="post" class="d-inline">
+                  @csrf
+                  <input type="hidden" name="id" value="{{ $proyek->id }}">
+                    <button type="submit" name="submit" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk menambah">+Bill of Quantity</button>
                   <!--<a href="/boq/tambah/{{ $proyek->id }}" title="Bill of Quantity" class="">+Bill of Quantity</a>-->
                   </form>
+                  @endif
                   </td>
                   <td>
-                  <div class="col-md-11">                    
+                  <div class="col-md-11">    
+                  @if ($proyek->boq_id <> null)                
+                    <span class="btn badge-pill btn-sm btn-round btn-success">sudah terisi</span>
+                  @else
                     <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
+                  @endif
                   </div>
                   </td>
                 </tr>

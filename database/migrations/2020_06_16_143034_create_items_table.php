@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration
             $table->string('specification');
             $table->integer('quantity');
             $table->string('price_unit');
+            $table->string('unit');
             $table->string('total_price');
             $table->string('bobot')->nullable();
             $table->integer('persentase')->nullable();

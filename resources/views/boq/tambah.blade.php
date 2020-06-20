@@ -5,8 +5,7 @@
    
 ])
 
-@section('content')        
-
+@section('content')    
   <div class="content">
     <div class="row">
       <div class="col-md-8">
@@ -15,7 +14,7 @@
             <h5 class="title mt-3">{{__(" Isi Bill Of Quantity")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="" autocomplete="off" enctype="multipart/form-data">
+            <form method="post" action="/boq" autocomplete="off" enctype="multipart/form-data">
               @csrf
               @include('alerts.success')
               <div class="row">
@@ -25,8 +24,8 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Nama Item")}}</label>
-                      <input type="text" name="item_name" class="form-control badge-pill " >
-                      
+                      <input type="text" name="item_name" class="text-capitalize form-control badge-pill @error('item_name') is-invalid @enderror" value="{{ old('item_name') }}" required>
+                      @error('item_name') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
                 </div>
@@ -35,7 +34,8 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label>{{__(" Spesifikasi")}}</label>
-                      <textarea class="form-control badge-pill " name="specification" rows="3" placeholder="Brand, Size, Type, Other......"></textarea>
+                      <textarea class="form-control badge-pill @error('specification') is-invalid @enderror" name="specification" rows="3" placeholder="Brand, Size, Type, Other......" required>{{ old('specification') }}</textarea>
+                      @error('specification') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
                 </div>
@@ -44,25 +44,26 @@
                   <div class="col-md-3 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Tipe")}}</label>
-                      <select name="tipe" class="form-control badge-pill" id="exampleFormControlSelect1">
-                        <option value="">-Pilih-</option>
+                      <select name="tipe" class="form-control badge-pill @error('tipe') is-invalid @enderror" id="exampleFormControlSelect1" required>
+                        <option value="">- Pilih -</option>
                         <option value="Material">Material</option>
                         <option value="Jasa">Jasa</option>
-                      </select>                      
+                      </select>  
+                      @error('tipe') <div class="invalid-feedback">{{ $message }}</div>@enderror                    
                     </div>
                   </div>
                   <div class="col-md-4 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Quantity")}}</label>
-                      <input type="number" name="quantity" class="form-control badge-pill " maxlength="3" >
-                      
+                      <input type="number" name="quantity" value="{{ old('quantity') }}" class="form-control badge-pill @error('quantity') is-invalid @enderror" maxlength="3" required>
+                      @error('quantity') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
                   <div class="col-md-4 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Unit")}}</label>
-                      <input type="text" name="unit" class="form-control badge-pill " >
-                      
+                      <input type="text" name="unit" value="{{ old('unit') }}" class="text-capitalize form-control badge-pill @error('unit') is-invalid @enderror" required>
+                      @error('unit') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
                 </div>
@@ -71,14 +72,15 @@
                   <div class="col-md-11 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Harga/Unit")}}</label>
-                      <input type="text" name="price_unit" class="form-control badge-pill " >
-                      
+                      <input type="number" name="price_unit" value="{{ old('price_unit') }}" class="form-control badge-pill @error('price_unit') is-invalid @enderror" required>
+                      @error('price_unit') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
                 </div>
               <div class="card-footer text-right mr-4">
-                <button type="submit" title="Tambah Item" class="btn btn-round btn-success ">{{__('Tambah')}}</button>
-                <a href="/proyek/tambah" title="Kembali" class="btn btn-round btn-warning ">{{__('kembali')}}</a>
+                <input type="hidden" value="{{$boq_id}}" name="boq_id">
+                <button type="submit" name="submit" title="Tambah Item" class="btn btn-round btn-success ">{{__('Tambah')}}</button>
+                <a href="/proyek/{{$proyek->id}}/edit" title="Kembali" class="btn btn-round btn-warning ">{{__('Kembali')}}</a>
               </div>
             </form>
           </div>
@@ -156,7 +158,7 @@
           </div>
         <div class="card-body">
         <div class="table-responsive">
-        <table class="table table-striped table-hover">
+        <table class="table table-sm table-striped table-hover">
             <thead>
             <tr>
                 <th>No.</th>
@@ -165,31 +167,81 @@
                 <th class="text-center">Quantity</th>
                 <th class="text-center">Unit</th>
                 <th class="text-center">Price/Unit</th>
-                <th class="text-center">Total Price</th>
-                
+                <th class="text-center">Total Price</th>                
                 <th class="text-center">Opsi</th>
             </tr>
             </thead>
-
             <tbody>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td>Pipa</td>
-                    <td>Brand WAVIN; Size 4; dll</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">Buah</td>
-                    <td class="text-center">Rp5.000.000</td>
-                    <td class="text-center">Rp25.000.000</td>
+            @if(count($items) <> 0)
+                @foreach($items as $item)                
+                <tr>                    
+                    <td class="text-center">{{$loop->iteration}}</td>
+                    <td>{{$item->item_name}}</td>
+                    <td class="text-center">{{$item->specification}}</td>
+                    <td class="text-center">{{$item->quantity}}</td>
+                    <td class="text-center">{{$item->unit}}</td>
+                    <td class="text-center">Rp. {{$item->price_unit}}</td>
+                    <td class="text-center">Rp. {{$item->total_price}}</td>
                     <td class="text-center">
-                        <a href="#" class="badge badge-primary" title="Edit Item" id="2-tasks-edit" icon="edit"><i class="fa fa-edit"></i> </a>
+                        <!-- <a href="#" class="badge badge-primary" title="Edit Item" id="2-tasks-edit" icon="edit"><i class="fa fa-edit"></i> </a> -->
+                        <!-- Button trigger mdl -->
+                        <a class="badge badge-primary text-white edit" icon="edit" 
+                        data-toggle="modal" data-target="#modal-edit"
+                        data-name="{{$item->item_name}}">
+                        <i class="fa fa-edit"></i>
+                        </a>                   
+
                         <a href="#" class="badge badge-danger" title="Hapus Item" id="2-tasks-delete" icon="close"><i class="fa fa-close"></i> </a>
                     </td>
+                </tr>   
+                @endforeach                
+                <tr>
+                  <td colspan="6" class="text-right">Total :</td>
+                  <td class="text-center">Rp. {{$total}}</td>
+                  <td></td>
                 </tr>
+              @else
+              <tr>
+                <td colspan="8" class="text-center">Belum ada item yang ditambahkan</td>
+              </tr>
+              @endif
             </tbody>
         </table>
+        <!-- Modal -->
+        <div class="modal fade" id="modal-edit" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="item_name">
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+              </div>
+
+            </div>
+          </div>
         </div>
+
        </div>
      </div>
 </div>
-  
+<script type="text/javascript">
+  $('.edit').click(function(){
+    var item_name = $(this).attr('data-name');
+    $('#item_name').val(item_name);
+  })
+</script>
 @endsection
