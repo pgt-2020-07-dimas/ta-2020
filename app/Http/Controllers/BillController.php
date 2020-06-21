@@ -77,7 +77,7 @@ class BillController extends Controller
         for ($i=0;$i<count($iditems);$i++){
             $item = Item::find($iditems[$i]);
             $bobot = ($item->total_price/$planned_budged);
-            $bobot = round($bobot,5);
+            $bobot = round($bobot,6);
             $items = Item::find($iditems[$i])->update([
                 'bobot' => $bobot,
             ]);
@@ -124,7 +124,49 @@ class BillController extends Controller
      */
     public function update(Request $request, Bill $bill)
     {
-        //
+        $request->validate([
+            'item_name' => 'required',
+            'boq_id' => 'required|numeric',
+            'specification' => 'required|max:50',
+            'tipe' => 'required',
+            'quantity' => 'required|numeric',
+            'unit' => 'required|alpha',
+            'price_unit' => 'required|numeric',
+        ]);
+
+        $total_price = $request->quantity * $request->price_unit;
+        
+        $itemup = Item::where('id',$request->id)->update([
+            'item_name'=>$request->item_name,
+            'specification'=>$request->specification,
+            'tipe'=>$request->tipe,
+            'quantity'=>$request->quantity,
+            'unit'=>$request->unit,
+            'price_unit'=>$request->price_unit,
+            'total_price'=>$total_price,
+            'status'=>0,
+            'persentase'=>0,
+        ]);
+        $planned_budged = Item::where('boq_id',$request->boq_id)->pluck('total_price')->sum();
+        $iditems = Item::where('boq_id',$request->boq_id)->pluck('id');        
+
+        for ($i=0;$i<count($iditems);$i++){
+            $item = Item::find($iditems[$i]);
+            $bobot = ($item->total_price/$planned_budged);
+            $bobot = round($bobot,6);
+            $items = Item::find($iditems[$i])->update([
+                'bobot' => $bobot,
+            ]);
+        }
+        
+        $bill = BIll::where('id',$request->boq_id)
+                    ->update([
+                        'planned_budged'=> $planned_budged,
+                    ]);
+        //dd($planned_budged);
+        return redirect('/boq'.'/'.$itemup.'/edit');
+
+
     }
 
     /**
@@ -133,8 +175,10 @@ class BillController extends Controller
      * @param  \App\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bill $bill)
+    public function destroy(Request $request,Bill $bill)
     {
-        //
+        Item::destroy($request->id);
+        
+        return redirect('/boq'.'/'.$request->boq_id.'/edit');
     }
 }

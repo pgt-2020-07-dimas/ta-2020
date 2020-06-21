@@ -187,6 +187,7 @@
                         <!-- Button trigger mdl -->
                         <a class="badge badge-primary text-white edit" icon="edit" 
                         data-toggle="modal" data-target="#modal-edit"
+                        data-id="{{$item->id}}" 
                         data-name="{{$item->item_name}}" 
                         data-quantity="{{$item->quantity}}" 
                         data-tipe="{{$item->tipe}}" 
@@ -194,9 +195,14 @@
                         data-price="{{$item->price_unit}}" 
                         data-spesifikasi="{{$item->specification}}">
                         <i class="fa fa-edit"></i>
-                        </a>                   
-
-                        <a href="#" class="badge badge-danger" title="Hapus Item" id="2-tasks-delete" icon="close"><i class="fa fa-close"></i> </a>
+                        </a>      
+                        <form action="/boq/{{$item->id}}" method="post">
+                        @method('delete')
+                        @csrf
+                        <input type="hidden" name="id" value="{{$item->id}}">
+                        <input type="hidden" name="boq_id" value="{{$item->boq_id}}">
+                        <button type="submit" name="submit" class="badge badge-danger" title="Hapus Item" icon="close" onclick="return confirm('Yakin menghapus?');"><i class="fa fa-close"></i> </button>
+                        </form>
                     </td>
                 </tr>   
                 @endforeach                
@@ -224,9 +230,13 @@
                 </button>
               </div>
 
-              <form action="">
+              <form action="/boq/{{$boq_id}}" method="post">
+              @method('patch')
+              @csrf
+              
                 <div class="modal-body">  
-                
+                <input type="hidden" id="id" name="id">
+                <input type="hidden" value="{{$boq_id}}" name="boq_id">
                   <div class="form-group">
                       <label  >{{__(" Nama Item")}}</label>
                       <input type="text" id="item_name" name="item_name" class="text-capitalize form-control badge-pill @error('item_name') is-invalid @enderror" value="{{ old('item_name') }}" required>
@@ -295,6 +305,8 @@
 </div>
 <script type="text/javascript">
   $('.edit').click(function(){
+    var id = $(this).attr('data-id');
+    $('#id').val(id);
     var item_name = $(this).attr('data-name');
     $('#item_name').val(item_name);
     var spesifikasi = $(this).attr('data-spesifikasi');
