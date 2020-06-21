@@ -13,7 +13,9 @@ class ProyekController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $proyek = Proyek::all();
+    {   
+        
+        $proyek = Proyek::where('user_id',auth()->user()->id)->get();
         //dd($proyek);
         return view('proyek.index',['proyek'=>$proyek]);
     }
@@ -98,7 +100,7 @@ class ProyekController extends Controller
         return redirect('/proyek'.'/'.$proyek->id.'/edit');
     }
 
-    /**
+    /** 
      * Remove the specified resource from storage.
      *
      * @param  \App\Proyek  $proyek

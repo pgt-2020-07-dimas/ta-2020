@@ -4,7 +4,7 @@
 -->
   <div class="logo">
     <a href="#" class="simple-text logo-mini">
-      {{ __('JMU') }}
+      {{ Auth::user()->departemen }}
     </a>
     <a href="#" class="simple-text logo-normal">
       {{ __('Utility Departement') }}

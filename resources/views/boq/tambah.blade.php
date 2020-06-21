@@ -44,10 +44,10 @@
                   <div class="col-md-3 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Tipe")}}</label>
-                      <select name="tipe" class="form-control badge-pill @error('tipe') is-invalid @enderror" id="exampleFormControlSelect1" required>
-                        <option value="">- Pilih -</option>
-                        <option value="Material">Material</option>
-                        <option value="Jasa">Jasa</option>
+                      <select id="tipe" name="tipe" class="form-control badge-pill @error('tipe') is-invalid @enderror" id="exampleFormControlSelect1" required>
+                        <option  value="">- Pilih -</option>
+                        <option value="Material" >Material</option>
+                        <option value="Jasa" >Jasa</option>
                       </select>  
                       @error('tipe') <div class="invalid-feedback">{{ $message }}</div>@enderror                    
                     </div>
@@ -185,7 +185,7 @@
                     <td class="text-center">
                         <!-- <a href="#" class="badge badge-primary" title="Edit Item" id="2-tasks-edit" icon="edit"><i class="fa fa-edit"></i> </a> -->
                         <!-- Button trigger mdl -->
-                        <a class="badge badge-primary text-white edit" icon="edit" 
+                        <a class="badge badge-primary text-white edit" icon="edit" title="Edit item"
                         data-toggle="modal" data-target="#modal-edit"
                         data-id="{{$item->id}}" 
                         data-name="{{$item->item_name}}" 
@@ -254,8 +254,8 @@
                     <div class="col">
                       <div class="form-group">
                         <label  >{{__(" Tipe")}}</label>
-                        <select name="tipe" class="form-control badge-pill @error('tipe') is-invalid @enderror" id="exampleFormControlSelect1" required>
-                          <option value="">- Pilih -</option>
+                        <select name="tipe" class="form-control badge-pill @error('tipe') is-invalid @enderror" id="tipe" required>
+                          <option value="" >- Pilih -</option>
                           <option value="Material">Material</option>
                           <option value="Jasa">Jasa</option>
                         </select>  
@@ -317,6 +317,16 @@
     $('#unit').val(unit);
     var price_unit = $(this).attr('data-price');
     $('#price_unit').val(price_unit);
+    var tipe = $(this).attr('data-tipe');
+    $('#tipe').val(tipe);
+    
   })
+  $(document).ready(function() {
+    const tipe = '{{ old('tipe') }}';
+    
+    if(tipe !== '') {
+      $('#tipe').val(tipe);
+    }
+  });
 </script>
 @endsection
