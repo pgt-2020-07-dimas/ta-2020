@@ -187,7 +187,12 @@
                         <!-- Button trigger mdl -->
                         <a class="badge badge-primary text-white edit" icon="edit" 
                         data-toggle="modal" data-target="#modal-edit"
-                        data-name="{{$item->item_name}}">
+                        data-name="{{$item->item_name}}" 
+                        data-quantity="{{$item->quantity}}" 
+                        data-tipe="{{$item->tipe}}" 
+                        data-unit="{{$item->unit}}" 
+                        data-price="{{$item->price_unit}}" 
+                        data-spesifikasi="{{$item->specification}}">
                         <i class="fa fa-edit"></i>
                         </a>                   
 
@@ -213,24 +218,74 @@
             <div class="modal-content">
               <div class="modal-header">
 
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Edit data item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
 
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Recipient:</label>
-                  <input type="text" class="form-control" id="item_name">
-                </div>
-              </div>
+              <form action="">
+                <div class="modal-body">  
+                
+                  <div class="form-group">
+                      <label  >{{__(" Nama Item")}}</label>
+                      <input type="text" id="item_name" name="item_name" class="text-capitalize form-control badge-pill @error('item_name') is-invalid @enderror" value="{{ old('item_name') }}" required>
+                      @error('item_name') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                  </div>
+                  
+                  <div class="form-group">
+                      <label>{{__(" Spesifikasi")}}</label>
+                      <textarea id="spesifikasi" class="form-control badge-pill @error('specification') is-invalid @enderror" name="specification" rows="3" placeholder="Brand, Size, Type, Other......" required>{{ old('specification') }}</textarea>
+                      @error('specification') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col">
+                      <div class="form-group">
+                        <label  >{{__(" Tipe")}}</label>
+                        <select name="tipe" class="form-control badge-pill @error('tipe') is-invalid @enderror" id="exampleFormControlSelect1" required>
+                          <option value="">- Pilih -</option>
+                          <option value="Material">Material</option>
+                          <option value="Jasa">Jasa</option>
+                        </select>  
+                        @error('tipe') <div class="invalid-feedback">{{ $message }}</div>@enderror                    
+                      </div>
+                    </div>
+
+                    <div class="col">
+                      <div class="form-group">
+                        <label  >{{__(" Quantity")}}</label>
+                        <input type="number" id="quantity" name="quantity" value="{{ old('quantity') }}" class="form-control badge-pill @error('quantity') is-invalid @enderror" maxlength="3" required>
+                        @error('quantity') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                      </div>
+                    </div>
+
+                    <div class="col">
+                      <div class="form-group">
+                        <label  >{{__(" Unit")}}</label>
+                        <input type="text" id="unit" name="unit" value="{{ old('unit') }}" class="text-capitalize form-control badge-pill @error('unit') is-invalid @enderror" required>
+                        @error('unit') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                      </div>
+                    </div>
+                  
+                  </div>
+                  <div class="form-group">
+                      <label  >{{__(" Harga/Unit")}}</label>
+                      <input type="number" id="price_unit" name="price_unit" value="{{ old('price_unit') }}" class="form-control badge-pill @error('price_unit') is-invalid @enderror" required>
+                      @error('price_unit') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                  </div>
+
+                    
+                </div>                
+              
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="submit" name="submit" title="Tambah Item" class="btn btn-round btn-success ">{{__('Perbaharui')}}</button>
+                <button type="button" class="btn btn-round btn-warning" data-dismiss="modal">Tutup</button>
+             
               </div>
-
+              </form>
             </div>
           </div>
         </div>
@@ -242,6 +297,14 @@
   $('.edit').click(function(){
     var item_name = $(this).attr('data-name');
     $('#item_name').val(item_name);
+    var spesifikasi = $(this).attr('data-spesifikasi');
+    $('#spesifikasi').val(spesifikasi);
+    var quantity = $(this).attr('data-quantity');
+    $('#quantity').val(quantity);
+    var unit = $(this).attr('data-unit');
+    $('#unit').val(unit);
+    var price_unit = $(this).attr('data-price');
+    $('#price_unit').val(price_unit);
   })
 </script>
 @endsection
