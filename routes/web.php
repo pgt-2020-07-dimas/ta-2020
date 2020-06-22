@@ -26,6 +26,7 @@ Route::get('/', [
   ]);
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
 Route::get('/proyek', 'ProyekController@index');
 Route::get('/proyek/tambah', 'ProyekController@create');
 Route::get('/proyek/{proyek}', 'ProyekController@show');
@@ -41,7 +42,12 @@ Route::patch('/boq/{bill}', 'BillController@update');
 Route::delete('/boq/{bill}', 'BillController@destroy');
 Route::post('/boq', 'BillController@store');
 Route::get('/boq/{bill}/edit', 'BillController@edit');
-Route::get('/purchase', 'PurchaseRequisitionController@index');
-Route::get('/spk', 'SpkController@index');
 
+Route::get('/pr/{purchase_requisition}/edit', 'PurchaseRequisitionController@edit');
+Route::patch('/pr/{purchase_requisition}', 'PurchaseRequisitionController@update');
+Route::post('/pr/tambah', 'PurchaseRequisitionController@create');
+Route::delete('/pr/{purchase_requisition}', 'PurchaseRequisitionController@destroy');
+Route::post('/pr', 'PurchaseRequisitionController@store');
+
+Route::get('/spk', 'SpkController@index');
 

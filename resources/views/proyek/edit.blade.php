@@ -153,22 +153,48 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    <a href="/purchase" title="Klik untuk menambah" class="">+Purchase Req</a>
+                <td>
+                  @if ($proyek->pr_id <> null)
+                  <a href="/pr/{{$proyek->pr_id}}/edit" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk mengedit">+PR</a>
+                  @else
+                  <form action="/pr/tambah" method="post" class="d-inline">
+                  @csrf
+                  <input type="hidden" name="id" value="{{ $proyek->id }}">
+                    <button type="submit" name="submit" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk menambah">+PR</button>
+                  <!--<a href="/spk/tambah/{{ $proyek->id }}" title="Bill of Quantity" class="">+Bill of Quantity</a>-->
+                  </form>
+                  @endif
                   </td>
                   <td>
                   <div class="col-md-11">
-                  <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
+                  @if ($proyek->pr_id <> null)                
+                    <span class="btn badge-pill btn-sm btn-round btn-success">sudah terisi</span>
+                  @else
+                    <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
+                  @endif
                   </div>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="/spk" title="Klik untuk menambah" class="">+SPK</a>
+                  @if ($proyek->spk_id <> null)
+                  <a href="/spk/{{$proyek->spk_id}}/edit" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk mengedit">+SPK</a>
+                  @else
+                  <form action="/spk/tambah" method="post" class="d-inline">
+                  @csrf
+                  <input type="hidden" name="id" value="{{ $proyek->id }}">
+                    <button type="submit" name="submit" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk menambah">+SPK</button>
+                  <!--<a href="/spk/tambah/{{ $proyek->id }}" title="Bill of Quantity" class="">+Bill of Quantity</a>-->
+                  </form>
+                  @endif
                   </td>
                   <td>
                   <div class="col-md-11">
-                  <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
+                  @if ($proyek->spk_id <> null)                
+                    <span class="btn badge-pill btn-sm btn-round btn-success">sudah terisi</span>
+                  @else
+                    <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
+                  @endif
                   </div>
                   </td>
                 </tr>

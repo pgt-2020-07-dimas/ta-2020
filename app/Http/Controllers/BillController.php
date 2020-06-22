@@ -35,6 +35,7 @@ class BillController extends Controller
         $proyek = Proyek::where('id',$request->id)->first();
         $items = Item::where('boq_id',$boq_id)->get();
         return view('boq.tambah',['proyek'=>$proyek,'boq_id'=>$boq_id,'items'=>$items]);
+        
     }
 
     /**

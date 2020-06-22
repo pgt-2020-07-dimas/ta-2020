@@ -46,6 +46,7 @@ class ProyekController extends Controller
             'user_cc' => 'required|max:50',
             'plant' => 'required|max:10',
         ]);
+
         $proyek = Proyek::create($request->all());            
         $id =$proyek->id;
         return redirect('/proyek'.'/'.$id.'/edit');
@@ -70,6 +71,7 @@ class ProyekController extends Controller
      */
     public function edit(Proyek $proyek)
     {
+        
         return view('proyek.edit',['proyek'=>$proyek]);
     }
 

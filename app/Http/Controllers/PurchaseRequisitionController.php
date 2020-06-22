@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PurchaseRequisition;
+use App\Proyek;
 use Illuminate\Http\Request;
 
 class PurchaseRequisitionController extends Controller
@@ -22,9 +23,16 @@ class PurchaseRequisitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $pr = PurchaseRequisition::create($request->all());   
+        $pr_id =$pr->id;
+        Proyek::where('id', $request->id)
+                ->update([
+                    'pr_id'=>$pr_id,
+                ]);
+        // $items = Item::where('boq_id',$boq_id)->get();
+        return redirect('/pr'.'/'.$pr_id.'/edit');
     }
 
     /**
@@ -34,7 +42,7 @@ class PurchaseRequisitionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         //
     }
 
@@ -57,7 +65,9 @@ class PurchaseRequisitionController extends Controller
      */
     public function edit(PurchaseRequisition $purchaseRequisition)
     {
-        //
+        
+        $proyek = Proyek::where('pr_id',$purchaseRequisition->id)->first();
+        return view('pr.edit',['purchaseRequisition'=>$purchaseRequisition], compact('proyek'));
     }
 
     /**
@@ -69,7 +79,19 @@ class PurchaseRequisitionController extends Controller
      */
     public function update(Request $request, PurchaseRequisition $purchaseRequisition)
     {
-        //
+        $request->validate([
+            'pr_no' => 'required|numeric',
+            'aanwijzing_date' => 'required|date',
+            'bid_submission_date' => 'required|date',
+        ]);
+
+        PurchaseRequisition::where('id', $purchaseRequisition->id)
+        ->update([
+            'pr_no'=>$request->pr_no,
+            'aanwijzing_date'=>$request->aanwijzing_date,
+            'bid_submission_date'=>$request->bid_submission_date,
+        ]);
+        return redirect('/pr'.'/'.$purchaseRequisition->id.'/edit');
     }
 
     /**

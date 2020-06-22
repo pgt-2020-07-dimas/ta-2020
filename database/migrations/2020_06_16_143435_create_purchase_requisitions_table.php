@@ -15,7 +15,7 @@ class CreatePurchaseRequisitionsTable extends Migration
     {
         Schema::create('purchase_requisitions', function (Blueprint $table) {
             $table->id();
-            $table->string('pr_no');
+            $table->string('pr_no')->nullable();
             $table->date('aanwijzing_date')->nullable();
             $table->date('bid_submission_date')->nullable();
             $table->string('path')->nullable();
