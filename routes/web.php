@@ -49,5 +49,9 @@ Route::post('/pr/tambah', 'PurchaseRequisitionController@create');
 Route::delete('/pr/{purchase_requisition}', 'PurchaseRequisitionController@destroy');
 Route::post('/pr', 'PurchaseRequisitionController@store');
 
-Route::get('/spk', 'SpkController@index');
+Route::get('/spk/{spk}/edit', 'SpkController@edit');
+Route::patch('/spk/{spk}', 'SpkController@update');
+Route::post('/spk/tambah', 'SpkController@create');
+Route::delete('/spk/{spk}', 'SpkController@destroy');
+Route::post('/spk', 'SpkController@store');
 

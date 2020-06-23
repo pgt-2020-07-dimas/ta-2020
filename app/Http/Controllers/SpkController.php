@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Spk;
+use App\Proyek;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SpkController extends Controller
 {
@@ -26,9 +28,16 @@ class SpkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $spk = Spk::create($request->all());   
+        $spk_id =$spk->id;
+        Proyek::where('id', $request->id)
+                ->update([
+                    'spk_id'=>$spk_id,
+                ]);
+        // $items = Item::where('boq_id',$boq_id)->get();
+        return redirect('/spk'.'/'.$spk_id.'/edit');
     }
 
     /**
@@ -61,7 +70,8 @@ class SpkController extends Controller
      */
     public function edit(Spk $spk)
     {
-        //
+        $proyek = Proyek::where('pr_id',$spk->id)->first();
+        return view('spk.edit',['spk'=>$spk], compact('proyek'));
     }
 
     /**

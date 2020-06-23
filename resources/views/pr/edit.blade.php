@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'namePage' => 'Bill Of Quantity',
+    'namePage' => 'Purchase Requisition',
     'class' => 'login-page sidebar-mini ',
     'activePage' => 'detail_proyek',
    
