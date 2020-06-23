@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\PurchaseRequisition;
 use App\Proyek;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PurchaseRequisitionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -78,19 +83,37 @@ class PurchaseRequisitionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, PurchaseRequisition $purchaseRequisition)
-    {
+    {   
+        //  $path = $request->file('pr')->store('/pr');
+         //dd($ $request->file('pr'));
         $request->validate([
             'pr_no' => 'required|numeric',
             'aanwijzing_date' => 'required|date',
             'bid_submission_date' => 'required|date',
         ]);
-
+        //  $path = $request->file('pr')->store('/pr');
+        // dd($path);
+        // 'path'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        if($request->file('pr')<>null){
+        $file = $request->file('pr');
+        $name = $purchaseRequisition->id .'-'.time();
+        $extension = $file->getClientOriginalExtension();
+        $newName = $name .'.'.$extension;
+        //dd($newName);
+        Storage::disk('local')->delete($purchaseRequisition->path);
+        $path = Storage::putFileAs('public/pr', $file, $newName);
+        // $path = Storage::putFile('public/pr', $request->file('pr'));
+        } else {
+            $path = $purchaseRequisition->path;
+        }
         PurchaseRequisition::where('id', $purchaseRequisition->id)
         ->update([
             'pr_no'=>$request->pr_no,
             'aanwijzing_date'=>$request->aanwijzing_date,
             'bid_submission_date'=>$request->bid_submission_date,
+            'path'=>$path,
         ]);
+        //dd($path);
         return redirect('/pr'.'/'.$purchaseRequisition->id.'/edit');
     }
 

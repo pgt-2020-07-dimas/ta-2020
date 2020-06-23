@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +39,7 @@ class BillController extends Controller
         $proyek = Proyek::where('id',$request->id)->first();
         $items = Item::where('boq_id',$boq_id)->get();
         return view('boq.tambah',['proyek'=>$proyek,'boq_id'=>$boq_id,'items'=>$items]);
-        
+
     }
 
     /**
