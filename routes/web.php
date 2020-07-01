@@ -55,3 +55,8 @@ Route::post('/spk/tambah', 'SpkController@create');
 Route::delete('/spk/{spk}', 'SpkController@destroy');
 Route::post('/spk', 'SpkController@store');
 
+Route::resource('drawing', 'DrawingController');
+Route::get('/drawing/{id}', 'DrawingController@show');
+Route::delete('/drawing/{drawing}', 'DrawingController@destroy');
+
+

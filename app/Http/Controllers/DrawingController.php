@@ -18,7 +18,8 @@ class DrawingController extends Controller
      */
     public function index()
     {
-        //
+        $file = Drawing::all();
+        return view('desain.index',compact('file'));
     }
 
     /**
@@ -28,7 +29,8 @@ class DrawingController extends Controller
      */
     public function create()
     {
-        //
+        $file = new Drawing();
+        return view('desain.create',compact('file'))->renderSections()['content'];
     }
 
     /**
@@ -39,8 +41,36 @@ class DrawingController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request,[
+            'proyek_id' => 'required',
+            'nama' => 'required',
+            'path' => 'required'
+        ]);
+
+        $maxId = \DB::table('drawings')->max('id') + 1;
+        try{       
+            $uploaded = $request->file('path');
+            $file = new Drawing();
+            $file->id = $maxId;
+            $file->project_id = $request->proyek_id;
+            $file->name = $request->nama;
+            $file->path = $maxId."-".$uploaded->getClientOriginalName();
+            $file->save();
+        
+            $uploaded->move(public_path('images/'),$file->path); //Folder lokasi File
+            \Session::flash('flash_message','Gambar berhasil ditambahkan');
+        }catch(\Exception $e){
+                echo $e->getMessage();
+                echo "<br>".$e->getLine();
+                die();
+        }
+        
+            $response = array(
+                'status' => 'success',
+                'url' => action('DrawingController@index'),
+            );
+            return $response;
+            }
 
     /**
      * Display the specified resource.
@@ -48,9 +78,12 @@ class DrawingController extends Controller
      * @param  \App\Drawing  $drawing
      * @return \Illuminate\Http\Response
      */
-    public function show(Drawing $drawing)
-    {
-        //
+    public function show($id)
+    {   
+        // dd($id);
+        $file = Drawing::where('project_id', $id)->get();
+        $project_id = $id;
+        return view('desain.index',compact('file'), compact('project_id'));
     }
 
     /**
@@ -84,6 +117,11 @@ class DrawingController extends Controller
      */
     public function destroy(Drawing $drawing)
     {
-        //
+        $file = Drawing::findOrFail($drawing->id);
+        unlink(public_path('images/').$file->path); //menghapus dokumen pada folder terkait
+        $file->delete();
+    
+        \Session::flash('flash_message','Dokumen berhasil di hapus');
+        return redirect()->action('DrawingController@index');
     }
 }

@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <!-- jquery -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ asset('js') }}/jQuery-2.1.4.min.js"></script>
+    <script src="{{ asset('js') }}/main.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="{{ asset('assets') }}/js/core/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -58,6 +61,21 @@
             @include('layouts.footer')
         </div>
     </div>
+
+    <div class="modal fade" id="modalMd" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modalMdTitle"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modalError"></div>
+                        <div id="modalMdContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
       
       <!--   Core JS Files   -->
       
@@ -75,36 +93,13 @@
       <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
       <script src="{{ asset('assets') }}/demo/demo.js"></script>
 
+      
+
       <!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>-->
-<script class="">
-    $(function() {
 
-        $(".progress").each(function() {
 
-            var value = $(this).attr('data-value');
-            var left = $(this).find('.progress-left .progress-bar');
-            var right = $(this).find('.progress-right .progress-bar');
-
-            if (value > 0) {
-                if (value <= 50) {
-                right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
-                } else {
-                right.css('transform', 'rotate(180deg)')
-                left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
-                }
-            }
-
-        })
-
-        function percentageToDegrees(percentage) {
-
-        return percentage / 100 * 360
-
-        }
-
-    });
-</script>    
+    
       @stack('js')
 </body>
 </html>

@@ -18,17 +18,17 @@
             <div class="col-sm-3">
                 <div class="card">                            
                     <div class="card-body mt-2">
-                    <div class="progress mx-auto" data-value='{{ $p->persentase }}'>
-                    <span class="progress-left">
-                                    <span class="progress-bar border-warning"></span>
-                    </span>
-                    <span class="progress-right">
-                                    <span class="progress-bar border-warning"></span>
-                    </span>
-                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                        <div class="h2 font-weight-bold mt-4">{{ $p->persentase }}<sup class="small">%</sup></div>
-                    </div>
-                    </div>
+                        <div class="progress mx-auto" data-value='{{ $p->persentase }}'>
+                        <span class="progress-left">
+                                        <span class="progress-bar border-warning"></span>
+                        </span>
+                        <span class="progress-right">
+                                        <span class="progress-bar border-warning"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold mt-4">{{ $p->persentase }}<sup class="small">%</sup></div>
+                        </div>
+                        </div>
                         <h5 class="card-title text-center mt-3">{{ Auth::user()->departemen }}-{{substr($p->project_year,-2)}}{{ Auth::user()->kode }}-{{$p->project_no}}</h5>
                         <p class="card-text text-center font-weight-bold">{{$p->project_title}}</p>  
                         <div class="card-body" style="height:6em">                                      
@@ -45,5 +45,34 @@
 
         @endforeach
     </div>
+
+    <script class="">
+    $(function() {
+
+        $(".progress").each(function() {
+
+            var value = $(this).attr('data-value');
+            var left = $(this).find('.progress-left .progress-bar');
+            var right = $(this).find('.progress-right .progress-bar');
+
+            if (value > 0) {
+                if (value <= 50) {
+                right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+                } else {
+                right.css('transform', 'rotate(180deg)')
+                left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+                }
+            }
+
+        })
+
+        function percentageToDegrees(percentage) {
+
+        return percentage / 100 * 360
+
+        }
+
+    });
+</script>
                         
 @endsection
