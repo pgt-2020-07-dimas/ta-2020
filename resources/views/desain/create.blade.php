@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="form-group">
-            {!! Form::text('proyek_id','{{ $project_id }}',['class'=>'form-control']) !!} 
+            {!! Form::hidden('proyek_id', $project_id,['class'=>'form-control']) !!} 
         </div>
         <div class="form-group">
             <label>Nama File</label>

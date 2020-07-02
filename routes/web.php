@@ -56,7 +56,9 @@ Route::delete('/spk/{spk}', 'SpkController@destroy');
 Route::post('/spk', 'SpkController@store');
 
 Route::resource('drawing', 'DrawingController');
-Route::get('/drawing/{id}', 'DrawingController@show');
+Route::get('/drawing/{id}', 'DrawingController@index');
+Route::get('/drawing/{id}/create', 'DrawingController@create');
 Route::delete('/drawing/{drawing}', 'DrawingController@destroy');
 
+Route::post('/contractor', 'ContractorController@store');
 

@@ -27,10 +27,11 @@ class DrawingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $file = new Drawing();
-        return view('desain.create',compact('file'))->renderSections()['content'];
+        $project_id = $id;
+        return view('desain.create',compact('file'), compact('project_id'))->renderSections()['content'];
     }
 
     /**

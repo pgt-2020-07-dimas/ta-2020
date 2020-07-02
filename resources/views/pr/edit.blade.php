@@ -65,19 +65,11 @@ $imgName = str_replace('storage/pr/','',$path);
                   <div class="col-md-12 pb-3 pr-3 ">
 
                       <!-- <label for="inputFile">Pilih file PR</label> -->
-                      <input onclick="uploadFunction()"  type="radio" id="up" name="select">
-                      <label for="up">Upload file</label>
-                      <input class="pt-2" id="upload" type="file" name="pr" id="inputFile" disabled>
+                      <label for="upload">Upload file</label>
+                      <input class="pt-2" id="upload" type="file" name="pr">
                       
                   </div>
                   
-                  <div class="col-md-12 pr-3 pb-3">
-                      <!-- <label for="inputFile">Pilih file PR</label> -->
-                      <input onclick="captureFunction()"  type="radio" id="cap" name="select">
-                      <label for="cap">Ambil gambar</label>
-                      <input class="pt-2" id="capture" type="file" name="pr" accept="image/*" capture="environment" disabled>
-                      
-                  </div>
                   </div>
                 </div>
               <div class="card-footer mt-4">
@@ -157,15 +149,3 @@ $imgName = str_replace('storage/pr/','',$path);
 </div>
   
 @endsection
-<script>
-function uploadFunction() {
-  document.getElementById("capture").disabled = true;
-  document.getElementById("upload").disabled = false;
-  $('#capture').val('');
-}
-function captureFunction() {
-  document.getElementById("upload").disabled = true;
-  document.getElementById("capture").disabled = false;
-  $('#upload').val('');
-}
-</script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Spk;
 use App\Proyek;
+use App\Contractor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -48,7 +49,8 @@ class SpkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        
     }
 
     /**
@@ -70,8 +72,10 @@ class SpkController extends Controller
      */
     public function edit(Spk $spk)
     {
-        $proyek = Proyek::where('pr_id',$spk->id)->first();
-        return view('spk.edit',['spk'=>$spk], compact('proyek'));
+
+        $proyek = Proyek::where('spk_id',$spk->id)->first();
+        $contractor = Contractor::orderBy('updated_at','desc')->get();
+        return view('spk.edit', compact('contractor', 'proyek', 'spk'));
     }
 
     /**
@@ -83,7 +87,15 @@ class SpkController extends Controller
      */
     public function update(Request $request, Spk $spk)
     {
-        //
+        
+        $spk = Spk::where('id',$spk->id)->update([
+            'spk_no'=>$request->spk_no,
+            'start_execution_date'=>$request->start_execution_date,
+            'estimate_finish_date'=>$request->estimate_finish_date,
+            'contractor_id'=>$request->contractor_id,
+            'path'=>$request->path,
+        ]);
+        return redirect('/spk'.'/'.$spk->id.'/edit');
     }
 
     /**

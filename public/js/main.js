@@ -10,12 +10,6 @@ $(document).on('ready', function () {
         e.preventDefault();
     });
 
-    $('.modalLg').off('click').on('click', function (e) {
-        $("#modalLg").modal('show');
-        $('#modalLgContent').load($(this).attr('href'));
-        $('#modalLgTitle').html($(this).attr('title'));
-        e.preventDefault();
-    });
 
 });
 

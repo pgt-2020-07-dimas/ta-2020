@@ -5,8 +5,7 @@
    
 ])
 
-@section('content')        
-
+@section('content')   
   <div class="content">
     <div class="row">
       <div class="col-md-8">
@@ -15,7 +14,8 @@
             <h5 class="title mt-3">{{__(" Isi Surat Perintah Kerja")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="" autocomplete="off" enctype="multipart/form-data">
+            <form method="post" action="/spk/{{ $spk->id }}" autocomplete="off" enctype="multipart/form-data">
+            @method('patch')
               @csrf
               @include('alerts.success')
               <div class="row">
@@ -25,7 +25,7 @@
                     <div class="col-md-10 pr-3">
                       <div class="form-group ">
                         <label>{{__(" No. SPK")}}</label>
-                        <input class="form-control @error('spk_no') is-invalid @enderror" name="spk_no" placeholder="" type="text" value="{{$spk->spk_no}}">
+                        <input class="form-control @error('spk_no') is-invalid @enderror" name="spk_no" placeholder="" type="text" value="{{$spk->spk_no}}" required>
                         @error('spk_no') <div class="invalid-feedback">{{ $message }}</div>@enderror
                       </div>
                     </div>
@@ -33,10 +33,13 @@
                   <div class="row">
                     <div class="col-md-7">
                       <div class="form-group">
-                        <label>{{__(" Contractor Id")}}</label>
+                        <label>{{__(" Contractor")}}</label>
                         <!-- <input class="form-control " placeholder="" type="number" name="contractor_id" value="{{$spk->contractor_id}}"> -->
-                        <select class="form-control @error('contractor') is-invalid @enderror" name="contractor" id="">
-                          <option value="">A</option>
+                        <select class="form-control @error('contractor') is-invalid @enderror" name="contractor_id">
+                          <option value="">- Pilih -</option>
+                          @foreach ($contractor as $c)
+                          <option value="{{ $c->id }}" <?=$spk->contractor_id == $c->id ? 'selected' : ''?>>{{ $c->name }}</option>
+                          @endforeach
                         </select>   
                         @error('contractor') <div class="invalid-feedback">{{ $message }}</div>@enderror               
                       </div>
@@ -59,7 +62,7 @@
                   <div class="col-md-10 pr-3">
                     <div class="form-group ">
                       <label>{{__(" Estimate Finish Date")}}</label>
-                      <input class="form-control @error('estimate_finish_date') is-invalid @enderror" type="date" name="estimate_finish_date" value="{{$spk->start_execution_date}}">
+                      <input class="form-control @error('estimate_finish_date') is-invalid @enderror" type="date" name="estimate_finish_date" value="{{$spk->estimate_finish_date}}">
                       @error('estimate_finish_date') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>
@@ -75,17 +78,8 @@
                   <div class="col-md-12 pb-3 pr-3 ">
 
                       <!-- <label for="inputFile">Pilih file PR</label> -->
-                      <input onclick="uploadFunction()"  type="radio" id="up" name="select">
-                      <label for="up">Upload file</label>
-                      <input class="pt-2" id="upload" type="file" name="pr" id="inputFile" disabled>
-                      
-                  </div>
-                  
-                  <div class="col-md-12 pr-3 pb-3">
-                      <!-- <label for="inputFile">Pilih file PR</label> -->
-                      <input onclick="captureFunction()"  type="radio" id="cap" name="select">
-                      <label for="cap">Ambil gambar</label>
-                      <input class="pt-2" id="capture" type="file" name="pr" accept="image/*" capture="environment" disabled>
+                      <label for="upload">Upload file</label>
+                      <input class="pt-2" id="upload" type="file" name="spk" id="inputFile">
                       
                   </div>
                   </div>
@@ -166,7 +160,7 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal Contractor-->
     <div class="modal fade" id="modal-tambah" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -178,7 +172,7 @@
                 </button>
               </div>
 
-              <form action="#" method="post">
+              <form action="/contractor" method="post">
               @csrf
               
                 <div class="modal-body">  
@@ -197,6 +191,7 @@
                   </div>                      
                 </div>   
               <div class="modal-footer">
+                <input type="hidden" name="spk_id" value={{$spk->id}}>
                 <button type="submit" name="submit" title="Tambah Item" class="btn btn-round btn-success ">{{__('Tambah')}}</button>
                 <button type="button" class="btn btn-round btn-warning" data-dismiss="modal">Tutup</button>
              
@@ -208,15 +203,3 @@
 </div>
   
 @endsection
-<script>
-function uploadFunction() {
-  document.getElementById("capture").disabled = true;
-  document.getElementById("upload").disabled = false;
-  $('#capture').val('');
-}
-function captureFunction() {
-  document.getElementById("upload").disabled = true;
-  document.getElementById("capture").disabled = false;
-  $('#upload').val('');
-}
-</script>
