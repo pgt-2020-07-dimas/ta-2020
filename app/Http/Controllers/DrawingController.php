@@ -16,10 +16,13 @@ class DrawingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $file = Drawing::all();
-        return view('desain.index',compact('file'));
+    public function index($id){
+        $file = Drawing::where('project_id', $id)->get();
+        $project_id = $id;
+        return view('desain.index',compact('file', 'project_id'));
+    //  $file = Drawing::all();
+    //     return view('desain.index',compact('file'));
+        
     }
 
     /**
@@ -40,7 +43,7 @@ class DrawingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $this->validate($request,[
             'proyek_id' => 'required',
@@ -68,7 +71,7 @@ class DrawingController extends Controller
         
             $response = array(
                 'status' => 'success',
-                'url' => action('DrawingController@index'),
+                'url' => action('DrawingController@index',$id),
             );
             return $response;
             }
@@ -82,9 +85,10 @@ class DrawingController extends Controller
     public function show($id)
     {   
         // dd($id);
-        $file = Drawing::where('project_id', $id)->get();
-        $project_id = $id;
-        return view('desain.index',compact('file'), compact('project_id'));
+        // $file = Drawing::where('project_id', $id)->get();
+        // $project_id = $id;
+        // return view('desain.index',compact('file', 'project_id'), compact('project_id'));
+        
     }
 
     /**
@@ -116,13 +120,16 @@ class DrawingController extends Controller
      * @param  \App\Drawing  $drawing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Drawing $drawing)
+    public function destroy($id, $drawing)
     {
-        $file = Drawing::findOrFail($drawing->id);
+        $file = Drawing::findOrFail($drawing);
         unlink(public_path('images/').$file->path); //menghapus dokumen pada folder terkait
         $file->delete();
-    
+        
         \Session::flash('flash_message','Dokumen berhasil di hapus');
-        return redirect()->action('DrawingController@index');
+        
+        return redirect()->action('DrawingController@index', $id);
+        
     }
+
 }

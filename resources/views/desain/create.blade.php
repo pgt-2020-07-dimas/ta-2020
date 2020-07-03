@@ -56,7 +56,7 @@
     });
 </script>
 {!! Form::model($file,[
-'action' => ['DrawingController@store'],
+'action' => ['DrawingController@store',$project_id],
 'id'=>'formUpload'
 ]) !!}
 <div class="row">

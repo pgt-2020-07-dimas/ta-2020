@@ -36,15 +36,17 @@
 <div class="card-body">
     <div class="row">
     <div class="col-lg-12">
-        <a class="btn btn-sm btn-success modalMd" href="/drawing/{{$project_id}}/create" title="Upload Foto"><span class="glyphicon glyphicon-upload"></span> Upload Foto</a>
+        <a class="btn btn-sm btn-success modalMd" href="/drawing/{{$project_id}}/file/create" title="Upload Foto"><span class="glyphicon glyphicon-upload"></span> Upload Foto</a>
         <div class="row mt-2">
             @foreach($file as $drawing)
             <div class="col-sm-3 mt-3">
                 <div class="thumbnail">
+                    <a href="/images/{{$drawing->path}}" class="" target="_blank">
                     {{ Html::image('images/'.$drawing->path,$drawing->name) }}
+                    </a>
                     <div class="caption">
                         <h5>{{ $drawing->name }}</h5>
-                        <form action="/drawing/{{ $drawing->id }}" method="h5OST">
+                        <form action="{{ action('DrawingController@destroy',[$project_id, $drawing->id]) }}" method="POST">
                         @method('delete')
                         @csrf  
                             <button class="badge btn-danger" title="Hah5us Foto" onclick="return confirm('Yakin Ingin Menghapus?')" type="submit">

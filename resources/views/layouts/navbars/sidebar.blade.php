@@ -43,7 +43,7 @@
         </a>
       </li>
       <li class = "@if ($activePage == 'kalender') active @endif">
-        <a href="#">
+        <a href="/calendar">
           <i class="now-ui-icons ui-1_calendar-60"></i>
           <p>{{ __('kalender') }}</p>
         </a>

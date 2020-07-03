@@ -144,8 +144,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <a href="/drawing/{{$proyek->id}}" title="Klik untuk menambah" class="">+Drawing</a>
-                    <!-- <a href="{{ action('DrawingController@index') }}" title="Klik untuk menambah" class="">+Drawing</a> -->
+                    <a href="/drawing/{{$proyek->id}}/file" title="Klik untuk menambah" class="">+Drawing</a>
                   </td>
                   <td>
                   <div class="col-md-11">
