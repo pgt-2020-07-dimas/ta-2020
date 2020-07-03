@@ -14,6 +14,31 @@
     @endif
     <div class="containter">
     <div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                    <h5 class="title">Pencarian proyek</h5>
+                        <form action="" class="form-inline">
+                            <input type="text" name="cari" class="form-control" placeholder="Masukan kata kunci"id="inlineFormInputName2">
+                            <button type="submit" class="btn btn-sm btn-primary btn-round ml-2">Cari</button>
+                        </form>                        
+                    </div>
+                    <div class="col-lg-6">
+                        <h5 class="title">Filter</h5>
+                        <label for="">Tahun</label>
+                        <label for="">Status</label>
+                        <label for="">Plant</label>
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 class="title">Urutkan</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if($proyek<>null)    
         @foreach ($proyek as $p)
             <div class="col-sm-3">
                 <div class="card">                            
@@ -44,8 +69,16 @@
             </div>
 
         @endforeach
+    @else
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body mt-2">
+            <label for="" class="card-title">Belum ada proyek yang ditambahkan</label>
+            </div>
+        </div>
     </div>
-
+    </div>
+    @endif  
     <script class="">
     $(function() {
 
@@ -74,5 +107,5 @@
 
     });
 </script>
-                        
+            
 @endsection
