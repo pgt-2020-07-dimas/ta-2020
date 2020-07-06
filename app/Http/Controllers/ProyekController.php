@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Proyek;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ProyekController extends Controller
@@ -19,9 +20,26 @@ class ProyekController extends Controller
     public function index()
     {   
         
-        $proyek = Proyek::where('user_id',auth()->user()->id)->get();
+        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate(8);  
         //dd($proyek);
         return view('proyek.index',['proyek'=>$proyek]);
+    }
+
+    public function liveSearch(Request $request)
+    { 
+        // dd($request->id);
+        $search = $request->cari;
+        // $pilih = $request->pilih;
+        
+        // dump($search);
+        
+            $proyek = Proyek::where('user_id',auth()->user()->id)
+            ->where('project_title','LIKE',"%{$search}%")
+            ->orwhere('plant','LIKE',"%{$search}%")
+            // ->orwhere('project_year','LIKE',"%{$pilih}%")
+            ->paginate(8);                        
+            return view('proyek.page',['proyek'=>$proyek]);
+        
     }
 
     /**

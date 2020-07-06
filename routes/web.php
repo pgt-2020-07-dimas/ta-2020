@@ -28,6 +28,7 @@ Route::get('/', [
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::get('/proyek', 'ProyekController@index');
+route::get('/proyek/search/','ProyekController@liveSearch')->name('liveSearch');
 Route::get('/proyek/tambah', 'ProyekController@create');
 Route::get('/proyek/{proyek}', 'ProyekController@show');
 Route::get('/proyek/{proyek}/edit', 'ProyekController@edit');
