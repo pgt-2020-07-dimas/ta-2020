@@ -32,11 +32,15 @@ class BillController extends Controller
     {   
         $boq = BIll::create($request->all());   
         $boq_id =$boq->id;
+        $persentase = Proyek::where('id',$request->id)->pluck('persentase')->first();
+        $persentase +=5;
         Proyek::where('id', $request->id)
                 ->update([
                     'boq_id'=>$boq_id,
+                    'persentase' => $persentase,
+                    'status'=> 'Design',
                 ]);
-        $proyek = Proyek::where('id',$request->id)->first();
+        $proyek = Proyek::where('id',$request->id)->first();        
         $items = Item::where('boq_id',$boq_id)->get();
         return view('boq.tambah',['proyek'=>$proyek,'boq_id'=>$boq_id,'items'=>$items]);
 

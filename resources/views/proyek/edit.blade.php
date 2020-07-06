@@ -144,11 +144,15 @@
                 </tr>
                 <tr>
                   <td>
-                    <a href="/drawing/{{$proyek->id}}/file" title="Klik untuk menambah" class="">+Drawing</a>
+                    <a href="/drawing/{{$proyek->id}}/file" class="btn badge-pill btn-sm btn-round btn-outline-danger" title="Klik untuk menambah" class="">+Drawing</a>
                   </td>
                   <td>
                   <div class="col-md-11">
-                  <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
+                  @if ($drawing === true)                
+                    <span class="btn badge-pill btn-sm btn-round btn-success">sudah terisi</span>
+                  @else
+                    <span class="btn badge-pill btn-sm btn-round btn-danger">belum terisi</span>
+                  @endif
                   </div>
                   </td>
                 </tr>

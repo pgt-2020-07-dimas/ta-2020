@@ -29,6 +29,8 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::get('/proyek', 'ProyekController@index');
 route::get('/proyek/search/','ProyekController@liveSearch')->name('liveSearch');
+route::get('/proyek/filter/','ProyekController@liveFilter')->name('liveFilter');
+
 Route::get('/proyek/tambah', 'ProyekController@create');
 Route::get('/proyek/{proyek}', 'ProyekController@show');
 Route::get('/proyek/{proyek}/edit', 'ProyekController@edit');
@@ -56,8 +58,10 @@ Route::post('/spk/tambah', 'SpkController@create');
 Route::delete('/spk/{spk}', 'SpkController@destroy');
 Route::post('/spk', 'SpkController@store');
 
-Route::resource('drawing.file', 'DrawingController');
-Route::get('/calendar', 'CalendarController@index');
+Route::get('/drawing/{id}/file','DrawingController@create');
+Route::post('/drawing','DrawingController@store');
+Route::delete('/drawing/{drawing}','DrawingController@destroy');
 
+Route::get('/calendar', 'CalendarController@index');
 Route::post('/contractor', 'ContractorController@store');
 

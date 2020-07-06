@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Proyek;
-use Illuminate\Support\Facades\DB;
+use App\Drawing;
 use Illuminate\Http\Request;
 
 class ProyekController extends Controller
@@ -20,28 +20,45 @@ class ProyekController extends Controller
     public function index()
     {   
         
-        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate(8);  
+        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate();  
         //dd($proyek);
         return view('proyek.index',['proyek'=>$proyek]);
     }
 
     public function liveSearch(Request $request)
     { 
-        // dd($request->id);
         $search = $request->cari;
-        // $pilih = $request->pilih;
-        
         // dump($search);
         
+
             $proyek = Proyek::where('user_id',auth()->user()->id)
             ->where('project_title','LIKE',"%{$search}%")
-            ->orwhere('plant','LIKE',"%{$search}%")
-            // ->orwhere('project_year','LIKE',"%{$pilih}%")
-            ->paginate(8);                        
-            return view('proyek.page',['proyek'=>$proyek]);
+            ->orwhere('project_no','LIKE',"%{$search}%")
+            ->paginate(8); 
+            $pro = Proyek::All();
+            // dd(count($proyek));                       
+            return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro]);
         
     }
 
+    public function liveFilter(Request $request)
+    { 
+        $tahun = $request->tahun;
+        $plant = $request->plant;
+        $status = $request->status; 
+        // dump($tahun);
+        // dd($plant);
+
+            $proyek = Proyek::where('user_id',auth()->user()->id)
+            ->where('project_year','LIKE',"%{$tahun}%")
+            ->where('plant','LIKE',"%{$plant}%")
+            ->where('status','LIKE',"%{$status}%")
+            ->paginate(8); 
+            $pro = Proyek::All();
+            // dd(count($proyek));                       
+            return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro]);
+        
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -49,6 +66,7 @@ class ProyekController extends Controller
      */
     public function create()
     {
+        
         return view('proyek.tambah');
     }
 
@@ -60,6 +78,7 @@ class ProyekController extends Controller
      */
     public function store(Request $request)
     {   
+        
         $request->validate([
             'project_no' => 'required|size:2',
             'project_year' => 'required|size:4',
@@ -68,8 +87,20 @@ class ProyekController extends Controller
             'user_cc' => 'required|max:50',
             'plant' => 'required|max:10',
         ]);
-
-        $proyek = Proyek::create($request->all());            
+        $year = substr($request->project_year,2,2);
+        $project_no = auth()->user()->departemen .'-'.$year.auth()->user()->kode.'-'.$request->project_no;
+        // dd($project_no);
+        $proyek = Proyek::create([
+            'project_no' => $project_no,
+            'project_year' => $request->project_year,
+            'project_title' => $request->project_title,
+            'deskripsi' => $request->deskripsi,
+            'user_cc' => $request->user_cc,
+            'user_id' => auth()->user()->id,
+            'persentase' => 5,
+            'status' => 'Planning',
+            'plant' => $request->plant,
+        ]);            
         $id =$proyek->id;
         return redirect('/proyek'.'/'.$id.'/edit');
     }
@@ -93,8 +124,15 @@ class ProyekController extends Controller
      */
     public function edit(Proyek $proyek)
     {
-        
-        return view('proyek.edit',['proyek'=>$proyek]);
+        $drawing = Drawing::where('project_id',$proyek->id)->get();
+        $drawing = count($drawing);
+        if ($drawing <> null){
+            $drawing = true;
+        } else {
+            $drawing = false;
+        }
+        // dd($drawing);
+        return view('proyek.edit',compact('proyek','drawing'));
     }
 
     /**

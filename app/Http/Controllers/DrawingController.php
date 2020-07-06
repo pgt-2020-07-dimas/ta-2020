@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Drawing;
+use App\Proyek;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DrawingController extends Controller
 {
@@ -17,9 +19,9 @@ class DrawingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($id){
-        $file = Drawing::where('project_id', $id)->get();
-        $project_id = $id;
-        return view('desain.index',compact('file', 'project_id'));
+        // $file = Drawing::where('project_id', $id)->get();
+        // $project_id = $id;
+        // return view('desain.index',compact('file', 'project_id'));
     //  $file = Drawing::all();
     //     return view('desain.index',compact('file'));
         
@@ -32,9 +34,9 @@ class DrawingController extends Controller
      */
     public function create($id)
     {
-        $file = new Drawing();
-        $project_id = $id;
-        return view('desain.create',compact('file'), compact('project_id'))->renderSections()['content'];
+        $drawing = Drawing::where('project_id',$id)->get();
+        // dd($drawing);
+        return view('desain.index',compact('id','drawing'));
     }
 
     /**
@@ -43,38 +45,46 @@ class DrawingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        $this->validate($request,[
-            'proyek_id' => 'required',
-            'nama' => 'required',
-            'path' => 'required'
-        ]);
-
-        $maxId = \DB::table('drawings')->max('id') + 1;
-        try{       
-            $uploaded = $request->file('path');
-            $file = new Drawing();
-            $file->id = $maxId;
-            $file->project_id = $request->proyek_id;
-            $file->name = $request->nama;
-            $file->path = $maxId."-".$uploaded->getClientOriginalName();
-            $file->save();
-        
-            $uploaded->move(public_path('images/'),$file->path); //Folder lokasi File
-            \Session::flash('flash_message','Gambar berhasil ditambahkan');
-        }catch(\Exception $e){
-                echo $e->getMessage();
-                echo "<br>".$e->getLine();
-                die();
+        // dd($request->file('drawing'));
+        // $request->validate([
+        //     'drawing'=> 'required',
+        // ]);
+        if($request->file('drawing')<>null){
+            // dd($request->file('drawing'));
+            $files = $request->file('drawing');
+            // dd($files);
+            foreach($files as $key=> $file){
+                // dd($request->drawing);
+                $name = $request->project_id .'-'.time().'-'.$key;
+                $extension = $file->getClientOriginalExtension();
+                $newName = $name .'.'.$extension;
+                //dd($newName);
+                // Storage::disk('local')->delete($purchaseRequisition->path);
+                $path = Storage::putFileAs('public/drawing', $file, $newName);
+                $drawing = Drawing::create([
+                    'project_id'=>$request->project_id,
+                    'name'=>$newName,
+                    'path'=>$path,
+                ]);
+                $result = Drawing::where('project_id',$request->project_id)->pluck('id');
+                $result = count($result);                
+                
+                if($result == 1){
+                    $persentase = Proyek::where('id',$request->project_id)->pluck('persentase')->first();
+                    $persentase +=5;
+                    Proyek::where('id',$request->project_id)->update([
+                        'persentase'=>$persentase,
+                    ]);
+                }
+            }            
         }
+        return redirect('/drawing'.'/'.$request->project_id.'/'.'file');
         
-            $response = array(
-                'status' => 'success',
-                'url' => action('DrawingController@index',$id),
-            );
-            return $response;
-            }
+    }
+
+   
 
     /**
      * Display the specified resource.
@@ -120,16 +130,21 @@ class DrawingController extends Controller
      * @param  \App\Drawing  $drawing
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $drawing)
+    public function destroy(Request $request,Drawing $drawing)
     {
-        $file = Drawing::findOrFail($drawing);
-        unlink(public_path('images/').$file->path); //menghapus dokumen pada folder terkait
-        $file->delete();
+        Drawing::destroy($request->id);
+        Storage::disk('local')->delete($drawing->path);
+        $result = Drawing::where('project_id',$request->project_id)->pluck('id');
+        $result = count($result);                
         
-        \Session::flash('flash_message','Dokumen berhasil di hapus');
-        
-        return redirect()->action('DrawingController@index', $id);
-        
+        if($result == 0){
+            $persentase = Proyek::where('id',$request->project_id)->pluck('persentase')->first();
+            $persentase -=5;
+            Proyek::where('id',$request->project_id)->update([
+                'persentase'=>$persentase,
+            ]);
+        }
+        return redirect('/drawing'.'/'.$request->project_id.'/file');        
     }
 
 }
