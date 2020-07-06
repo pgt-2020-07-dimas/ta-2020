@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Drawing extends Model
 {
-    protected $table = "drawings";
+    protected $fillable = ['project_id','path','name'];
 }

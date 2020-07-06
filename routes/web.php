@@ -55,8 +55,10 @@ Route::post('/spk/tambah', 'SpkController@create');
 Route::delete('/spk/{spk}', 'SpkController@destroy');
 Route::post('/spk', 'SpkController@store');
 
-Route::resource('drawing.file', 'DrawingController');
-Route::get('/calendar', 'CalendarController@index');
+Route::get('/drawing/{id}/file','DrawingController@create');
+Route::post('/drawing','DrawingController@store');
+Route::delete('/drawing/{drawing}','DrawingController@destroy');
 
+Route::get('/calendar', 'CalendarController@index');
 Route::post('/contractor', 'ContractorController@store');
 

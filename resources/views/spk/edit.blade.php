@@ -4,7 +4,10 @@
     'activePage' => 'detail_proyek',
    
 ])
-
+@php
+$path = str_replace('public','storage',$spk->path);
+$imgName = str_replace('storage/spk/','',$path);
+@endphp
 @section('content')   
   <div class="content">
     <div class="row">
@@ -70,7 +73,7 @@
                 <div class="row mt-2 my-3 pb-2">
                 @if($spk->path<>null)
                 <div class="col-md-5 mb-3 text-center">
-                  <img id="thumbnail" class="img-thumbnail" src="{{asset($path)}}" alt="{{$purchaseRequisition->path}}">
+                  <img id="thumbnail" class="img-thumbnail" src="{{asset($path)}}" alt="{{$spk->path}}">
                   <label for="thumbnail"></label>
                 </div>
                 @endif
@@ -79,7 +82,7 @@
 
                       <!-- <label for="inputFile">Pilih file PR</label> -->
                       <label for="upload">Upload file</label>
-                      <input class="pt-2" id="upload" type="file" name="spk" id="inputFile">
+                      <input class="pt-2" id="upload" type="file" name="spk">
                       
                   </div>
                   </div>

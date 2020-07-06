@@ -20,7 +20,7 @@ $imgName = str_replace('storage/pr/','',$path);
             <h5 class="title mt-3">{{__(" Isi Purchase Requisition")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="/pr/{{$purchaseRequisition->id}}" autocomplete="off" enctype="multipart/form-data" required>
+            <form method="post" action="/pr/{{$purchaseRequisition->id}}" autocomplete="off" enctype="multipart/form-data">
               @method('patch')
               @csrf
               @include('alerts.success')
@@ -40,7 +40,7 @@ $imgName = str_replace('storage/pr/','',$path);
                   <div class="col-md-10 pr-3">
                     <div class="form-group">
                     <label  >{{__(" Aanwijzing Date")}}</label>
-                      <input type="date" name="aanwijzing_date" class="form-control @error('aanwijzing_date') is-invalid @enderror" value="{{$purchaseRequisition->aanwijzing_date }}" required>
+                      <input type="date" name="aanwijzing_date" class="form-control @error('aanwijzing_date') is-invalid @enderror" value="{{$purchaseRequisition->aanwijzing_date }}" >
                       @error('aanwijzing_date') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>

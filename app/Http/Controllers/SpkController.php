@@ -33,9 +33,13 @@ class SpkController extends Controller
     {
         $spk = Spk::create($request->all());   
         $spk_id =$spk->id;
+        $persentase = Proyek::where('id',$request->id)->pluck('persentase')->first();        
+        $persentase +=2;
         Proyek::where('id', $request->id)
                 ->update([
                     'spk_id'=>$spk_id,
+                    'persentase'=>$persentase,
+                    'status'=> 'SPK'
                 ]);
         // $items = Item::where('boq_id',$boq_id)->get();
         return redirect('/spk'.'/'.$spk_id.'/edit');
@@ -87,13 +91,24 @@ class SpkController extends Controller
      */
     public function update(Request $request, Spk $spk)
     {
-        
-        $spk = Spk::where('id',$spk->id)->update([
+        if($request->file('spk')<>null){
+            $file = $request->file('spk');
+            $name = $spk->id .'-'.time();
+            $extension = $file->getClientOriginalExtension();
+            $newName = $name .'.'.$extension;
+            //dd($newName);
+            Storage::disk('local')->delete($spk->path);
+            $path = Storage::putFileAs('public/spk', $file, $newName);
+            // $path = Storage::putFile('public/spk', $request->file('spk'));
+            } else {
+                $path = $spk->path;
+            }
+        Spk::where('id',$spk->id)->update([
             'spk_no'=>$request->spk_no,
             'start_execution_date'=>$request->start_execution_date,
             'estimate_finish_date'=>$request->estimate_finish_date,
             'contractor_id'=>$request->contractor_id,
-            'path'=>$request->path,
+            'path'=>$path,
         ]);
         return redirect('/spk'.'/'.$spk->id.'/edit');
     }

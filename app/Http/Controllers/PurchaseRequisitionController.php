@@ -32,9 +32,13 @@ class PurchaseRequisitionController extends Controller
     {
         $pr = PurchaseRequisition::create($request->all());   
         $pr_id =$pr->id;
+        $persentase = Proyek::where('id',$request->id)->pluck('persentase')->first();        
+        $persentase +=2;
         Proyek::where('id', $request->id)
                 ->update([
                     'pr_id'=>$pr_id,
+                    'persentase'=>$persentase,
+                    'status'=>'Open PR'
                 ]);
         // $items = Item::where('boq_id',$boq_id)->get();
         return redirect('/pr'.'/'.$pr_id.'/edit');
@@ -84,12 +88,13 @@ class PurchaseRequisitionController extends Controller
      */
     public function update(Request $request, PurchaseRequisition $purchaseRequisition)
     {   
+        // dd($request->file('pr'));
         //  $path = $request->file('pr')->store('/pr');
          //dd($ $request->file('pr'));
         $request->validate([
             'pr_no' => 'required|numeric',
-            'aanwijzing_date' => 'required|date',
-            'bid_submission_date' => 'required|date',
+            'aanwijzing_date' => 'date|nullable',
+            'bid_submission_date' => 'date|nullable',
         ]);
         //  $path = $request->file('pr')->store('/pr');
         // dd($path);
@@ -105,7 +110,7 @@ class PurchaseRequisitionController extends Controller
         // $path = Storage::putFile('public/pr', $request->file('pr'));
         } else {
             $path = $purchaseRequisition->path;
-        }
+        }        
         PurchaseRequisition::where('id', $purchaseRequisition->id)
         ->update([
             'pr_no'=>$request->pr_no,
@@ -114,6 +119,18 @@ class PurchaseRequisitionController extends Controller
             'path'=>$path,
         ]);
         //dd($path);
+        $status = PurchaseRequisition::where('id', $purchaseRequisition->id)->pluck('aanwijzing_date')->first();
+        if ($status <> null){
+            $persentase = Proyek::where('pr_id',$purchaseRequisition->id)->pluck('persentase')->first();
+            if($persentase < 18){                
+                $persentase +=1;
+            }     
+            Proyek::where('pr_id', $purchaseRequisition->id)
+                    ->update([
+                        'persentase'=>$persentase,
+                    ]);
+        }
+        // dd($status);
         return redirect('/pr'.'/'.$purchaseRequisition->id.'/edit');
     }
 

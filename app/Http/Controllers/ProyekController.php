@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Proyek;
+use App\Drawing;
 use Illuminate\Http\Request;
 
 class ProyekController extends Controller
@@ -31,6 +32,7 @@ class ProyekController extends Controller
      */
     public function create()
     {
+        
         return view('proyek.tambah');
     }
 
@@ -42,6 +44,7 @@ class ProyekController extends Controller
      */
     public function store(Request $request)
     {   
+        
         $request->validate([
             'project_no' => 'required|size:2',
             'project_year' => 'required|size:4',
@@ -50,8 +53,20 @@ class ProyekController extends Controller
             'user_cc' => 'required|max:50',
             'plant' => 'required|max:10',
         ]);
-
-        $proyek = Proyek::create($request->all());            
+        $year = substr($request->project_year,2,2);
+        $project_no = auth()->user()->departemen .'-'.$year.auth()->user()->kode.'-'.$request->project_no;
+        // dd($project_no);
+        $proyek = Proyek::create([
+            'project_no' => $project_no,
+            'project_year' => $request->project_year,
+            'project_title' => $request->project_title,
+            'deskripsi' => $request->deskripsi,
+            'user_cc' => $request->user_cc,
+            'user_id' => auth()->user()->id,
+            'persentase' => 5,
+            'status' => 'Planning',
+            'plant' => $request->plant,
+        ]);            
         $id =$proyek->id;
         return redirect('/proyek'.'/'.$id.'/edit');
     }
@@ -75,8 +90,15 @@ class ProyekController extends Controller
      */
     public function edit(Proyek $proyek)
     {
-        
-        return view('proyek.edit',['proyek'=>$proyek]);
+        $drawing = Drawing::where('project_id',$proyek->id)->get();
+        $drawing = count($drawing);
+        if ($drawing <> null){
+            $drawing = true;
+        } else {
+            $drawing = false;
+        }
+        // dd($drawing);
+        return view('proyek.edit',compact('proyek','drawing'));
     }
 
     /**

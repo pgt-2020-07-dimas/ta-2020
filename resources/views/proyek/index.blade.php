@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    @if($proyek<>null)    
+    @if(count($proyek)<>null)    
         @foreach ($proyek as $p)
             <div class="col-sm-3">
                 <div class="card">                            
@@ -54,7 +54,7 @@
                             <div class="h2 font-weight-bold mt-4">{{ $p->persentase }}<sup class="small">%</sup></div>
                         </div>
                         </div>
-                        <h5 class="card-title text-center mt-3">{{ Auth::user()->departemen }}-{{substr($p->project_year,-2)}}{{ Auth::user()->kode }}-{{$p->project_no}}</h5>
+                        <h5 class="card-title text-center mt-3">{{$p->project_no}}</h5>
                         <p class="card-text text-center font-weight-bold">{{$p->project_title}}</p>  
                         <div class="card-body" style="height:6em">                                      
                             <p class="card-text">{{ $p->deskripsi }}</p>
@@ -72,14 +72,14 @@
     @else
     <div class="col-md-12">
         <div class="card">
-            <div class="card-body mt-2">
+            <div class="card-body mt-2 text-center">
             <label for="" class="card-title">Belum ada proyek yang ditambahkan</label>
             </div>
         </div>
     </div>
     </div>
     @endif  
-    <script class="">
+    <script>
     $(function() {
 
         $(".progress").each(function() {

@@ -16,7 +16,7 @@
     <div class="col-md-12">
         <div class="card pl-3">
           <div class="card-header">
-          <h4 class="title text-center mt-3">{{ Auth::user()->departemen }}-{{substr($proyek->project_year,-2)}}{{ Auth::user()->kode }}-{{$proyek->project_no}}</h4>
+          <h4 class="title text-center mt-3">{{$proyek->project_no}}</h4>
             <p class="card-title text-center">{{$proyek->project_title}}</p> 
           </div>
           <div class="card-body">
