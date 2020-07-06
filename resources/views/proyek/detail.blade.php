@@ -160,7 +160,7 @@
         </div>
         <div class="text-right pr-5">
         <a href="{{ $proyek->id }}/edit" class="btn btn-warning btn-round">Edit</a>
-         <a href="#" class="btn btn-primary btn-round">Update Progress</a>
+         <a href="/progres/proyek/{{ $proyek->id }}" class="btn btn-primary btn-round">Update</a>
          <a href="/proyek" class="btn btn-info mr-3 btn-round">Kembali</a>
          </div>
          </div>

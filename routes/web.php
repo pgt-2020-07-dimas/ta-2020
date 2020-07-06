@@ -65,3 +65,4 @@ Route::delete('/drawing/{drawing}','DrawingController@destroy');
 Route::get('/calendar', 'CalendarController@index');
 Route::post('/contractor', 'ContractorController@store');
 
+Route::get('/progres/proyek/{id}','ProgressController@index');

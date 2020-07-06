@@ -15,8 +15,10 @@ class CreateProgressesTable extends Migration
     {
         Schema::create('progresses', function (Blueprint $table) {
             $table->id();
+            $table->integer('boq_id');
             $table->integer('item_id');
             $table->string('quantity');
+            $table->string('bobot')->default('0');
             $table->date('date');
             $table->string('path')->nullable();
             $table->timestamps();
