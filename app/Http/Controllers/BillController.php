@@ -38,10 +38,10 @@ class BillController extends Controller
                 ->update([
                     'boq_id'=>$boq_id,
                     'persentase' => $persentase,
-                    'status'=> 'Design',
+                    'status'=> 'BOQ',
                 ]);
         $proyek = Proyek::where('id',$request->id)->first();        
-        $items = Item::where('boq_id',$boq_id)->get();
+        $items = Item::where('boq_id',$boq_id)->get(); 
         return view('boq.tambah',['proyek'=>$proyek,'boq_id'=>$boq_id,'items'=>$items]);
 
     }

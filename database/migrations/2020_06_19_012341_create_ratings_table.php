@@ -17,6 +17,7 @@ class CreateRatingsTable extends Migration
             $table->id();
             $table->integer('contractor_id');
             $table->string('rating')->nullable();
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }

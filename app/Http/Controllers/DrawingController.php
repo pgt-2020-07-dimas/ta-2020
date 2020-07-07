@@ -76,6 +76,7 @@ class DrawingController extends Controller
                     $persentase +=5;
                     Proyek::where('id',$request->project_id)->update([
                         'persentase'=>$persentase,
+                        'status' =>'Design'
                     ]);
                 }
             }            
@@ -142,6 +143,7 @@ class DrawingController extends Controller
             $persentase -=5;
             Proyek::where('id',$request->project_id)->update([
                 'persentase'=>$persentase,
+                'status' =>'BOQ'
             ]);
         }
         return redirect('/drawing'.'/'.$request->project_id.'/file');        

@@ -18,40 +18,39 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5 mb-2">
                     <h5 class="title">Pencarian proyek</h5>
-                        <form action="" class="form-inline">
-                            <input value="" type="text" name="search" class="form-control" placeholder="Masukan kata kunci" id="search">
-                            <button type="submit" class="btn btn-sm btn-primary btn-round ml-1">Cari</button>
+                        <form action="" class="form">
+                            <input value="" type="text" name="search" class="form-control" placeholder="Masukan kata kunci pencarian" id="search">                            
                         </form>                        
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-7">
                         <h5 class="title">Filter</h5>
-                      <div class="row filter">
-                        <select  name="tahun" id="tahun" class="form-control col-sm-3">
-                        <option value="">-- Tahun --</option>                        
-                        <option value="2020">2020</option>                        
-                        <option value="2019">2019</option>                        
+                      <div class="row filter container">
+                        <select  name="tahun" id="tahun" class="form-control col-sm-4">
+                        <option value="">-- Tahun --</option>       
+                        @foreach($project_year as $py)
+                          <option value="{{$py->project_year}}">{{$py->project_year}}</option>
+                        @endforeach                                       
                         </select>
-                        <select name="plant" id="plant" class="form-control col-sm-3">
-                        <option value="">-- Plant --</option>                        
-                        <option value="Plant A">Plant A</option>                        
-                        <option value="Plant DK">Plant DK</option>                        
+                        <select name="plant" id="plant" class="form-control col-sm-4">
+                        <option value="">-- Plant --</option>      
+                        @foreach($plant as $p)
+                        <option value="{{$p->plant}}">{{$p->plant}}</option>
+                        @endforeach
                         </select>
-                        <select name="status" id="status" class="form-control col-sm-3">
+                        <select name="status" id="status" class="form-control col-sm-4">
                         <option value="">-- Status --</option>                        
-                        <option value="Planning">Planning</option>                        
-                        <option value="Desain">Desain</option>
-                        <option value="SPK">SPK</option>                        
+                        @foreach($status as $s)
+                        <option value="{{$s->status}}">{{$s->status}}</option>
+                        @endforeach                        
                         </select>
                       </div>
                         <!-- <label for="">Tahun</label>
                         <label for="">Status</label>
                         <label for="">Plant</label> -->
                     </div>
-                    <div class="col-lg-2">
-                        <h5 class="title">Urutkan</h5>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -72,6 +71,7 @@
 			$.get( "{{ url('/proyek/search?cari=') }}"+str, function( data ) {
 			$( "#mydata" ).html( data );  
 	    });
+      
     });
 
   $(document).ready(function(){
@@ -89,10 +89,11 @@
 	$(".filter").click(function(){
 	  var str=  $("#tahun").val();
 	  var str1=  $("#plant").val();
-      var str2=  $("#status").val();
-			$.get( "{{ url('/proyek/filter?tahun=') }}"+str+"&&"+"plant="+str1+"&&"+"status="+str2, function( data ) {
+    var str2=  $("#status").val();
+	  
+		$.get( "{{ url('/proyek/filter?tahun=') }}"+str+"&&"+"plant="+str1+"&&"+"status="+str2, function( data ) {
 			$( "#mydata" ).html( data );  
-	    });
+	  });
 	  
 	});  
   }); 

@@ -21,8 +21,18 @@ class ProyekController extends Controller
     {   
         
         $proyek = Proyek::where('user_id',auth()->user()->id)->paginate();  
+        $project_year = Proyek::select('project_year')
+                 ->groupBy('project_year')
+                 ->get();
+        $plant = Proyek::select('plant')
+                 ->groupBy('plant')
+                 ->get();
+        $status = Proyek::select('status')
+                 ->groupBy('status')
+                 ->get();
+
         //dd($proyek);
-        return view('proyek.index',['proyek'=>$proyek]);
+        return view('proyek.index',compact('proyek','project_year','plant','status'));
     }
 
     public function liveSearch(Request $request)
@@ -66,7 +76,10 @@ class ProyekController extends Controller
      */
     public function create()
     {
-        
+        // $tahun = Proyek::select('project_year',Proyek::raw('count(*) as total'))
+        //          ->groupBy('project_year')
+        //          ->first();
+        // dd($tahun);
         return view('proyek.tambah');
     }
 
@@ -80,7 +93,7 @@ class ProyekController extends Controller
     {   
         
         $request->validate([
-            'project_no' => 'required|size:2',
+            'project_no' => 'required|size:2|unique:projects',
             'project_year' => 'required|size:4',
             'project_title' => 'required|max:50',
             'deskripsi' => 'required|max:100',

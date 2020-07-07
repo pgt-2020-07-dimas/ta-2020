@@ -44,7 +44,7 @@
       
       <div class="container-fluid">
         <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="index.html">SMIP</a></div>
+          <div class="site-logo mr-auto w-25"><img class="img-fluid" src="{{asset('/images/logo-micro.png')}}" alt=""></div>
 
           <div class="mx-auto text-center">
             <nav class="site-navigation position-relative text-right" role="navigation">
@@ -78,6 +78,8 @@
             <div class="col-12">
               <div class="row align-items-center">
                 <div class="col-lg-6 mb-4">
+                <hr>
+                <hr>
                   <h1  data-aos="fade-up" data-aos-delay="100">Sistem Manajemen Informasi Proyek</h1>
                   <p class="mb-4"  data-aos="fade-up" data-aos-delay="200" >Sistem Manajemen Proyek merupakan sebuah aplikasi web yang menyediakan akses Informasi Proyek mengenai Pembuatan Proyek, Detail Informasi Proyek,  dan Informasi Kontaktor, yang berkaitan dengan Joint Maintenance Utility PT. Gajah Tunggal Tbk.</p>
                   <p data-aos="fade-up" data-aos-delay="300" id="login" ><a href="#login" class="btn btn-primary py-3 px-5 btn-pill">Masuk Untuk Lanjutkan -></a></p>

@@ -21,6 +21,15 @@ class ProgressController extends Controller
     {
         $proyek = Proyek::where('id',$id)->first();
         $items = Item::where('boq_id',$proyek->boq_id)->get();
+        if($proyek->status === 'SPK'){
+            $status = true;
+        } else {
+            $status = false;
+        }
+        return view('progres.update',compact('items','proyek','status'));
+        die;
+        $proyek = Proyek::where('id',$id)->first();
+        $items = Item::where('boq_id',$proyek->boq_id)->get();
         $spk = Spk::where('id',$proyek->spk_id)->first();
         $start = Carbon::create($spk->start_execution_date);
         $end = Carbon::create($spk->estimate_finish_date);
