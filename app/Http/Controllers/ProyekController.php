@@ -20,22 +20,45 @@ class ProyekController extends Controller
     public function index()
     {   
         
-        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate(4);  
-        //dd($proyek);
+        // $proyek = Proyek::where('user_id',auth()->user()->id)->paginate(4);  
+        // //dd($proyek);
+        // $pro = Proyek::All();
+        //     // dd(count($proyek));                       
+        // return view('proyek.index',['proyek'=>$proyek],['pro'=>$pro]);
+        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate();  
+        $project_year = Proyek::select('project_year')
+                 ->groupBy('project_year')
+                 ->get();
+        $plant = Proyek::select('plant')
+                 ->groupBy('plant')
+                 ->get();
+        $status = Proyek::select('status')
+                 ->groupBy('status')
+                 ->get();
+        
         $pro = Proyek::All();
-            // dd(count($proyek));                       
-        return view('proyek.index',['proyek'=>$proyek],['pro'=>$pro]);
+
+        //dd($proyek);
+        return view('proyek.index',compact('proyek','project_year','plant','status','pro'));
     }
 
     public function liveSearch(Request $request)
     { 
+        $tahun = $request->tahun;
+        $plant = $request->plant;
+        $status = $request->status; 
         $search = $request->cari;
         // dump($search);
         
 
             $proyek = Proyek::where('user_id',auth()->user()->id)
-            ->where('project_title','LIKE',"%{$search}%")
-            ->orwhere('project_no','LIKE',"%{$search}%")
+            ->where(function($query) use ($search) {
+                $query->where('project_title','LIKE',"%".$search."%")
+                    ->orWhere('project_no','LIKE',"%".$search."%");
+            })
+            ->where('project_year','LIKE',"%{$tahun}%")
+            ->where('plant','LIKE',"%{$plant}%")
+            ->where('status','LIKE',"%{$status}%")
             ->paginate(4); 
             $pro = Proyek::All();
             // dd(count($proyek));                       
@@ -44,17 +67,24 @@ class ProyekController extends Controller
     }
 
     public function liveFilter(Request $request)
-    { 
+    {   
         $tahun = $request->tahun;
         $plant = $request->plant;
         $status = $request->status; 
+        $search = $request->cari;
         // dump($tahun);
         // dd($plant);
 
             $proyek = Proyek::where('user_id',auth()->user()->id)
+            // ->where('project_title','LIKE',"%{$search}%")
+            ->where(function($query) use ($search) {
+                $query->where('project_title','LIKE',"%".$search."%")
+                    ->orWhere('project_no','LIKE',"%".$search."%");
+            })
             ->where('project_year','LIKE',"%{$tahun}%")
             ->where('plant','LIKE',"%{$plant}%")
             ->where('status','LIKE',"%{$status}%")
+            // ->orwhere('project_no','LIKE',"%{$search}%")
             ->paginate(4); 
             $pro = Proyek::All();
             // dd(count($proyek));                       
@@ -66,9 +96,19 @@ class ProyekController extends Controller
     {
      if($request->ajax())
      {
-        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate(4);  
+        //  dd($request->tahun);
+        $tahun = $request->tahun;
+        $plant = $request->plant;
+        $status = $request->status; 
+
+        $proyek = Proyek::where('user_id',auth()->user()->id)
+            ->where('project_year','LIKE',"%{$tahun}%")
+            ->where('plant','LIKE',"%{$plant}%")
+            ->where('status','LIKE',"%{$status}%")
+            ->paginate(4); 
+
         //dd($proyek);
-        $pro = Proyek::All();
+        $pro = Proyek::where('user_id',auth()->user()->id)->get();
         return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro])->render();     }
     }
     /**
@@ -78,7 +118,10 @@ class ProyekController extends Controller
      */
     public function create()
     {
-        
+        // $tahun = Proyek::select('project_year',Proyek::raw('count(*) as total'))
+        //          ->groupBy('project_year')
+        //          ->first();
+        // dd($tahun);
         return view('proyek.tambah');
     }
 
@@ -92,7 +135,7 @@ class ProyekController extends Controller
     {   
         
         $request->validate([
-            'project_no' => 'required|size:2',
+            'project_no' => 'required|size:2|unique:projects',
             'project_year' => 'required|size:4',
             'project_title' => 'required|max:50',
             'deskripsi' => 'required|max:100',

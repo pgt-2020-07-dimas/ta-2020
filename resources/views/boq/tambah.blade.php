@@ -44,7 +44,7 @@
                   <div class="col-md-3 pr-3">
                     <div class="form-group">
                       <label  >{{__(" Tipe")}}</label>
-                      <select id="tipe" name="tipe" class="form-control badge-pill @error('tipe') is-invalid @enderror" id="exampleFormControlSelect1" required>
+                      <select name="tipe" class="form-control badge-pill @error('tipe') is-invalid @enderror" id="exampleFormControlSelect1" required>
                         <option  value="">- Pilih -</option>
                         <option value="Material" >Material</option>
                         <option value="Jasa" >Jasa</option>
@@ -183,8 +183,6 @@
                     <td class="text-center">Rp. {{$item->price_unit}}</td>
                     <td class="text-center">Rp. {{$item->total_price}}</td>
                     <td class="text-center">
-                        <!-- <a href="#" class="badge badge-primary" title="Edit Item" id="2-tasks-edit" icon="edit"><i class="fa fa-edit"></i> </a> -->
-                        <!-- Button trigger mdl -->
                         <a class="badge badge-primary text-white edit" icon="edit" title="Edit item"
                         data-toggle="modal" data-target="#modal-edit"
                         data-id="{{$item->id}}" 
@@ -319,6 +317,7 @@
     $('#price_unit').val(price_unit);
     var tipe = $(this).attr('data-tipe');
     $('#tipe').val(tipe);
+    
     
   })
   $(document).ready(function() {

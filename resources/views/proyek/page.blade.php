@@ -33,11 +33,11 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body mt-2 text-center">
-            <label for="" class="card-title">Proyek Tidak Ditemukan</label>
+                <label for="" class="card-title">Proyek Tidak Ditemukan</label>
             </div>
         </div>
     </div>
-    </div>
+    <!-- </div> pernah tak hapus --> 
     @endif 
     @foreach ($pro as $j)
     @php   
