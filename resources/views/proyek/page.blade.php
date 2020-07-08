@@ -51,11 +51,11 @@
         </div>
     </div>
     
-    <!-- <div class="row">
+    <div class="row">
             <div class="col-lg-12">
                 {{ $proyek->links() }}
         </div>
-     </div> -->
+     </div>
 
     <script class="">
     $(function() {

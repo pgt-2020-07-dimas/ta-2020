@@ -20,9 +20,11 @@ class ProyekController extends Controller
     public function index()
     {   
         
-        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate();  
+        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate(4);  
         //dd($proyek);
-        return view('proyek.index',['proyek'=>$proyek]);
+        $pro = Proyek::All();
+            // dd(count($proyek));                       
+        return view('proyek.index',['proyek'=>$proyek],['pro'=>$pro]);
     }
 
     public function liveSearch(Request $request)
@@ -34,7 +36,7 @@ class ProyekController extends Controller
             $proyek = Proyek::where('user_id',auth()->user()->id)
             ->where('project_title','LIKE',"%{$search}%")
             ->orwhere('project_no','LIKE',"%{$search}%")
-            ->paginate(8); 
+            ->paginate(4); 
             $pro = Proyek::All();
             // dd(count($proyek));                       
             return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro]);
@@ -53,11 +55,21 @@ class ProyekController extends Controller
             ->where('project_year','LIKE',"%{$tahun}%")
             ->where('plant','LIKE',"%{$plant}%")
             ->where('status','LIKE',"%{$status}%")
-            ->paginate(8); 
+            ->paginate(4); 
             $pro = Proyek::All();
             // dd(count($proyek));                       
             return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro]);
         
+    }
+
+    function fetch_data(Request $request)
+    {
+     if($request->ajax())
+     {
+        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate(4);  
+        //dd($proyek);
+        $pro = Proyek::All();
+        return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro])->render();     }
     }
     /**
      * Show the form for creating a new resource.

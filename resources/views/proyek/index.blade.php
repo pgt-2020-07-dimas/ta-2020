@@ -57,11 +57,13 @@
         </div>
     </div>
     
-    <div class="container row" id="mydata"></div>
+    <div class="container row" id="mydata">
+    @include('proyek.page')
+    </div>
 
-    <!-- <div class="row">
+    <!-- <div class="row" id="page">
             <div class="col-lg-12">
-                {{ $proyek->links() }}
+                {{{ $proyek->links() }}}
             </div>
     </div> -->
    
@@ -97,7 +99,28 @@
 	});  
   }); 
 
-</script>
+  
 
+$(document).ready(function(){
+
+$(document).on('click', '.pagination a', function(event){
+ event.preventDefault(); 
+ var page = $(this).attr('href').split('page=')[1];
+ fetch_data(page);
+});
+
+function fetch_data(page)
+{
+ $.ajax({
+  url:"/pagination/fetch_data?page="+page,
+  success:function(data)
+  {
+   $('#mydata').html(data);
+  }
+ });
+}
+
+});
+</script>
 
 @endsection
