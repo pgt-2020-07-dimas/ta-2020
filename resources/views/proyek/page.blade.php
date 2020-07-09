@@ -1,4 +1,10 @@
-@if(count($proyek)<>null)    
+@if(count($proyek)<>null)  
+    @foreach ($pro as $j)
+    @php   
+            $row[]=$j->persentase;
+            $cek = count($row);
+    @endphp
+    @endforeach  
         @foreach ($proyek as $p)
             <div class="col-sm-3">
                 <div class="card">                            
@@ -27,8 +33,12 @@
                     </div>
                 </div>
             </div>
-            
          @endforeach
+    <div class="col-md-12">
+        <div class="">
+            <p>Total Proyek : {{ $cek }} </p>
+        </div>
+    </div>
     @else
     <div class="col-md-12">
         <div class="card">
@@ -37,19 +47,15 @@
             </div>
         </div>
     </div>
-    <!-- </div> pernah tak hapus --> 
-    @endif 
-    @foreach ($pro as $j)
-    @php   
-            $row[]=$j->persentase;
-            $cek = count($row);
-    @endphp
-    @endforeach
     <div class="col-md-12">
         <div class="">
-            <p>Total Proyek : {{ $cek }} </p>
+            <p>Total Proyek : 0 </p>
         </div>
     </div>
+    <!-- </div> pernah tak hapus --> 
+    @endif 
+    
+    
     
     <div class="row">
             <div class="col-lg-12">

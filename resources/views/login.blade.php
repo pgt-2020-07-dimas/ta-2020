@@ -146,8 +146,8 @@
     </div>
     <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="100">
       <div class="container">
-        <div class="row">
-        
+      @if(count($proyek)<>null) 
+      <div class="row">
           <div class="owl-carousel col-12 nonloop-block-14">  
           @foreach ($proyek as $p)
             <div class="course bg-white h-90 align-self-stretch pt-1" >
@@ -183,7 +183,17 @@
             
           </div>
         </div>
-  
+        @else
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body mt-2 text-center">
+                <label for="" class="card-title">Belum Ada Proyek</label>
+            </div>
+        </div>
+    </div>
+    <!-- </div> pernah tak hapus --> 
+    @endif 
+    
         <div class="row justify-content-center">
           <div class="col-7 text-center">
             <button class="customPrevBtn btn btn-primary m-1">Prev</button>

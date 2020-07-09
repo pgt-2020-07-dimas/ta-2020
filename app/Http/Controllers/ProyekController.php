@@ -36,7 +36,7 @@ class ProyekController extends Controller
                  ->groupBy('status')
                  ->get();
         
-        $pro = Proyek::All();
+        $pro = Proyek::where('user_id',auth()->user()->id)->get();
 
         //dd($proyek);
         return view('proyek.index',compact('proyek','project_year','plant','status','pro'));
@@ -60,7 +60,7 @@ class ProyekController extends Controller
             ->where('plant','LIKE',"%{$plant}%")
             ->where('status','LIKE',"%{$status}%")
             ->paginate(4); 
-            $pro = Proyek::All();
+            $pro = Proyek::where('user_id',auth()->user()->id)->get();
             // dd(count($proyek));                       
             return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro]);
         
@@ -86,7 +86,7 @@ class ProyekController extends Controller
             ->where('status','LIKE',"%{$status}%")
             // ->orwhere('project_no','LIKE',"%{$search}%")
             ->paginate(4); 
-            $pro = Proyek::All();
+            $pro = Proyek::where('user_id',auth()->user()->id)->get();
             // dd(count($proyek));                       
             return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro]);
         
