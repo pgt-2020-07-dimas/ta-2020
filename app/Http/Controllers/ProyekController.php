@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Proyek;
 use App\Drawing;
+use App\Item;
+use App\Spk;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProyekController extends Controller
@@ -126,7 +129,34 @@ class ProyekController extends Controller
      */
     public function show(Proyek $proyek)
     {
-        return view('proyek.detail',['proyek'=>$proyek]);
+        $proyek = Proyek::where('id',$proyek->id)->first();
+        if ($proyek->status <> 1){
+            $arrMinggu[]=null;            
+            $totalWeek = null;
+            return view('progres.index', compact('arrMinggu','totalWeek','proyek'));
+        } else {
+            $items = Item::where('boq_id',$proyek->boq_id)->get();
+            $spk = Spk::where('id',$proyek->spk_id)->first();
+            $start = Carbon::create($spk->start_execution_date);
+            $end = Carbon::create($spk->estimate_finish_date);
+            $interval = $start->diff($end);
+            $interval = $interval->format('%a');
+            $totalWeek = intval($interval/7);
+            $sisaHari = $interval%7;
+            $arrMinggu[]= $start->format('d M y');
+            for($i=1;$i<=$totalWeek;$i++){
+                $minggu = $start->addWeeks(1); 
+                $arrMinggu[]= $minggu->format('d M y');
+            }
+            if($sisaHari<>0){
+                $arrMinggu[]= $end->addDays($sisaHari)->format('d M y');
+                $totalWeek +=1;
+            }
+                    
+            // dd($totalWeek);
+            return view('progres.index', compact('arrMinggu','totalWeek','proyek'));
+        }
+        
     }
 
     /**

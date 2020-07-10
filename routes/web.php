@@ -66,3 +66,4 @@ Route::get('/calendar', 'CalendarController@index');
 Route::post('/contractor', 'ContractorController@store');
 
 Route::get('/progres/proyek/{id}','ProgressController@index');
+Route::post('/progres','ProgressController@store');

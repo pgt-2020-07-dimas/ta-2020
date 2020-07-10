@@ -66,7 +66,7 @@ $imgName = str_replace('storage/pr/','',$path);
 
                       <!-- <label for="inputFile">Pilih file PR</label> -->
                       <label for="upload">Upload file</label>
-                      <input class="pt-2" id="upload" type="file" name="pr">
+                      <input class="pt-2" id="upload" type="file" accept="image/*" name="pr">
                       
                   </div>
                   

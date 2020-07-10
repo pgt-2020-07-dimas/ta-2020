@@ -4,10 +4,12 @@
     'activePage' => 'detail_proyek',
    
 ])
-
 @section('content')        
       <div class="card ">
-            <div class="card-header"></div>
+            <div class="card-header">
+                <h5 class="title text-center mt-3">{{$proyek->project_no}}</h5>
+                <p class="card-title text-center">{{$proyek->project_title}}</p> 
+            </div>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -15,12 +17,25 @@
                         </div>
                     @endif
                     <div class="container">
-                    <figure class="highcharts-figure">
+                        Project year : {{$proyek->project_year}} <br>
+                        User/CC : {{$proyek->user_cc}} <br>
+                        Plant : {{$proyek->plant}} <br>
+                        Progress : {{$proyek->persentase}} <br>
+                        
+                     <figure class="highcharts-figure">
                         <div id="data_progres"></div>
                     </figure>
                     </div>                    
-                </div>                        
-        </div>   
+                </div>  
+                <div class="card-footer">
+                <div class="text-right">
+                    <a href="{{ $proyek->id }}/edit" class="btn btn-warning btn-round">Edit</a>
+                    <a href="/progres/proyek/{{ $proyek->id }}" class="btn btn-primary btn-round">Update</a>
+                    <a href="/proyek" class="btn btn-info mr-3 btn-round">Kembali</a>
+                </div> 
+                </div>                      
+        </div> 
+          
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -47,11 +62,13 @@
                 },
                 yAxis: {
                     max: 100,
+                    mib:0,
                     title: {
                         text: 'Persentase'
                     },
                     labels: {
-                        format: '{value}%'
+                        format: '{value}%',
+                        visible: true,
                     }
                 },
                 tooltip: {
@@ -59,6 +76,12 @@
                     valueSuffix: ' %'
                 },
                 plotOptions: {
+                    spline: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    },
                     area: {
                         stacking: 'normal',
                         lineColor: '#666666',
@@ -67,11 +90,11 @@
                             lineWidth: 1,
                             lineColor: '#666666'
                         }
-                    }
+                    },
                 },
                 series: [{
                     name: 'Progres',
-                    data: [5,10,15,15,17,50,55,60,65,70,95,97,99,null]
+                    data: []
                 }]
             });
         </script>  
