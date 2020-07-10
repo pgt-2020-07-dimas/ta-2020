@@ -18,13 +18,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-5 mb-2">
+                    <div class="col-sm-6 mb-2 mr-2">
                     <h5 class="title">Pencarian proyek</h5>
                         <form action="" class="form">
-                            <input value="" type="text" name="search" class="form-control" placeholder="Masukan kata kunci pencarian" id="search">                            
+                            <input value="" type="text" name="search" class="form-control col-sm-10" placeholder="Masukan kata kunci pencarian" id="search">                            
                         </form>                        
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-sm-5">
                         <h5 class="title">Filter</h5>
                       <div class="row filter container">
                         <select  name="tahun" id="tahun" class="form-control col-sm-4">
@@ -56,14 +56,12 @@
         </div>
     </div>
     
-    <div class="container row" id="mydata"></div>
-
-    <!-- <div class="row">
-            <div class="col-lg-12">
-                {{ $proyek->links() }}
-            </div>
-    </div> -->
-   
+    <div class="container row" id="mydata">
+    @include('proyek.page')
+    </div>
+    
+     {{ $proyek->links() }}
+       
 <script>
   $(document).ready(function(){
     var str=  $("#search").val();
@@ -77,8 +75,11 @@
   $(document).ready(function(){
 	$("#search").keyup(function(){
 	  var str=  $("#search").val();
+    var tahun=  $("#tahun").val();
+    var plant= $("#plant").val();
+    var status= $("#status").val();
 	  
-			$.get( "{{ url('/proyek/search?cari=') }}"+str, function( data ) {
+			$.get( "{{ url('/proyek/search?cari=') }}"+str+"&&"+"tahun="+tahun+"&&"+"plant="+plant+"&&"+"status="+status, function( data ) {
 			$( "#mydata" ).html( data );  
 	    });
 	  
@@ -90,15 +91,51 @@
 	  var str=  $("#tahun").val();
 	  var str1=  $("#plant").val();
     var str2=  $("#status").val();
+    var cari=  $("#search").val();
 	  
-		$.get( "{{ url('/proyek/filter?tahun=') }}"+str+"&&"+"plant="+str1+"&&"+"status="+str2, function( data ) {
+		$.get( "{{ url('/proyek/filter?tahun=') }}"+str+"&&"+"plant="+str1+"&&"+"status="+str2+"&&"+"cari="+cari, function( data ) {
 			$( "#mydata" ).html( data );  
 	  });
 	  
 	});  
   }); 
+  
+
+  
+
+$(document).ready(function(){
+
+//   $(document).on('click', '#.filter', function(){
+//     var str=  $("#tahun").val();
+// 	  var str1=  $("#plant").val();
+//     var str2=  $("#status").val();
+//   fetch_data(str, str1, str2);
+//  });
+
+$(document).on('click', '.pagination a', function(event){
+ event.preventDefault(); 
+ var page = $(this).attr('href').split('page=')[1];
+ var tahun =$("#tahun").val();
+ var plant= $("#plant").val();
+ var status= $("#status").val();
+ var str=  $("#search").val();
+ fetch_data(page, tahun, plant, status, str);
+});
+
+function fetch_data(page,tahun, plant, status, str)
+{
+ $.ajax({
+  url:"/pagination/fetch_data?page="+page+"&tahun="+tahun+"&plant="+plant+"&status="+status+"&cari="+str,
+  success:function(data)
+  {
+   $('#mydata').html(data);
+  }
+ });
+}
+
+
+});
 
 </script>
-
 
 @endsection

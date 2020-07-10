@@ -30,6 +30,7 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/proyek', 'ProyekController@index');
 route::get('/proyek/search/','ProyekController@liveSearch')->name('liveSearch');
 route::get('/proyek/filter/','ProyekController@liveFilter')->name('liveFilter');
+Route::get('pagination/fetch_data', 'ProyekController@fetch_data');
 
 Route::get('/proyek/tambah', 'ProyekController@create');
 Route::get('/proyek/{proyek}', 'ProyekController@show');

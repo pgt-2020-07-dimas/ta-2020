@@ -24,6 +24,11 @@
     <link rel="stylesheet" href="/page/css/aos.css">
 
     <link rel="stylesheet" href="/page/css/style.css">
+
+    <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet" />
+   <link href="{{ asset('assets') }}/css/font-awesome.min.css" rel="stylesheet" /> 
+
+   <link rel="stylesheet" href="/css/style.css">
     
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -72,7 +77,7 @@
 
     <div class="intro-section" id="home">
       
-      <div class="slide-1" style="background-image: url('/page/images/hero_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="slide-1" style="background-image: url('/page/images/hero.jpg');" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-12">
@@ -130,9 +135,9 @@
     </div>
 
     
-    <div class="site-section courses-title" id="proyek">
+    <div class="site-section courses-title" style="background-color: darkslateblue;" id="proyek">
       <div class="container">
-        <div class="row mb-5 justify-content-center">
+        <div class="row justify-content-center">
           <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
             <h2 class="section-title">Proyek</h2>
           </div>
@@ -141,113 +146,54 @@
     </div>
     <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="100">
       <div class="container">
-        <div class="row">
-
-          <div class="owl-carousel col-12 nonloop-block-14">
-
-            <div class="course bg-white h-100 align-self-stretch">
-              <figure class="m-0">
-                <a href="course-single.html"><img src="/page/images/img_1.jpg" alt="Image" class="img-fluid"></a>
-              </figure>
-              <div class="course-inner-text py-4 px-4">
-                <span class="course-price">$20</span>
-                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
-                <h3><a href="#">Study Law of Physics</a></h3>
-                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
+      @if(count($proyek)<>null) 
+      <div class="row">
+          <div class="owl-carousel col-12 nonloop-block-14">  
+          @foreach ($proyek as $p)
+            <div class="course bg-white h-90 align-self-stretch pt-1" >
+      
+            <div class="card-body   mt-2" >
+            <div class="progress mx-auto" data-value='{{ $p->persentase }}'>
+                <span class="progress-left">
+                                <span class="progress-bar border-warning"></span>
+                </span>
+                <span class="progress-right">
+                                <span class="progress-bar border-warning"></span>
+                </span>
+                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                    <div class="h2 font-weight-bold ">{{ $p->persentase }}<sup class="small">%</sup></div>
+                </div>
+                </div>
+                </div>
+                <div class="">
+              <div class="course-inner-text py-3 px-4">
+                <span class="course-price"><span class="icon-clock-o"></span></span>
+                <div class="meta"><span class="icon-wrench"></span><b class="">{{ $p->status }}</b></div>
+                <h3 class="card-title text-center mt-3">{{$p->project_no}}</h3>
+                <h3><a href="#">{{$p->project_title}}</a></h3>
+                <p>{{ $p->deskripsi }}</p>
               </div>
               <div class="d-flex border-top stats">
-                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
+                <div class="py-3 px-4"><span class="icon-map-marker"></span> {{ $p->plant }}</div>
+               
+              </div>
               </div>
             </div>
-
-            <div class="course bg-white h-100 align-self-stretch">
-              <figure class="m-0">
-                <a href="course-single.html"><img src="/page/images/img_2.jpg" alt="Image" class="img-fluid"></a>
-              </figure>
-              <div class="course-inner-text py-4 px-4">
-                <span class="course-price">$99</span>
-                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
-                <h3><a href="#">Logo Design Course</a></h3>
-                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
-              </div>
-              <div class="d-flex border-top stats">
-                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
-              </div>
-            </div>
-
-            <div class="course bg-white h-100 align-self-stretch">
-              <figure class="m-0">
-                <a href="course-single.html"><img src="/page/images/img_3.jpg" alt="Image" class="img-fluid"></a>
-              </figure>
-              <div class="course-inner-text py-4 px-4">
-                <span class="course-price">$99</span>
-                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
-                <h3><a href="#">JS Programming Language</a></h3>
-                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
-              </div>
-              <div class="d-flex border-top stats">
-                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
-              </div>
-            </div>
-
-
-
-            <div class="course bg-white h-100 align-self-stretch">
-              <figure class="m-0">
-                <a href="course-single.html"><img src="/page/images/img_4.jpg" alt="Image" class="img-fluid"></a>
-              </figure>
-              <div class="course-inner-text py-4 px-4">
-                <span class="course-price">$20</span>
-                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
-                <h3><a href="#">Study Law of Physics</a></h3>
-                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
-              </div>
-              <div class="d-flex border-top stats">
-                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
-              </div>
-            </div>
-
-            <div class="course bg-white h-100 align-self-stretch">
-              <figure class="m-0">
-                <a href="course-single.html"><img src="/page/images/img_5.jpg" alt="Image" class="img-fluid"></a>
-              </figure>
-              <div class="course-inner-text py-4 px-4">
-                <span class="course-price">$99</span>
-                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
-                <h3><a href="#">Logo Design Course</a></h3>
-                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
-              </div>
-              <div class="d-flex border-top stats">
-                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
-              </div>
-            </div>
-
-            <div class="course bg-white h-100 align-self-stretch">
-              <figure class="m-0">
-                <a href="course-single.html"><img src="/page/images/img_6.jpg" alt="Image" class="img-fluid"></a>
-              </figure>
-              <div class="course-inner-text py-4 px-4">
-                <span class="course-price">$99</span>
-                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
-                <h3><a href="#">JS Programming Language</a></h3>
-                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
-              </div>
-              <div class="d-flex border-top stats">
-                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
-              </div>
-            </div>
-
+            @endforeach
+            
           </div>
-
-         
-
         </div>
+        @else
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body mt-2 text-center">
+                <label for="" class="card-title">Belum Ada Proyek</label>
+            </div>
+        </div>
+    </div>
+    <!-- </div> pernah tak hapus --> 
+    @endif 
+    
         <div class="row justify-content-center">
           <div class="col-7 text-center">
             <button class="customPrevBtn btn btn-primary m-1">Prev</button>
@@ -312,7 +258,7 @@
   
     
   </div> <!-- .site-wrap -->
-
+  <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
   <script src="/page/js/jquery-3.3.1.min.js"></script>
   <script src="/page/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="/page/js/jquery-ui.js"></script>
@@ -326,9 +272,34 @@
   <script src="/page/js/aos.js"></script>
   <script src="/page/js/jquery.fancybox.min.js"></script>
   <script src="/page/js/jquery.sticky.js"></script>
-
-  
   <script src="/page/js/main.js"></script>
-    
+  <script class="">
+    $(function() {
+
+        $(".progress").each(function() {
+
+            var value = $(this).attr('data-value');
+            var left = $(this).find('.progress-left .progress-bar');
+            var right = $(this).find('.progress-right .progress-bar');
+
+            if (value > 0) {
+                if (value <= 50) {
+                right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+                } else {
+                right.css('transform', 'rotate(180deg)')
+                left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+                }
+            }
+
+        })
+
+        function percentageToDegrees(percentage) {
+
+        return percentage / 100 * 360
+
+        }
+
+    });
+</script>
   </body>
 </html>

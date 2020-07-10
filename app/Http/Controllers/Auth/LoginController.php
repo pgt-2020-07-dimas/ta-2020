@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -46,6 +47,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $user = User::select('departemen')->get();
-        return view('login',['user'=>$user]);
-    }
+        $proyek = DB::table('projects')->get();
+        return view('login',['user'=>$user],['proyek'=>$proyek]);
+    } 
 }

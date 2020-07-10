@@ -34,6 +34,9 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('js') }}/jQuery-2.1.4.min.js"></script>
     <script src="{{ asset('js') }}/main.js"></script>
+    <!-- Calender -->
+    <link href="{{ asset('lib') }}/main.css" rel="stylesheet"/>
+    <script src="{{ asset('lib') }}/main.js"></script>
 
     <script src="{{ asset('js') }}/datatables/js/jquery.dataTables.min.js"></script>
 
