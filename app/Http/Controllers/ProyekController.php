@@ -172,7 +172,7 @@ class ProyekController extends Controller
     public function show(Proyek $proyek)
     {
         $proyek = Proyek::where('id',$proyek->id)->first();
-        if ($proyek->status <> 1){
+        if ($proyek->spk_id <> 1){
             $arrMinggu[]=null;            
             $totalWeek = null;
             return view('progres.index', compact('arrMinggu','totalWeek','proyek'));
