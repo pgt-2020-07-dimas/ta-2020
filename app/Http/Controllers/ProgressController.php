@@ -109,6 +109,81 @@ class ProgressController extends Controller
         return redirect()->back();
     }
 
+    public function histori($id)
+    {
+        $proyek = Proyek::where('id',$id)->first();
+        // $items = Item::where('boq_id',$proyek->boq_id)->get();
+        $items = Item::where('items.boq_id', $proyek->boq_id)
+                    ->select(DB::raw('items.id, items.boq_id,items.item_name,items.quantity as qtyAsli,sum(progresses.quantity) as qtyDtg,items.persentase'))
+                        ->leftJoin('progresses','items.id','=','progresses.item_id')
+                        ->groupBy('items.id')
+                        ->get();
+        // return $items;die;
+        // dd($items[0]->qtyDtg);
+        if($proyek->status === 'Finish'){
+            $status = true;
+        } else {
+            $status = false;
+        }
+
+        $history = Progress::leftJoin('items', 'progresses.item_id', '=', 'items.id')
+            ->select('progresses.item_id',
+                        'items.boq_id',
+                        'items.item_name',
+                        'progresses.quantity as qtyDtg',
+                        'items.quantity as qtyAsli',
+                        'progresses.bobot',
+                        'items.status',
+                        'items.persentase',
+                        'progresses.date', 
+                        'progresses.path' 
+                      )
+            ->get();
+            // return $history;die;
+        return view('progres.histori_finish',compact('items','proyek','status','history'));
+        die;
+        
+        
+    }
+
+
+    public function batal($id)
+    {
+        $proyek = Proyek::where('id',$id)->first();
+        // $items = Item::where('boq_id',$proyek->boq_id)->get();
+        $items = Item::where('items.boq_id', $proyek->boq_id)
+                    ->select(DB::raw('items.id, items.boq_id,items.item_name,items.quantity as qtyAsli,sum(progresses.quantity) as qtyDtg,items.persentase'))
+                        ->leftJoin('progresses','items.id','=','progresses.item_id')
+                        ->groupBy('items.id')
+                        ->get();
+        // return $items;die;
+        // dd($items[0]->qtyDtg);
+        if($proyek->status === 'Suspend'){
+            $status = true;
+        } else {
+            $status = false;
+        }
+
+        $history = Progress::leftJoin('items', 'progresses.item_id', '=', 'items.id')
+            ->select('progresses.item_id',
+                        'items.boq_id',
+                        'items.item_name',
+                        'progresses.quantity as qtyDtg',
+                        'items.quantity as qtyAsli',
+                        'progresses.bobot',
+                        'items.status',
+                        'items.persentase',
+                        'progresses.date', 
+                        'progresses.path' 
+                      )
+            ->get();
+            // return $history;die;
+        return view('progres.histori_batal',compact('items','proyek','status','history'));
+        die;
+        
+        
+    }
+
     /**
      * Display the specified resource.
      *

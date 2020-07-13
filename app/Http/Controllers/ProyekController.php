@@ -102,9 +102,14 @@ class ProyekController extends Controller
         //  dd($request->tahun);
         $tahun = $request->tahun;
         $plant = $request->plant;
-        $status = $request->status; 
+        $status = $request->status;  
+        $search = $request->cari;
 
         $proyek = Proyek::where('user_id',auth()->user()->id)
+            ->where(function($query) use ($search) {
+                $query->where('project_title','LIKE',"%".$search."%")
+                    ->orWhere('project_no','LIKE',"%".$search."%");
+            })
             ->where('project_year','LIKE',"%{$tahun}%")
             ->where('plant','LIKE',"%{$plant}%")
             ->where('status','LIKE',"%{$status}%")

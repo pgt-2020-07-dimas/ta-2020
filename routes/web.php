@@ -28,8 +28,8 @@ Route::get('/', [
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::get('/proyek', 'ProyekController@index');
-route::get('/proyek/search/','ProyekController@liveSearch')->name('liveSearch');
-route::get('/proyek/filter/','ProyekController@liveFilter')->name('liveFilter');
+Route::get('/proyek/search/','ProyekController@liveSearch')->name('liveSearch');
+Route::get('/proyek/filter/','ProyekController@liveFilter')->name('liveFilter');
 Route::get('pagination/fetch_data', 'ProyekController@fetch_data');
 
 Route::get('/proyek/tambah', 'ProyekController@create');
@@ -67,4 +67,22 @@ Route::get('/calendar', 'CalendarController@index');
 Route::post('/contractor', 'ContractorController@store');
 
 Route::get('/progres/proyek/{id}','ProgressController@index');
+Route::get('/progres/histori/{id}','ProgressController@histori');
+Route::get('/progres/batal/{id}','ProgressController@batal');
 Route::post('/progres','ProgressController@store');
+
+
+
+Route::get('/histori', 'HistoriController@index');
+Route::get('/histori/search/','HistoriController@liveSearch')->name('liveSearch');
+Route::get('/histori/filter/','HistoriController@liveFilter')->name('liveFilter');
+Route::get('/histori/fetch_data', 'HistoriController@fetch_data');
+Route::get('/histori/{proyek}', 'HistoriController@show');
+
+Route::get('/batal', 'BatalController@index');
+Route::get('/batal/search/','BatalController@liveSearch')->name('liveSearch');
+Route::get('/batal/filter/','BatalController@liveFilter')->name('liveFilter');
+Route::get('/batal/fetch_data', 'BatalController@fetch_data');
+Route::get('/batal/{proyek}', 'BatalController@show');
+
+

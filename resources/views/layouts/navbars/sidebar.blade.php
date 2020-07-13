@@ -31,13 +31,13 @@
         </a>
       </li>
       <li class = " @if ($activePage == 'histori_proyek') active @endif">
-        <a href="#">
+        <a href="/histori">
           <i class="now-ui-icons design_bullet-list-67"></i>
           <p>{{ __('Histori Proyek') }}</p>
         </a>
       </li>
       <li class = "@if ($activePage == 'proyek_batal') active @endif">
-        <a href="#">
+        <a href="/batal">
           <i class="now-ui-icons ui-2_settings-90"></i>
           <p>{{ __('Proyek Batal') }}</p>
         </a>

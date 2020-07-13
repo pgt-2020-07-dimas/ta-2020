@@ -11,13 +11,13 @@
                     <div class="card-body mt-2">
                         <div class="progress mx-auto" data-value='{{ $p->persentase }}'>
                         <span class="progress-left">
-                                        <span class="progress-bar border-warning"></span>
+                                        <span class="progress-bar border-primary"></span>
                         </span>
                         <span class="progress-right">
-                                        <span class="progress-bar border-warning"></span>
+                                        <span class="progress-bar border-primary"></span>
                         </span>
                         <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                            <div class="h2 font-weight-bold mt-4 ml-2">{{ $p->persentase }}<sup class="small">%</sup></div>
+                            <div class="h2 font-weight-bold mt-4 ml-3">{{ $p->persentase }}<sup class="small">%</sup></div>
                         </div>
                         </div>
                         <h5 class="card-title text-center mt-3">{{$p->project_no}}</h5>
@@ -27,7 +27,7 @@
                         </div>
                         <p class="card-body font-italic"><small>Status : {{ $p->status }} | {{ $p->plant }}</small></p>
                         <div class="text-right">
-                            <a href="/proyek/{{$p->id}}" class="btn btn-round btn-primary">Detail</a>
+                            <a href="/histori/{{$p->id}}" class="btn btn-round btn-primary">Detail</a>
                         </div>
                         
                     </div>
