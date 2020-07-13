@@ -85,4 +85,7 @@ Route::get('/batal/filter/','BatalController@liveFilter')->name('liveFilter');
 Route::get('/batal/fetch_data', 'BatalController@fetch_data');
 Route::get('/batal/{proyek}', 'BatalController@show');
 
+Route::get('/rating', 'RatingController@index');
+
+
 

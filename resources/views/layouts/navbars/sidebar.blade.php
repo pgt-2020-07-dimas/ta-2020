@@ -49,7 +49,7 @@
         </a>
       </li>
       <li class = "@if ($activePage == 'rating_kontaktor') active @endif">
-        <a href="#">
+        <a href="/rating">
           <i class="now-ui-icons users_circle-08"></i>
           <p>{{ __('Rating Kontaktor') }}</p>
         </a>

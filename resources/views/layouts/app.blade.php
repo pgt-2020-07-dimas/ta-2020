@@ -38,6 +38,13 @@
     <link href="{{ asset('lib') }}/main.css" rel="stylesheet"/>
     <script src="{{ asset('lib') }}/main.js"></script>
 
+    <!-- Rating -->
+    <!-- <link rel="stylesheet" href="/dist/css/main.css"> -->
+    <link rel="stylesheet" href="/dist/themes/fontawesome-stars.css">
+    <link rel="stylesheet" href="/dist/themes/css-stars.css">
+    <link rel="stylesheet" href="/dist/themes/bootstrap-stars.css">
+    <link rel="stylesheet" href="/dist/themes/fontawesome-stars-o.css">
+
     <script src="{{ asset('js') }}/datatables/js/jquery.dataTables.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
