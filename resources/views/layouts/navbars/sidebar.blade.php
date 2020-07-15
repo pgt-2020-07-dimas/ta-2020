@@ -4,7 +4,6 @@
 -->
   <div class="logo">
     <a href="#" class="simple-text logo-mini">
-      {{ Auth::user()->departemen }}
     </a>
     <a href="#" class="simple-text logo-normal">
       {{ __('Utility Departement') }}

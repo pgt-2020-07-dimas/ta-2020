@@ -13,7 +13,7 @@
   <meta name="description" content="Now UI Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
   <!-- Twitter Card data -->
   <title>
-    {{Auth::user()->departemen}} - Sistem Manajemen Informasi Proyek
+    Sistem Manajemen Informasi Proyek
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
