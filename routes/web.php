@@ -78,6 +78,7 @@ Route::get('/histori/search/','HistoriController@liveSearch')->name('liveSearch'
 Route::get('/histori/filter/','HistoriController@liveFilter')->name('liveFilter');
 Route::get('/histori/fetch_data', 'HistoriController@fetch_data');
 Route::get('/histori/{proyek}', 'HistoriController@show');
+Route::get('/histori/{proyek}/rating', 'HistoriController@rating');
 
 Route::get('/batal', 'BatalController@index');
 Route::get('/batal/search/','BatalController@liveSearch')->name('liveSearch');
