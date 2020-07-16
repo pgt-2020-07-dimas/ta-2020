@@ -143,6 +143,11 @@ class HistoriController extends Controller
         }
         
     }
+    
+    public function rating(Proyek $proyek)
+    {
+        return view('histori.rating');
+    }
+
+
 }
-
-

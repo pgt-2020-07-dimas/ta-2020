@@ -38,7 +38,7 @@
                                         @if($items[$i]->qtyDtg==null)
                                             0/{{$items[$i]->qtyAsli}} - {{$items[$i]->persentase}}%
                                         @else
-                                            {{$items[$i]->qtyDtg}}/{{$items[$i]->qtyAsli}} - {{$items[$i]->persentase}}%
+                                            {{$items[$i]->qtyDtg}}/{{$items[$i]->qtyAsli}}
                                         @endif
                                         </td>
                                         <td class="text-center">

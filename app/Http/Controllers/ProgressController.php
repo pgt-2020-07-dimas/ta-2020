@@ -32,7 +32,7 @@ class ProgressController extends Controller
                         ->get();
         // return $items;die;
         // dd($items[0]->qtyDtg);
-        if($proyek->status === 'SPK'){
+        if($proyek->status === 'SPK' or $proyek->status === 'On progress' or $proyek->status === 'Finish'){
             $status = true;
         } else {
             $status = false;

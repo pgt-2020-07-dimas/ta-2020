@@ -29,6 +29,7 @@
                 </div>  
                 <div class="card-footer">
                 <div class="text-right">
+                    <a href="/histori/{{$proyek->id}}/rating" class="btn btn-success btn-round">Rating</a>
                     <a href="/drawing/{{$proyek->id}}/file" class="btn btn-warning btn-round">Lihat Desain</a>
                     <a href="/progres/histori/{{ $proyek->id }}" class="btn btn-primary btn-round">Detail Histori</a>
                     <a href="/histori" class="btn btn-info mr-3 btn-round">Kembali</a>
@@ -36,6 +37,8 @@
                 </div>                      
         </div> 
           
+
+
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
