@@ -48,13 +48,13 @@
                     type: 'spline'
                 },
                 title: {
-                    text: 'Progress'
+                    text: ''
                 },
                 subtitle: {
-                    text: 'JMU-204-02'
+                    text: 'Kurva S'
                 },
                 xAxis: {
-                    categories: <?=json_encode($arrMinggu);?>,
+                    categories: <?=json_encode($tanggal);?>,
                     tickmarkPlacement: 'on',
                     title: {
                         enabled: false
@@ -94,7 +94,7 @@
                 },
                 series: [{
                     name: 'Progres',
-                    data: [1,1,2,4,7,15,40,55,65,80,85,90,95,99]
+                    data: <?=$total;?>
                 }]
             });
         </script>  

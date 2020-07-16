@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProgressesTable extends Migration
+class CreatePerkembangansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateProgressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('progresses', function (Blueprint $table) {
+        Schema::create('perkembangans', function (Blueprint $table) {
             $table->id();
             $table->integer('boq_id');
-            $table->integer('arrive_id');
-            $table->integer('item_id');
-            $table->string('quantity');
-            $table->date('date');
-            $table->string('bobot')->default('0');
+            $table->string('barang')->nullable();
+            $table->string('pemasangan')->nullable();
+            $table->string('total')->nullable();
+            $table->string('path')->nullable();
+            $table->date('date')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateProgressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('progresses');
+        Schema::dropIfExists('perkembangans');
     }
 }

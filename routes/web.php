@@ -70,6 +70,7 @@ Route::get('/progres/proyek/{id}','ProgressController@index');
 Route::get('/progres/histori/{id}','ProgressController@histori');
 Route::get('/progres/batal/{id}','ProgressController@batal');
 Route::post('/progres','ProgressController@store');
+Route::post('/progres/perkembangan','ProgressController@store2');
 
 
 
