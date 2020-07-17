@@ -212,29 +212,21 @@
         <div class="row">
           <div class="col-md-4">
             <h3 style="color: aliceblue">Tentang Joint Maintenance Utility</h3>
-            <p>Sistem Manajemen Proyek merupakan sebuah aplikasi web yang menyediakan akses Informasi Proyek dan Data Perkembangan Proyek di departement Joint Maintenance Utility PT. Gajah Tunggal Tbk.</p>
+            <p class="text-white">Sistem Manajemen Proyek merupakan sebuah aplikasi web yang menyediakan akses Informasi Proyek dan Data Perkembangan Proyek di Departement Joint Maintenance Utility PT. Gajah Tunggal Tbk.</p>
           </div>
 
           <div class="col-md-3 ml-auto">
             <h3>Links</h3>
             <ul class="list-unstyled footer-links">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#proyek">Proyek</a></li>
-              <li></li>
-              <li><a target="_blank" href="https://utility-idc.firebaseapp.com/">U-IDC</a></li>
+              <li><a href="#home" class="text-white">Home</a></li>
+              <li><a href="#proyek"  class="text-white">Proyek</a></li>
+              <li><a target="_blank"  class="text-white" href="https://utility-idc.firebaseapp.com/">U-IDC</a></li>
 
             </ul>
           </div>
 
           <div class="col-md-4">
-            <h3>Subscribe</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt incidunt iure iusto architecto? Numquam, natus?</p>
-            <form action="#" class="footer-subscribe">
-              <div class="d-flex mb-5">
-                <input type="text" class="form-control rounded-0" placeholder="Email">
-                <input type="submit" class="btn btn-primary rounded-0" value="Subscribe">
-              </div>
-            </form>
+           
           </div>
 
         </div>
@@ -242,9 +234,9 @@
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <div class="border-top pt-5">
-            <p>
+            <p class="text-white">
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib </a>
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
       </p>
             </div>

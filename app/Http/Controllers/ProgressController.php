@@ -7,6 +7,7 @@ use App\Bill;
 use App\Item;
 use App\Proyek;
 use App\Spk;
+use App\PurchaseRequisition;
 use App\Arrive;
 use App\Perkembangan;
 use DB;
@@ -24,6 +25,7 @@ class ProgressController extends Controller
     public function index($id)
     {
         $proyek = Proyek::where('id',$id)->first();
+      
         // $items = Item::where('boq_id',$proyek->boq_id)->get();
         $items = Item::where('items.boq_id', $proyek->boq_id)
                     ->select(DB::raw('items.id, items.boq_id,items.item_name,items.quantity as qtyAsli,sum(progresses.quantity) as qtyDtg,items.persentase'))
@@ -50,7 +52,6 @@ class ProgressController extends Controller
                     $perkembangan->path = str_replace('public', 'storage', $perkembangan->path);
                     return $perkembangan;
                 });
-        
         // $history = Progress::leftJoin('items', 'progresses.item_id', '=', 'items.id')
         //     ->select('progresses.item_id',
         //                 'items.boq_id',
@@ -100,9 +101,11 @@ class ProgressController extends Controller
             'status'=>'1',
             'path'=>$path,
         ]);
-        $persenProyek = proyek::where('boq_id',$request->boq_id)->pluck('persentase');
-        $persenProyek += $total * 80/100;
-        if($persenProyek<99){
+        $persenProyek = Proyek::where('boq_id',$request->boq_id)->pluck('persentase');
+        // return $persenProyek;die;
+        $persenProyek = 20 + ($total * 80/100);
+        $persenProyek = number_format($persenProyek,2);
+        if($persenProyek > 99){
             $status = 'Finish';
         } else {
             $status = 'On progress';
@@ -164,6 +167,22 @@ class ProgressController extends Controller
             Item::where('id',$request->items[$i])->update([
                     'persentase'=>$persentase
             ]);
+        $jumlah = Progress::where('boq_id',$request->boq_id)->count();
+        if($jumlah <> 0){
+
+            $persenBarang = Progress::where('boq_id',$request->boq_id)->sum('bobot');
+            // $pemasanganBarang = Progress::where('boq_id',$request->boq_id)->pluck('pemasangan');
+            // terakhir disini
+            // $persenProyek = Proyek::where('boq_id',$request->boq_id)->pluck('persentase');
+            $persenProyek = 20 +($persenBarang*80/100);
+            $persenProyek = number_format($persenProyek,2);
+            Proyek::where('boq_id',$request->boq_id)->update([
+                'persentase'=> $persenProyek,
+            ]);
+            Perkembangan::where('boq_id',$request->boq_id)->latest()->update([
+                'barang'=> $persenBarang,
+            ]);
+        }
         }
         return redirect()->back();
         // $qtyAsli = Item::where('id',$request->id)->pluck('quantity')->first();;
@@ -282,9 +301,23 @@ class ProgressController extends Controller
      * @param  \App\Progress  $progress
      * @return \Illuminate\Http\Response
      */
-    public function show(Progress $progress)
+    public function detailItem($id)
     {
-        
+        $item_name = Item::where('id',$id)->pluck('item_name');
+        $item_name = $item_name[0];
+        $items = Progress::where('item_id',$id)->get();
+        // return $item;die;
+        return view('progres.status.index',compact('item_name','items'));
+    }
+    public function detailRiwayat($id)
+    {
+        $arrives = Progress::where('arrive_id',$id)
+        ->select(DB::raw(' items.item_name, progresses.quantity, progresses.date'))
+        ->leftJoin('items','progresses.item_id','=','items.id')
+        ->get();
+        // dd($arrives);
+        // return $arrives;die;
+        return view('progres.riwayat.index',compact('arrives'));
     }
 
     /**
@@ -316,8 +349,49 @@ class ProgressController extends Controller
      * @param  \App\Progress  $progress
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Progress $progress)
+    public function destroy(Request $request,$id)
     {
-        //
+        // return $request;die;
+        Progress::where('arrive_id',$id)->delete();
+        Arrive::where('id',$id)->delete();
+        Storage::disk('local')->delete($request->path);
+        $barang = Progress::where('boq_id',$request->boq_id)->sum('bobot');
+        $pemasangan = Perkembangan::where('boq_id',$request->boq_id)->latest()->pluck('pemasangan');
+        $pemasangan = $pemasangan[0];
+        $total = ($barang)+($pemasangan*20/100);
+
+        $perkembangan = Perkembangan::where('boq_id',$request->boq_id)->latest()
+                    ->update([
+                        'barang'=>$barang,
+                        'total'=>$total
+                    ]);
+        $persenProyek = 20 + ($total * 80/100);
+        $persenProyek = number_format($persenProyek,2);
+        $proyek = Proyek::where('boq_id',$request->boq_id)
+                ->update([
+                    'persentase'=>$persenProyek,
+                    ]);
+        return redirect()->back();
+        
+    }
+    public function destroy2(Request $request,$id)
+    {
+        
+        Perkembangan::destroy($id);
+        Storage::disk('local')->delete($request->path);
+        $persenProyek = Perkembangan::where('boq_id',$request->boq_id)->latest()->pluck('total');
+        // return count($persenProyek);die;
+        $jumlah = count($persenProyek);
+        if($jumlah<>null){
+            $persenProyek = 20 + ($persenProyek[0]*80/100);
+            Proyek::where('boq_id',$request->boq_id)->update([
+                'persentase'=>$persenProyek,
+            ]);
+        } else {
+            Proyek::where('boq_id',$request->boq_id)->update([
+                'persentase'=>'20',
+            ]);
+        }
+        return redirect()->back();
     }
 }

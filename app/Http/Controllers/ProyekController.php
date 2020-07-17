@@ -6,6 +6,8 @@ use App\Proyek;
 use App\Drawing;
 use App\Item;
 use App\Spk;
+use App\Bill;
+use App\PurchaseRequisition;
 use App\Perkembangan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -178,11 +180,14 @@ class ProyekController extends Controller
     public function show(Proyek $proyek)
     { 
         $proyek = Proyek::where('id',$proyek->id)->first();
+        $spk = Spk::where('id',$proyek->spk_id)->first();
+        $pr = PurchaseRequisition::where('id',$proyek->pr_id)->first();
+        $boq = Bill::where('id',$proyek->boq_id)->first();
         $total = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('total');
         $total= str_replace('"', '', $total);
         $tanggal = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('date');
         // return $total;die;
-        return view('progres.index', compact('total','tanggal','proyek'));
+        return view('progres.index', compact('total','tanggal','proyek','pr','spk','boq'));
         // if ($proyek->spk_id <> 1){
         //     $arrMinggu[]=null;            
         //     $totalWeek = null;
@@ -211,6 +216,14 @@ class ProyekController extends Controller
         //}
         // arrMinggu diatas
         
+    }
+    public function detail(Request $request,$id){
+        $proyek = Bill::where('id', $id)
+                ->update([
+                    'actual_budged'=>$request->actual_budged
+                ]);
+        return redirect()->back();
+                
     }
 
     /**

@@ -33,6 +33,7 @@ Route::get('/proyek/filter/','ProyekController@liveFilter')->name('liveFilter');
 Route::get('pagination/fetch_data', 'ProyekController@fetch_data');
 
 Route::get('/proyek/tambah', 'ProyekController@create');
+Route::post('/proyek/actual/{id}', 'ProyekController@detail');
 Route::get('/proyek/{proyek}', 'ProyekController@show');
 Route::get('/proyek/{proyek}/edit', 'ProyekController@edit');
 Route::post('/proyek', 'ProyekController@store');
@@ -71,6 +72,10 @@ Route::get('/progres/histori/{id}','ProgressController@histori');
 Route::get('/progres/batal/{id}','ProgressController@batal');
 Route::post('/progres','ProgressController@store');
 Route::post('/progres/perkembangan','ProgressController@store2');
+Route::delete('/progres/perkembangan/{id}','ProgressController@destroy2');
+Route::get('/progres/item/{id}','ProgressController@detailItem');
+Route::delete('/progres/riwayat/{id}','ProgressController@destroy');
+Route::get('/progres/riwayat/{id}','ProgressController@detailRiwayat');
 
 
 

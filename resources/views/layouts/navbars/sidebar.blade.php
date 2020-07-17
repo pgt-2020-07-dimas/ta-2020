@@ -6,7 +6,7 @@
     <a href="#" class="simple-text logo-mini">
     </a>
     <a href="#" class="simple-text logo-normal">
-      {{ __('Utility Departement') }}
+      {{ __('JMU DEPARTMENT') }}
     </a>
   </div>
   <div class="sidebar-wrapper" id="sidebar-wrapper">
