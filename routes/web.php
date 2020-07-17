@@ -31,6 +31,8 @@ Route::get('/proyek', 'ProyekController@index');
 Route::get('/proyek/search/','ProyekController@liveSearch')->name('liveSearch');
 Route::get('/proyek/filter/','ProyekController@liveFilter')->name('liveFilter');
 Route::get('pagination/fetch_data', 'ProyekController@fetch_data');
+Route::get('/rating/search/','RatingController@liveSearch')->name('liveSearch');
+Route::get('pagination/rating/fetch_data', 'RatingController@fetch_data');
 
 Route::get('/proyek/tambah', 'ProyekController@create');
 Route::post('/proyek/actual/{id}', 'ProyekController@detail');

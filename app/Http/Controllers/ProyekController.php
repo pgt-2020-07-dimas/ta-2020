@@ -63,7 +63,7 @@ class ProyekController extends Controller
             ->where('project_year','LIKE',"%{$tahun}%")
             ->where('plant','LIKE',"%{$plant}%")
             ->where('status','LIKE',"%{$status}%")
-            ->paginate(4); 
+            ->paginate(8); 
             $pro = Proyek::where('user_id',auth()->user()->id)->get();
             // dd(count($proyek));                       
             return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro]);
@@ -89,7 +89,7 @@ class ProyekController extends Controller
             ->where('plant','LIKE',"%{$plant}%")
             ->where('status','LIKE',"%{$status}%")
             // ->orwhere('project_no','LIKE',"%{$search}%")
-            ->paginate(4); 
+            ->paginate(8); 
             $pro = Proyek::where('user_id',auth()->user()->id)->get();
             // dd(count($proyek));                       
             return view('proyek.page',['proyek'=>$proyek],['pro'=>$pro]);
@@ -114,7 +114,7 @@ class ProyekController extends Controller
             ->where('project_year','LIKE',"%{$tahun}%")
             ->where('plant','LIKE',"%{$plant}%")
             ->where('status','LIKE',"%{$status}%")
-            ->paginate(4); 
+            ->paginate(8); 
 
         //dd($proyek);
         $pro = Proyek::where('user_id',auth()->user()->id)->get();

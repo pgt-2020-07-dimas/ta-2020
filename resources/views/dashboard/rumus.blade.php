@@ -102,6 +102,19 @@
     @endphp
   @endif
 
+  @if(count($si)<>null)
+  @foreach($si as $j )
+    @php     
+    $li[]=$j->plant;
+    $xi = count($li);
+    @endphp
+  @endforeach
+  @else
+    @php
+    $xi = 0;
+    @endphp
+  @endif
+
 @if(count($pa)<>null)
   @foreach($pa as $j )
     @php     
@@ -239,7 +252,7 @@
     text: ''
   },
   xAxis: {
-    categories: ['Finish', 'OnProgress', 'SPK/PO', 'Aanwijzing', 'Open PR', 'Desain', 'Planning', 'Cancel'],
+    categories: ['Finish', 'OnProgress', 'SPK/PO', 'Aanwijzing', 'Open PR', 'Desain', 'BOQ', 'Planning', 'Cancel'],
     title: {
       text: null
     }
@@ -281,7 +294,7 @@
   },
   series: [{
     name: 'Total ',
-    data: [<?=$xa?>, <?=$xb?>, <?=$xc?>, <?=$xd?>, <?=$xe?>, <?=$xf?>, <?=$xg?>, <?=$xh?>]
+    data: [<?=$xa?>, <?=$xb?>, <?=$xc?>, <?=$xd?>, <?=$xe?>, <?=$xf?>, <?=$xg?>, <?=$xh?>, <?=$xi?>]
   }]
 });
 </script>

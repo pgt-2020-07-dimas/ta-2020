@@ -26,13 +26,14 @@ class HomeController extends Controller
     {
         $proyek = Proyek::where('user_id',auth()->user()->id)->get();
         $sa = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Finish')->get();
-        $sb = Proyek::where('user_id',auth()->user()->id)->where('Status', 'OnProgress')->get();
+        $sb = Proyek::where('user_id',auth()->user()->id)->where('Status', 'On progress')->get();
         $sc = Proyek::where('user_id',auth()->user()->id)->where('Status', 'SPK')->get();
         $sd = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Aanwijzing')->get();
         $se = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Open PR')->get();
-        $sf = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Desain')->get();
-        $sg = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Planning')->get();
-        $sh = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Suspend')->get();        
+        $sf = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Design')->get();
+        $sg = Proyek::where('user_id',auth()->user()->id)->where('Status', 'BOQ')->get();
+        $sh = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Planning')->get();
+        $si = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Suspend')->get();        
 
         $pa = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant A')->get();
         $pb = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant BHI')->get();
@@ -44,7 +45,7 @@ class HomeController extends Controller
         $pj = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant J')->get();
         $po = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Other')->get();
 
-        return view('dashboard.index', compact('proyek','sa','sb','sc','sd','se','sf','sg','sh','pa','pb','pc','pd','pm','pe','pr','pj','po'));
+        return view('dashboard.index', compact('proyek','sa','sb','sc','sd','se','sf','sg','sh','si','pa','pb','pc','pd','pm','pe','pr','pj','po'));
     }
 
     public function tambah()

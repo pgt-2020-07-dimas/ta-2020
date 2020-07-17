@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Proyek;
-use App\Contractor;
 use App\Rating;
-use App\Item;
+use App\Contractor;
 use App\Spk;
+use App\Bill;
+use App\PurchaseRequisition;
+use App\Perkembangan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -56,7 +58,7 @@ class HistoriController extends Controller
             })
             ->where('project_year','LIKE',"%{$tahun}%")
             ->where('plant','LIKE',"%{$plant}%")
-            ->paginate(4); 
+            ->paginate(8); 
             $pro = Proyek::where('user_id',auth()->user()->id)->where('status', 'Finish')->get();
             // dd(count($proyek));                       
             return view('histori.page',['proyek'=>$proyek],['pro'=>$pro]);
@@ -81,7 +83,7 @@ class HistoriController extends Controller
             ->where('project_year','LIKE',"%{$tahun}%")
             ->where('plant','LIKE',"%{$plant}%")
             // ->orwhere('project_no','LIKE',"%{$search}%")
-            ->paginate(4); 
+            ->paginate(8); 
             $pro = Proyek::where('user_id',auth()->user()->id)->where('status', 'Finish')->get();
             // dd(count($proyek));                       
             return view('histori.page',['proyek'=>$proyek],['pro'=>$pro]);
@@ -103,10 +105,9 @@ class HistoriController extends Controller
                 $query->where('project_title','LIKE',"%".$search."%")
                     ->orWhere('project_no','LIKE',"%".$search."%");
             })
-            ->where('status', 'Finish')
             ->where('project_year','LIKE',"%{$tahun}%")
             ->where('plant','LIKE',"%{$plant}%")
-            ->paginate(4); 
+            ->paginate(8); 
 
         //dd($proyek);
         $pro = Proyek::where('user_id',auth()->user()->id)->where('status', 'Finish')->get();
@@ -116,32 +117,15 @@ class HistoriController extends Controller
     public function show(Proyek $proyek)
     {
         $proyek = Proyek::where('id',$proyek->id)->first();
-        if ($proyek->spk_id <> 1){
-            $arrMinggu[]=null;            
-            $totalWeek = null;
-            return view('progres.finish', compact('arrMinggu','totalWeek','proyek'));
-        } else {
-            $items = Item::where('boq_id',$proyek->boq_id)->get();
-            $spk = Spk::where('id',$proyek->spk_id)->first();
-            $start = Carbon::create($spk->start_execution_date);
-            $end = Carbon::create($spk->estimate_finish_date);
-            $interval = $start->diff($end);
-            $interval = $interval->format('%a');
-            $totalWeek = intval($interval/7);
-            $sisaHari = $interval%7;
-            $arrMinggu[]= $start->format('d M y');
-            for($i=1;$i<=$totalWeek;$i++){
-                $minggu = $start->addWeeks(1); 
-                $arrMinggu[]= $minggu->format('d M y');
-            }
-            if($sisaHari<>0){
-                $arrMinggu[]= $end->addDays($sisaHari)->format('d M y');
-                $totalWeek +=1;
-            }
-                    
-            // dd($totalWeek);
-            return view('progres.finish', compact('arrMinggu','totalWeek','proyek'));
-        }
+        $spk = Spk::where('id',$proyek->spk_id)->first();
+        $pr = PurchaseRequisition::where('id',$proyek->pr_id)->first();
+        $boq = Bill::where('id',$proyek->boq_id)->first();
+        $total = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('total');
+        $total= str_replace('"', '', $total);
+        $tanggal = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('date');
+        // return $total;die;
+        return view('progres.finish', compact('total','tanggal','proyek','pr','spk','boq'));
+        
         
     }
     
@@ -186,5 +170,5 @@ class HistoriController extends Controller
         // dd($proyek);
         return redirect('/rating');
         // return redirect('/histori'.'/'.$request->project_id.'/');
-        }
+    }
 }

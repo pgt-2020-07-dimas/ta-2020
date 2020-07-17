@@ -1,6 +1,11 @@
-@if(count($contractor)<>null)  
-    
-        @foreach ($contractor as $c)
+@if(count($rating)<>null)  
+        @foreach ($pro as $j)
+        @php   
+                $row[]=$j->name;
+                $cek = count($row);
+        @endphp
+        @endforeach  
+        @foreach ($rating as $c)
             <div class="col-sm-3">
                 <div class="card">                            
                     <div class="card-body mt-2">
@@ -31,7 +36,7 @@
 
     <div class="col-md-12">
         <div class="">
-            <p>Total Kontraktor : </p>
+            <p>Total Kontraktor : {{ $cek}}</p>
         </div>
     </div>
     @else
@@ -48,9 +53,15 @@
         </div>
     </div>
    @endif
+
+   <div class="row">
+            <div class="col-lg-12">
+        </div>
+     </div>
+
     
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script> 
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>  -->
 <script>
 $("#input-id").rating();
 </script>
