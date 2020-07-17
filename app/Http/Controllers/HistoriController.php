@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Proyek;
-use App\Drawing;
+use App\Contractor;
+use App\Rating;
 use App\Item;
 use App\Spk;
 use Carbon\Carbon;
@@ -146,8 +147,44 @@ class HistoriController extends Controller
     
     public function rating(Proyek $proyek)
     {
-        return view('histori.rating');
+        $proyek = Proyek::where('id',$proyek->id)->first();
+        $spk    = Spk::where('id', $proyek->spk_id)->first();
+        $contraktor = Contractor::where('id', $spk->contractor_id)->first();
+       //dd($contraktor->name);
+        return view('histori.rating', compact('proyek','spk','contraktor'));
     }
 
+    public function store(Request $request)
+    {
+        $a1 = 2/100*$request->a1;
+        $a2 = 3/100*$request->a2;
+        $a3 = 5/100*$request->a3;
+        $b1 = 10/100*$request->b1;
+        $b2 = 15/100*$request->b2;
+        $c1 = 5/100*$request->c1;
+        $c2 = 15/100*$request->c2;
+        $d1 = 10/100*$request->d1;
+        $d2 = 5/100*$request->d2;
+        $d3 = 5/100*$request->d3;
+        $e1 = 10/100*$request->e1;
+        $e2 = 5/100*$request->e2;
+        $f1 = 5/100*$request->f1;
+        $g1 = 2/100*$request->g1;
+        $g2 = 3/100*$request->g2;
 
+        $hasil = ($a1+$a2+$a3+$b1+$b2+$c1+$c2+$d1+$d2+$d3+$e1+$e2+$f1+$g1+$g2);
+
+        $proyek = Rating::create([
+            'contractor_id' => $request->kontraktor,
+            'rating' => $hasil,
+            'deskripsi' => $request->deskripsi,
+        ]);  
+        $rating = Rating::where('contractor_id',$request->kontraktor)->avg('rating');
+        $proyek = Contractor::where('id',$request->kontraktor)->update([
+            'rating'=>$rating
+        ]);
+        // dd($proyek);
+        return redirect('/rating');
+        // return redirect('/histori'.'/'.$request->project_id.'/');
+        }
 }

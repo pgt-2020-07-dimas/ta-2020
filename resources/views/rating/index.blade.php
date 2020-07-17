@@ -33,9 +33,6 @@
                         </select>
                         
                       </div>
-                        <!-- <label for="">Tahun</label>
-                        <label for="">Status</label>
-                        <label for="">Plant</label> -->
                     </div>
                     
                 </div>

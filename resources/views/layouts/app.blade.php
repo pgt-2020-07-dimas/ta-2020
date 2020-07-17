@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <!-- CSS Files -->
   <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet" />
-   <link href="{{ asset('assets') }}/css/font-awesome.min.css" rel="stylesheet" /> 
+  <link href="{{ asset('assets') }}/css/font-awesome.min.css" rel="stylesheet" /> 
   <link href="{{ asset('assets') }}/css/themify-icons.css" rel="stylesheet" />
   <link href="{{ asset('assets') }}/css/now-ui-dashboard.css?v=1.3.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
@@ -40,10 +40,10 @@
 
     <!-- Rating -->
     <!-- <link rel="stylesheet" href="/dist/css/main.css"> -->
-    <link rel="stylesheet" href="/dist/themes/fontawesome-stars.css">
-    <link rel="stylesheet" href="/dist/themes/css-stars.css">
-    <link rel="stylesheet" href="/dist/themes/bootstrap-stars.css">
-    <link rel="stylesheet" href="/dist/themes/fontawesome-stars-o.css">
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+   
+
 
     <script src="{{ asset('js') }}/datatables/js/jquery.dataTables.min.js"></script>
 

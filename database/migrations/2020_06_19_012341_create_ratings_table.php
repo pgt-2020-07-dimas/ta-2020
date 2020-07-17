@@ -16,7 +16,7 @@ class CreateRatingsTable extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->integer('contractor_id');
-            $table->string('rating')->nullable();
+            $table->string('rating')->default('0');
             $table->string('deskripsi')->nullable();
             $table->timestamps();
         });

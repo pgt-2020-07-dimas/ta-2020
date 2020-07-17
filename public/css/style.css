@@ -86,6 +86,8 @@ body {
  
 }
 
+
+
 .rounded-lg {
   border-radius: 1rem;
 }
@@ -339,3 +341,7 @@ div.h4 {
     transform: rotate(360deg);
   }
 }
+
+
+/*rating*/
+

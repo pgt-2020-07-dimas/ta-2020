@@ -27,7 +27,7 @@ class HomeController extends Controller
         $proyek = Proyek::where('user_id',auth()->user()->id)->get();
         $sa = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Finish')->get();
         $sb = Proyek::where('user_id',auth()->user()->id)->where('Status', 'OnProgress')->get();
-        $sc = Proyek::where('user_id',auth()->user()->id)->where('Status', 'SPK/PO')->get();
+        $sc = Proyek::where('user_id',auth()->user()->id)->where('Status', 'SPK')->get();
         $sd = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Aanwijzing')->get();
         $se = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Open PR')->get();
         $sf = Proyek::where('user_id',auth()->user()->id)->where('Status', 'Desain')->get();

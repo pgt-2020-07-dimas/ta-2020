@@ -1,42 +1,24 @@
-
+@if(count($contractor)<>null)  
+    
+        @foreach ($contractor as $c)
             <div class="col-sm-3">
                 <div class="card">                            
                     <div class="card-body mt-2">
-                        <h4 class="card-title text-center font-weight-bold mt-3">PT. Kuwakui</h4>
+                        <h4 class="card-title text-center font-weight-bold mt-3">{{ $c->name }}</h4>
+                        <div class="site-logo mr-auto w-55"><img class="img-fluid" src="{{asset('/images/worker.png')}}" alt=""></div>
                         <p class="font-italic card-title ml-4">Rating :</p>
+                    <div class="text-center">
 
-                        <div class="stars stars-example-fontawesome text-center">
-                            <select id="example-fontawesome" name="rating" autocomplete="off">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            </select>
-                            <!-- <span class="title">Font Awesome</span> -->
-                        </div>
-
-                        <div class="stars stars-example-fontawesome-o text-center">
-                            <select id="example-fontawesome-o" name="rating" data-current-rating="1.5" autocomplete="off">
-                            <option value=""></option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            
-                            </select>
-                            <!-- <span class="title current-rating">
-                            Nilai: <span class="value"></span>
-                            </span> -->
-                            <span class="title your-rating hidden">
-                            Your rating: <span class="value"></span>&nbsp;
-                            
+                    <!-- <input id="input-2" name="input-2" class="rating rating-loading" data-min="0" data-max="4" data-step="0.1" value="{{ $c->rating }}" data-size="xs" disabled> -->
+                        
+                        <span class="title mt-4">
+                            Score: <span class="value">{{ $c->rating }} / 4</span>&nbsp; 
                             </span>
                         </div>
-
-                        <h5 class="card-title text-center mt-3">No. Proyek</h5>
-                        <p class="card-text text-center font-weight-bold">Nama Kontaktor</p>  
+                          
+                        <div class="card-body" style="height:6em">                                      
+                            <p class="card-text">{{ $c->alamat }}</p>
+                        </div> 
 
                         <div class="text-right">
                             <a href="#" class="btn btn-round btn-primary">Detail</a>
@@ -44,26 +26,31 @@
                         
                     </div>
                 </div>
-            </div>
-        
+            </div>    
+            @endforeach
 
     <div class="col-md-12">
         <div class="">
-            <p>Total Kontaktor :  </p>
+            <p>Total Kontraktor : </p>
         </div>
     </div>
-   
-    
-    
-    
-    <!-- <div class="row">
-            <div class="col-lg-12">
-
+    @else
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body mt-2 text-center">
+                <label for="" class="card-title">Kontraktor Tidak Ditemukan</label>
+            </div>
         </div>
-     </div> -->
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/dist/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
-    <script src="/dist/jquery.barrating.min.js"></script>
-    <script src="/dist/js/examples.js"></script>
+    </div>
+    <div class="col-md-12">
+        <div class="">
+            <p>Total Kontraktor : 0 </p>
+        </div>
+    </div>
+   @endif
+    
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script> 
+<script>
+$("#input-id").rating();
+</script>

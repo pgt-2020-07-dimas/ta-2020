@@ -24,8 +24,6 @@ class ProyekController extends Controller
     public function index()
     {   
         
-        // $proyek = Proyek::where('user_id',auth()->user()->id)->paginate(4);  
-        // //dd($proyek);
         // $pro = Proyek::All();
         //     // dd(count($proyek));                       
         // return view('proyek.index',['proyek'=>$proyek],['pro'=>$pro]);

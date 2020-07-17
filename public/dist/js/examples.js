@@ -40,7 +40,7 @@ $(function() {
             hoverState: false
         });
 
-        $('#example-fontawesome').barrating({
+        $('.example-fontawesome').barrating({
             theme: 'fontawesome-stars',
             showSelectedRating: false
         });
@@ -55,7 +55,7 @@ $(function() {
             showSelectedRating: false
         });
 
-        var currentRating = $('#example-fontawesome-o').data('current-rating');
+        var currentRating = $('.example-fontawesome-o').data('current-rating');
 
         $('.stars-example-fontawesome-o .current-rating')
             .find('span')
@@ -64,17 +64,17 @@ $(function() {
         $('.stars-example-fontawesome-o .clear-rating').on('click', function(event) {
             event.preventDefault();
 
-            $('#example-fontawesome-o')
+            $('.example-fontawesome-o')
                 .barrating('clear');
         });
 
-        $('#example-fontawesome-o').barrating({
+        $('.example-fontawesome-o').barrating({
             theme: 'fontawesome-stars-o',
             showSelectedRating: false,
             initialRating: currentRating,
             onSelect: function(value, text) {
                 if (!value) {
-                    $('#example-fontawesome-o')
+                    $('.example-fontawesome-o')
                         .barrating('clear');
                 } else {
                     $('.stars-example-fontawesome-o .current-rating')
