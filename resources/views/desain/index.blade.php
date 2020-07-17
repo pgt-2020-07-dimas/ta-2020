@@ -50,6 +50,7 @@
                         </form> 
                     </div>
                 </div>
+                
               @endforeach
               @else 
               <div class="col-sm-12 my-3 py-2 text-center">
@@ -58,6 +59,9 @@
               @endif
             </div>            
         </div>
+    </div>
+    <div class="col-md-12 text-right">
+        <a href="/proyek/{{$project_id}}/edit" class="btn btn-warning btn-round">Kembali</a>
     </div>
 </div>
 

@@ -36,16 +36,15 @@
                                         <td >{{$items[$i]->item_name}}</td>
                                         <td class="text-center">
                                         @if($items[$i]->qtyDtg==null)
-                                            0/{{$items[$i]->qtyAsli}} - {{$items[$i]->persentase}}%
+                                            0/{{$items[$i]->qtyAsli}}
                                         @else
                                             {{$items[$i]->qtyDtg}}/{{$items[$i]->qtyAsli}}
                                         @endif
                                         </td>
                                         <td class="text-center">
-                                        <a href="#" class="badge badge-primary text-white persentase" 
-                                        data-toggle="modal" data-target="#modal-persentase" title="Detail kedatangan"
-                                        data-item="{{$items[$i]->item_name}}">
-                                        <i class="fa fa-info-circle"></i>
+                                        <a href="/progres/item/{{$items[$i]->id}}" target="_blank" class="badge badge-primary text-white" 
+                                        title="Detail kedatangan">
+                                        <i class="fas fa-eye"></i>
                                         </a>                         
                                         </td>
                                     </tr>
@@ -90,7 +89,16 @@
                                     <td  class="text-center">{{$loop->iteration}}</td>
                                     <td>{{$a->date}}</td>
                                     <td class="text-center"><a href="/{{$a->path}}" target="_blank" class="btn btn-sm btn-info btn-round">Lihat</a></td>
-                                    <td class="text-center"><button class="btn btn-sm btn-info btn-round" data-toggle="modal" data-target="#modal-detail">Lihat</button></td>
+                                    <td class="text-center">
+                                    <a href="/progres/riwayat/{{$a->id}}" target="_blank" class="badge btn-info"><i class="fas fa-eye"></i></a>
+                                    <form action="/progres/riwayat/{{$a->id}}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <input type="hidden" name="path" value="{{$a->path}}">
+                                            <input type="hidden" name="boq_id" value="{{$a->boq_id}}">
+                                            <button onclick="return confirm('Yakin menghapus?');" type="submit" class="badge btn-danger text-white"><i class="far fa-trash-alt"></i></button>
+                                    </form>
+                                    </td>
                                 </tr>
                             @endforeach
                              </tbody>
@@ -116,7 +124,7 @@
                                 <tr>
                                     <td class="text-center">No.</td>
                                     <td>Tanggal</td>
-                                    <td class="text-center">%Perkembangan</td>
+                                    <td class="text-center">(%)</td>
                                     <td class="text-center">Foto</td>
                                     <td class="text-center">Opsi</td>
                                 </tr>
@@ -126,13 +134,24 @@
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td>{{$p->date}}</td>
-                                    <td class="text-center">{{$p->pemasangan}}</td>
+                                    <td class="text-center">{{$p->pemasangan}}%</td>
                                     <td class="text-center"><a class="btn btn-sm btn-info btn-round" target="_blank" href="/{{ $p->path }}">Lihat</a></td>
-                                    <td class="text-center">hapus</td>
+                                    <td class="text-center">
+                                        <form action="/progres/perkembangan/{{$p->id}}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <input type="hidden" name="path" value="{{$p->path}}">
+                                            <input type="hidden" name="boq_id" value="{{$p->boq_id}}">
+                                            <button onclick="return confirm('Yakin menghapus?');" type="submit" class="badge btn-danger text-white"><i class="far fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                              </tbody>
                         </table>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <a href="/proyek/{{$proyek->id}}" class="btn btn-warning btn-round">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -141,7 +160,11 @@
         @else
                 <div class="text-center card-body">
                     Surat Perintah Kerja belum Diisi
-                </div>               
+                    <div class="col-md-12 text-right">
+                        <a href="/proyek/{{$proyek->id}}" class="btn btn-warning btn-round">Kembali</a>
+                    </div>
+                </div>     
+
         @endif 
         <!-- modal detail     -->
         <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -210,32 +233,7 @@
                 </div>
             </div>
         </div>  
-        <!-- end modal perkembangan  -->
-        <!-- modal persentase -->
-        <div class="modal fade" id="modal-persentase" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail kedatangan barang</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>No.</td>
-                            <td>Jumlah</td>
-                            <td>Tanggal</td>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            </div>
-        </div>
-        </div>
-        <!-- end modal persentase -->
+        <!-- end modal perkembangan  -->      
         <!-- Modal riwayat -->
         <div class="modal fade" id="modal-edit" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">

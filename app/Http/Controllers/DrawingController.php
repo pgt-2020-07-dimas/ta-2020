@@ -35,8 +35,9 @@ class DrawingController extends Controller
     public function create($id)
     {
         $drawing = Drawing::where('project_id',$id)->get();
+        $project_id = $id;
         // dd($drawing);
-        return view('desain.index',compact('id','drawing'));
+        return view('desain.index',compact('id','drawing','project_id'));
     }
 
     /**
