@@ -5,6 +5,7 @@
             $cek = count($row);
     @endphp
     @endforeach  
+    <div class="row">
         @foreach ($proyek as $p)
             <div class="col-sm-3">
                 <div class="card">                            
@@ -25,7 +26,8 @@
                         <div class="card-body" style="height:6em">                                      
                             <p class="card-text">{{ $p->deskripsi }}</p>
                         </div>
-                        <p class="card-body font-italic"><small>Status : {{ $p->status }} | {{ $p->plant }}</small></p>
+                        <p class="card-body font-italic my-0 py-0"><small>Status : {{ $p->status }}</small></p>
+                        <div class="card-body my-0 py-0"><small>{{ $p->plant }}</small></div>
                         <div class="text-right">
                             <a href="/proyek/{{$p->id}}" class="btn btn-round btn-primary">Detail</a>
                         </div>
@@ -34,22 +36,27 @@
                 </div>
             </div>
          @endforeach
+    </div>
     <div class="col-md-12">
         <div class="">
             <p>Total Proyek : {{ $cek }} </p>
         </div>
     </div>
     @else
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body mt-2 text-center">
-                <label for="" class="card-title">Proyek Tidak Ditemukan</label>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body mt-2 text-center">
+                    <label for="" class="card-title">Proyek Tidak Ditemukan</label>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="">
-            <p>Total Proyek : 0 </p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="">
+                <p>Total Proyek : 0 </p>
+            </div>
         </div>
     </div>
     <!-- </div> pernah tak hapus --> 

@@ -27,9 +27,9 @@ class BatalController extends Controller
         
         $proyek = Proyek::where('user_id',auth()->user()->id)->where('status', 'Suspend')->paginate();  
         $project_year = Proyek::select('project_year')
-                 ->groupBy('project_year')
+                 ->groupBy('project_year')->where('status','Suspend')
                  ->get();
-        $plant = Proyek::select('plant')
+        $plant = Proyek::select('plant')->where('status','Suspend')
                  ->groupBy('plant')
                  ->get();
         // $status = Proyek::select('status')
@@ -124,7 +124,7 @@ class BatalController extends Controller
         $total= str_replace('"', '', $total);
         $tanggal = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('date');
         // return $total;die;
-        return view('progres.batal', compact('total','tanggal','proyek','pr','spk','boq'))
+        return view('progres.batal', compact('total','tanggal','proyek','pr','spk','boq'));
         
         
     }

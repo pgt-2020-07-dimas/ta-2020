@@ -41,11 +41,12 @@ class HomeController extends Controller
         $pd = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant DK')->get();
         $pm = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant M')->get();
         $pe = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant E')->get();
-        $pr = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant R')->get();
+        $plantr = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant R')->get();
         $pj = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant J')->get();
+        // return $pj;die;
         $po = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Other')->get();
 
-        return view('dashboard.index', compact('proyek','sa','sb','sc','sd','se','sf','sg','sh','si','pa','pb','pc','pd','pm','pe','pr','pj','po'));
+        return view('dashboard.index',compact('pj','proyek','sa','sb','sc','sd','se','sf','sg','sh','si','pa','pb','pc','pd','pm','pe','plantr','po'));
     }
 
     public function tambah()

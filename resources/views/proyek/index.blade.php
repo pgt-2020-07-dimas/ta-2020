@@ -56,8 +56,10 @@
         </div>
     </div>
     
-    <div class="container row" id="mydata">
-    @include('proyek.page')
+    <div class="container" id="mydata">
+     
+       @include('proyek.page')
+     
     </div>
     
      {{ $proyek->links() }}

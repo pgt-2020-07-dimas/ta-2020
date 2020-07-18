@@ -1,3 +1,4 @@
+
 @if(count($sa)<>null)
   @foreach($sa as $j )
     @php     
@@ -193,8 +194,8 @@
     @endphp
   @endif
 
-  @if(count($pr)<>null)
-  @foreach($pr as $j )
+  @if(count($plantr)<>null)
+  @foreach($plantr as $j )
     @php     
     $r[]=$j->plant;
     $yr = count($r);
@@ -209,8 +210,8 @@
   @if(count($pj)<>null)
   @foreach($pj as $j )
     @php     
-    $j[]=$j->plant;
-    $yj = count($j);
+    $z[]=$j->plant;
+    $yj = count($z);
     @endphp
   @endforeach
   @else
@@ -383,9 +384,9 @@
           drilldown: "Plant R"
         },
         {
-          name: "Plant Joint",
+          name: "Plant J",
           y: <?=$yj?>,
-          drilldown: "Plant Joint"
+          drilldown: "Plant J"
         },
         {
           name: "Other",

@@ -29,7 +29,10 @@ class ProyekController extends Controller
         // $pro = Proyek::All();
         //     // dd(count($proyek));                       
         // return view('proyek.index',['proyek'=>$proyek],['pro'=>$pro]);
-        $proyek = Proyek::where('user_id',auth()->user()->id)->paginate();  
+        // return 'ok';die;
+        $proyek = Proyek::where('status','!=','Finish')
+                        ->where('status','!=','Suspend')
+                        ->where('user_id',auth()->user()->id)->paginate();  
         $project_year = Proyek::select('project_year')
                  ->groupBy('project_year')
                  ->get();
@@ -37,6 +40,7 @@ class ProyekController extends Controller
                  ->groupBy('plant')
                  ->get();
         $status = Proyek::select('status')
+                 ->where('status','!=','Finish')
                  ->groupBy('status')
                  ->get();
         
@@ -55,7 +59,9 @@ class ProyekController extends Controller
         // dump($search);
         
 
-            $proyek = Proyek::where('user_id',auth()->user()->id)
+            $proyek = Proyek::where('status','!=','Finish')
+            ->where('status','!=','Suspend')
+            ->where('user_id',auth()->user()->id)
             ->where(function($query) use ($search) {
                 $query->where('project_title','LIKE',"%".$search."%")
                     ->orWhere('project_no','LIKE',"%".$search."%");
@@ -79,7 +85,9 @@ class ProyekController extends Controller
         // dump($tahun);
         // dd($plant);
 
-            $proyek = Proyek::where('user_id',auth()->user()->id)
+            $proyek = Proyek::where('status','!=','Finish')
+            ->where('status','!=','Suspend')
+            ->where('user_id',auth()->user()->id)
             // ->where('project_title','LIKE',"%{$search}%")
             ->where(function($query) use ($search) {
                 $query->where('project_title','LIKE',"%".$search."%")
@@ -184,8 +192,9 @@ class ProyekController extends Controller
         $total = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('total');
         $total= str_replace('"', '', $total);
         $tanggal = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('date');
+        $drawing = Drawing::where('project_id',$proyek)->get();
         // return $total;die;
-        return view('progres.index', compact('total','tanggal','proyek','pr','spk','boq'));
+        return view('progres.index', compact('total','tanggal','proyek','pr','spk','boq','drawing'));
         // if ($proyek->spk_id <> 1){
         //     $arrMinggu[]=null;            
         //     $totalWeek = null;

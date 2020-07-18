@@ -22,18 +22,8 @@ $imgName = str_replace('storage/spk/','',$path);
               @csrf
               @include('alerts.success')
               <div class="row">
-              </div>           
-
+              </div>      
               <div class="row">
-                    <div class="col-md-10 pr-3">
-                      <div class="form-group ">
-                        <label>{{__(" No. SPK")}}</label>
-                        <input class="form-control @error('spk_no') is-invalid @enderror" name="spk_no" placeholder="" type="text" value="{{$spk->spk_no}}" required>
-                        @error('spk_no') <div class="invalid-feedback">{{ $message }}</div>@enderror
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
                     <div class="col-md-7">
                       <div class="form-group">
                         <label>{{__(" Contractor")}}</label>
@@ -51,7 +41,18 @@ $imgName = str_replace('storage/spk/','',$path);
                       <a href="#" class="btn btn-round btn-primary align-bottom tambah" data-toggle="modal" data-target="#modal-tambah">Tambah</a>
                       
                     </div>
+                </div>     
+
+                <div class="row">
+                    <div class="col-md-10 pr-3">
+                      <div class="form-group ">
+                        <label>{{__(" No. SPK")}}</label>
+                        <input class="form-control @error('spk_no') is-invalid @enderror" name="spk_no" placeholder="" type="text" value="{{$spk->spk_no}}" required>
+                        @error('spk_no') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                      </div>
+                    </div>
                 </div>
+                  
                 <div class="row">
                   <div class="col-md-10 pr-3">
                     <div class="form-group ">

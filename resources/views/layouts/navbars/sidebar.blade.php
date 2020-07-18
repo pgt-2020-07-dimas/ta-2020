@@ -53,12 +53,12 @@
           <p>{{ __('Rating Kontaktor') }}</p>
         </a>
       </li>
-      <li class = "@if ($activePage == 'info') active @endif">        
+      <!-- <li class = "@if ($activePage == 'info') active @endif">        
         <a href="#">
           <i class="now-ui-icons travel_info"></i>
           <p>{{ __('Info') }}</p>
         </a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>

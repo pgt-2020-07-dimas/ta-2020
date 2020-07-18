@@ -26,10 +26,10 @@ class HistoriController extends Controller
     {   
         
         $proyek = Proyek::where('user_id',auth()->user()->id)->where('status', 'Finish')->paginate();  
-        $project_year = Proyek::select('project_year')
+        $project_year = Proyek::select('project_year')->where('status','Finish')
                  ->groupBy('project_year')
                  ->get();
-        $plant = Proyek::select('plant')
+        $plant = Proyek::select('plant')->where('status','Finish')
                  ->groupBy('plant')
                  ->get();
         // $status = Proyek::select('status')

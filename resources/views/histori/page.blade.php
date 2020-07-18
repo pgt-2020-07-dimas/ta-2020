@@ -5,6 +5,7 @@
             $cek = count($row);
     @endphp
     @endforeach  
+    <div class="row">
         @foreach ($proyek as $p)
             <div class="col-sm-3">
                 <div class="card">                            
@@ -34,22 +35,21 @@
                 </div>
             </div>
          @endforeach
-    <div class="col-md-12">
-        <div class="">
-            <p>Total Proyek : {{ $cek }} </p>
-        </div>
     </div>
-    @else
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body mt-2 text-center">
-                <label for="" class="card-title">Proyek Tidak Ditemukan</label>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body mt-2 text-center">
+                    <label for="" class="card-title">Proyek Tidak Ditemukan</label>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="">
-            <p>Total Proyek : 0 </p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="">
+                <p>Total Proyek : 0 </p>
+            </div>
         </div>
     </div>
     <!-- </div> pernah tak hapus --> 

@@ -124,11 +124,15 @@ class PurchaseRequisitionController extends Controller
             $persentase = Proyek::where('pr_id',$purchaseRequisition->id)->pluck('persentase')->first();
             if($persentase < 18){                
                 $persentase +=1;
+                Proyek::where('pr_id', $purchaseRequisition->id)
+                    ->update([
+                        'status'=>'Aanwijzing',
+                    ]); 
             }     
             Proyek::where('pr_id', $purchaseRequisition->id)
                     ->update([
                         'persentase'=>$persentase,
-                    ]);
+                    ]); 
         }
         // dd($status);
         return redirect('/pr'.'/'.$purchaseRequisition->id.'/edit');

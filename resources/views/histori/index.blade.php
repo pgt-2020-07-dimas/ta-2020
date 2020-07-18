@@ -51,7 +51,7 @@
         </div>
     </div>
     
-    <div class="container row" id="mydata">
+    <div class="container" id="mydata">
     @include('histori.page')
     </div>
     
