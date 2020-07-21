@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contractor;
+use DB;
 use Illuminate\Http\Request;
 
 class ContractorController extends Controller
@@ -49,8 +50,16 @@ class ContractorController extends Controller
      */
     public function show(Contractor $contractor)
     {
-        //
-    }
+        // return $contractor->id;die;  
+        $detailRating = Contractor::where('contractors.id',$contractor->id)
+                        ->select(DB::raw('projects.project_no,projects.project_title,spks.spk_no,ratings.rating'))
+                        ->leftjoin('ratings','contractors.id','=','ratings.contractor_id')
+                        ->leftjoin('projects','ratings.id','=','projects.rating_id')
+                        ->leftjoin('spks','projects.spk_id','=','spks.id')
+                        ->get();
+        // return $detailRating;die;
+        return view('rating.detail',compact('contractor','detailRating'));
+;    }
 
     /**
      * Show the form for editing the specified resource.

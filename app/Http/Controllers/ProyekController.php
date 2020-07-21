@@ -192,7 +192,7 @@ class ProyekController extends Controller
         $total = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('total');
         $total= str_replace('"', '', $total);
         $tanggal = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('date');
-        $drawing = Drawing::where('project_id',$proyek)->get();
+        $drawing = Drawing::where('project_id',$proyek)->first();
         // return $total;die;
         return view('progres.index', compact('total','tanggal','proyek','pr','spk','boq','drawing'));
         // if ($proyek->spk_id <> 1){

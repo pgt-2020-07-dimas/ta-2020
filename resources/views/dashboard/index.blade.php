@@ -28,7 +28,7 @@
         
         $jum[]=$j->persentase;
         $jumlah = array_sum($jum);
-        $hasil = $jumlah/$cek
+        $hasil = number_format($jumlah/$cek,2)
         @endphp
     @endforeach
     @else
@@ -41,7 +41,7 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header">
-                <h6 class="card-subtitle text-muted">PROJECT 'Number'</h6>
+                <h6 class="card-subtitle text-muted">PROJECT 'Amount'</h6>
             </div>
             <div class="card-body">
                 <div class="green">
@@ -87,7 +87,7 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header">
-            <h6 class=" card-subtitle text-muted">PROJECT 'Ammount'</h6>
+            <h6 class=" card-subtitle text-muted">PROJECT 'Budged'</h6>
             </div>
             <div class="card-body">
                 <div class="green">

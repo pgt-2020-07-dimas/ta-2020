@@ -39,7 +39,7 @@
 <script>
   $(document).ready(function(){
     var str=  $("#search").val();
-	  
+            // alert('loaded');
 			$.get( "{{ url('/rating/search?cari=') }}"+str, function( data ) {
 			$( "#data" ).html( data );  
 	    });
@@ -49,8 +49,8 @@
   $(document).ready(function(){
 	$("#search").keyup(function(){
 	  var str=  $("#search").val();
-	  
-			$.get( "{{ url('/rating/search?cari=') }}"+str, function( data ) {
+            // alert(str);
+			$.get("{{ url('/rating/search?cari=') }}"+str, function( data ) {
 			$( "#data" ).html( data );  
 	    });
 	  
@@ -58,7 +58,7 @@
   }); 
 
 
-$(document).ready(function(){
+$(document).ready(function(){ 
 
 $(document).on('click', '.pagination a', function(event){
  event.preventDefault(); 

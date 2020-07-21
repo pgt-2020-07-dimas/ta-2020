@@ -1,6 +1,6 @@
 @if(count($rating)<>null)  
         @foreach ($pro as $j)
-        @php   
+        @php    
                 $row[]=$j->name;
                 $cek = count($row);
         @endphp
@@ -26,7 +26,7 @@
                         </div> 
 
                         <div class="text-right">
-                            <a href="#" class="btn btn-round btn-primary">Detail</a>
+                            <a href="/contractor/{{ $c->id }}" class="btn btn-round btn-primary">Detail</a>
                         </div>
                         
                     </div>

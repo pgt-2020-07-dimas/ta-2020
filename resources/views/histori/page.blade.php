@@ -38,6 +38,14 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="">
+                <p>Total Proyek : {{$cek}} </p>
+            </div>
+        </div>
+    </div>
+    @else
+    <div class="row">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body mt-2 text-center">
                     <label for="" class="card-title">Proyek Tidak Ditemukan</label>
@@ -52,8 +60,8 @@
             </div>
         </div>
     </div>
-    <!-- </div> pernah tak hapus --> 
     @endif 
+    <!-- </div> pernah tak hapus --> 
     
     
     

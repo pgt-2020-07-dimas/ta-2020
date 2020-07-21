@@ -96,6 +96,7 @@ Route::get('/batal/fetch_data', 'BatalController@fetch_data');
 Route::get('/batal/{proyek}', 'BatalController@show');
 
 Route::get('/rating', 'RatingController@index');
+Route::get('/contractor/{contractor}', 'ContractorController@show');
 
 
 

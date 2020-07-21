@@ -106,7 +106,7 @@
   
 
 $(document).ready(function(){
-
+ 
 //   $(document).on('click', '#.filter', function(){
 //     var str=  $("#tahun").val();
 // 	  var str1=  $("#plant").val();

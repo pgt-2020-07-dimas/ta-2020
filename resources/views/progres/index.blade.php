@@ -43,7 +43,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text-center" colspan="3">@if ($boq<>null)<a href="/boq/{{$boq->id}}/edit" class="badge badge-success btn-round">Lihat BOQ</a>@endif
-                                            @if ($drawing<>null)<a href="/drawing/{{$proyek->id}}/file" class="badge badge-danger btn-round">Lihat Drawing</a>@endif</td>                                            
+                                            @if ($drawing <> null)<a href="/drawing/{{$proyek->id}}/file" class="badge badge-danger btn-round">Lihat Drawing</a>@endif</td>                                            
                                         </tr>
                                         
                                     </table>

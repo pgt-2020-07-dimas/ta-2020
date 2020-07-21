@@ -250,8 +250,13 @@ class ProgressController extends Controller
                     $perkembangan->path = str_replace('public', 'storage', $perkembangan->path);
                     return $perkembangan;
                 });
+        if($proyek->rating_id == null){
+            $ratingStatus = 0;
+        } else {
+            $ratingStatus=1;
+        }
             // return $history;die;
-        return view('progres.histori_finish', compact('items','status','proyek','arrives','perkembangan'));
+        return view('progres.histori_finish', compact('items','status','proyek','arrives','perkembangan','ratingStatus'));
         // die;      
     }
 

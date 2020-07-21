@@ -3,7 +3,7 @@
     @php   
             $row[]=$j->persentase;
             $cek = count($row);
-    @endphp
+    @endphp 
     @endforeach  
     <div class="row">
         @foreach ($proyek as $p)
