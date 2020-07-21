@@ -16,6 +16,12 @@
   <title>
     Sistem Informasi Proyek
   </title>
+ <!-- Rating -->
+    <!-- <link rel="stylesheet" href="/dist/css/main.css"> -->
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+   
+
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -39,10 +45,6 @@
     <link href="{{ asset('lib') }}/main.css" rel="stylesheet"/>
     <script src="{{ asset('lib') }}/main.js"></script>
 
-    <!-- Rating -->
-    <!-- <link rel="stylesheet" href="/dist/css/main.css"> -->
-    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet"> -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
    
 
 
