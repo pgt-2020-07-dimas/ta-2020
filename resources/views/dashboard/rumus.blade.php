@@ -259,9 +259,9 @@
     }
   },
   yAxis: {
-    min: 0,
+    min: 1,
     title: {
-      text: 'Total Proyek Status',
+      text: '',
       align: 'high'
     },
     labels: {

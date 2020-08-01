@@ -54,6 +54,7 @@ $c = count($detailRating);
                             </tr>
                         </thead>
                         <tbody>
+                        @if($detailRating[0]->project_no<>null)
                         <?php $j=1;?>
                             @for($i=0;$i<$c;$i++)
                             <tr>
@@ -65,6 +66,11 @@ $c = count($detailRating);
                                 <?php $j++;?>
                             </tr>
                             @endfor
+                        @else
+                            <tr>
+                                <td colspan="5" class="text-center">Belum ada rating</td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>

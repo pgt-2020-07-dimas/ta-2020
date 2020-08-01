@@ -5,6 +5,7 @@
    
 ])
 @section('content') 
+
 <div class="content ">       
 <div class="card ">
     <div class="card-header">
@@ -36,6 +37,7 @@
     <form method="post" action="/histori/rating" autocomplete="off" enctype="multipart/form-data">  
         @csrf     
         @include('alerts.success')
+    <input type="hidden" name="spk_id" value="{{$spk->id}}">
     <div class="card-body">
     <div class="table-responsive">
         <table class="table table-borderless">

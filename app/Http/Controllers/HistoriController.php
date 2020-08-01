@@ -158,15 +158,20 @@ class HistoriController extends Controller
 
         $hasil = ($a1+$a2+$a3+$b1+$b2+$c1+$c2+$d1+$d2+$d3+$e1+$e2+$f1+$g1+$g2);
 
-        $proyek = Rating::create([
+        $rating2 = Rating::create([
             'contractor_id' => $request->kontraktor,
             'rating' => $hasil,
             'deskripsi' => $request->deskripsi,
         ]);  
         $rating = Rating::where('contractor_id',$request->kontraktor)->avg('rating');
-        $proyek = Contractor::where('id',$request->kontraktor)->update([
+        $contractor = Contractor::where('id',$request->kontraktor)->update([
             'rating'=>$rating
         ]);
+        $proyek = Proyek::where('spk_id',$request->spk_id)
+                    ->update([
+                        'rating_id'=> $rating2->id
+                    ]);
+        //sini men
         // dd($proyek);
         return redirect('/rating');
         // return redirect('/histori'.'/'.$request->project_id.'/');
