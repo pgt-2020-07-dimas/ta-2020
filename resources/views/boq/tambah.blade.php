@@ -196,7 +196,7 @@
                         </a>      
                         <form action="/boq/{{$item->id}}" method="post">
                         @method('delete')
-                        @csrf
+                        @csrf 
                         <input type="hidden" name="id" value="{{$item->id}}">
                         <input type="hidden" name="boq_id" value="{{$item->boq_id}}">
                         <button type="submit" name="submit" class="badge badge-danger" title="Hapus Item" icon="close" onclick="return confirm('Yakin menghapus?');"><i class="fa fa-close"></i> </button>

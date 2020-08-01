@@ -154,8 +154,8 @@ class ProyekController extends Controller
         $request->validate([
             'project_no' => 'required|size:2|unique:projects',
             'project_year' => 'required|size:4',
-            'project_title' => 'required|max:50',
-            'deskripsi' => 'required|max:100',
+            'project_title' => 'required',
+            'deskripsi' => 'required',
             'user_cc' => 'required|max:50',
             'plant' => 'required|max:10',
         ]);
@@ -192,8 +192,8 @@ class ProyekController extends Controller
         $total = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('total');
         $total= str_replace('"', '', $total);
         $tanggal = Perkembangan::where('boq_id',$proyek->boq_id)->pluck('date');
-        $drawing = Drawing::where('project_id',$proyek)->first();
-        // return $total;die;
+        $drawing = Drawing::where('project_id',$proyek->id)->first();
+        // return $drawing;die;
         return view('progres.index', compact('total','tanggal','proyek','pr','spk','boq','drawing'));
         // if ($proyek->spk_id <> 1){
         //     $arrMinggu[]=null;            

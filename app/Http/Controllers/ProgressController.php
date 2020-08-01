@@ -83,6 +83,7 @@ class ProgressController extends Controller
 
         $barang = Progress::where('boq_id',$request->boq_id)->sum('bobot');
         $total = ($barang)+($request->pemasangan*20/100);
+        $total = number_format($total,2);
         if($request->file('perkembangan')<>null){
             $file = $request->file('perkembangan');
             $name = $request->boq_id .'-'. time();
