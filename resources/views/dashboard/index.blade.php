@@ -89,18 +89,10 @@
             <div class="card-header">
             <h6 class=" card-subtitle text-muted">PROJECT 'Budged'</h6>
             </div>
-            <div class="card-body">
-                <div class="green">
-                    <div class="progress ml-5" style="background-color: darkorange;">
-                    <div class="inner">
-                        <div class="text-center">
-                            <p class="title mt-4"  style="color: white; font-size: 5em; "></p>
-                            <p class="title mb-2" style="color: white; font-size: 2em;"></p>
-                        </div>
-                        <div class="glare"></div>
-                    </div>
-                    </div>
-                </div>
+            <div class="card-body">                
+                <figure class="highcharts-figure">
+                    <div id="container-2"></div>
+                </figure>
             </div>
             <div class="card-footer">
                 <p class="text-center mt-3 mb-2">Anggaran dan Penggunaan</p>

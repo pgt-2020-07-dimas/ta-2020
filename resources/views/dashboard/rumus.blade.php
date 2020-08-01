@@ -301,6 +301,7 @@
 </script>
 
 <script>
+
     Highcharts.chart('container', {
   chart: {
     type: 'column'
@@ -392,6 +393,82 @@
           name: "Other",
           y: <?=$yo?>,
           drilldown: "Other"
+        }
+      ]
+    }
+  ],
+  drilldown: {
+    series: [
+      {
+      }
+       
+    ]
+  }
+});
+
+</script>
+<script>
+
+Highcharts.chart('container-2', {
+  
+  chart: {
+    height: 200,
+    type: 'column',
+    
+  },
+  title: {
+    text: ''
+  },
+  subtitle: {
+    text: ''
+  },
+  accessibility: {
+    announceNewData: {
+      enabled: true
+    }
+  },
+  xAxis: {
+    type: 'category'
+  },
+  yAxis: {
+    title: {
+      text: 'RP.'
+    }
+
+  },
+  legend: {
+    enabled: false
+  },
+  plotOptions: {
+    series: {
+      borderWidth: 0,
+      dataLabels: {
+        enabled: true,
+        format: '{point.y}'
+      }
+    }
+  },
+
+  tooltip: {
+    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b>'
+  },
+
+  series: [
+    {
+      name: "Rp.",
+      colorByPoint: true,
+      data: [
+        
+        {
+          name: "Planned",
+          y: <?=$planned?>,
+          drilldown: "Planned"
+        },
+        {
+          name: "Actual",
+          y: <?=$actual?>,
+          drilldown: "Actual"
         }
       ]
     }

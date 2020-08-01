@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Proyek;
+use App\Bill;
 
 class HomeController extends Controller
 {
@@ -45,8 +46,9 @@ class HomeController extends Controller
         $pj = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Plant J')->get();
         // return $pj;die;
         $po = Proyek::where('user_id',auth()->user()->id)->where('plant', 'Other')->get();
-
-        return view('dashboard.index',compact('pj','proyek','sa','sb','sc','sd','se','sf','sg','sh','si','pa','pb','pc','pd','pm','pe','plantr','po'));
+        $actual = Bill::sum('actual_budged');
+        $planned = Bill::sum('planned_budged');
+        return view('dashboard.index',compact('actual','planned','pj','proyek','sa','sb','sc','sd','se','sf','sg','sh','si','pa','pb','pc','pd','pm','pe','plantr','po'));
     }
 
     public function tambah()
